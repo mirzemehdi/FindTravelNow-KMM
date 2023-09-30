@@ -1,4 +1,4 @@
-package com.myapplication
+package com.measify.findtravelnow
 
 import MainView
 import android.os.Bundle
