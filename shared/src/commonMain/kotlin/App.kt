@@ -1,10 +1,10 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -38,34 +38,28 @@ fun App() {
                 ).padding(40.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier.fillMaxHeight(0.75f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Bottom
-            ) {
+            Image(
+                painter = painterResource("drawable/onboarding_1.xml"),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .fillMaxHeight(0.5f)
+            )
 
-                Image(
-                    painter = painterResource("drawable/onboarding_1.xml"),
-                    contentDescription = null,
-                    modifier = Modifier.weight(1f, false).padding(vertical = 50.dp)
-                )
+            Text(
+                modifier = Modifier.padding(top = 50.dp),
+                text = "Trusted and Free",
+                style = MaterialTheme.typography.displayMedium,
+                color = Black,
+            )
 
-                Text(
-                    modifier = Modifier.padding(bottom = 20.dp),
-                    text = "Trusted and Free",
-                    style = MaterialTheme.typography.displayMedium,
-                    color = Black,
-                )
-
-                Text(
-                    modifier = Modifier.padding(),
-                    text = "We’re completely free to use – trusted by thousands people.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Black,
-                    textAlign = TextAlign.Center
-                )
-
-            }
+            Text(
+                modifier = Modifier.padding(top = 20.dp),
+                text = "We’re completely free to use – trusted by thousands people.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Black,
+                textAlign = TextAlign.Center
+            )
 
             Spacer(modifier = Modifier.weight(1f))
 
