@@ -46,6 +46,11 @@ val Typography
             fontWeight = FontWeight.SemiBold,
             fontFamily = popinsFontFamily
         ),
+        titleSmall = TextStyle(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontFamily = popinsFontFamily
+        ),
         bodyMedium = TextStyle(
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
