@@ -33,4 +33,15 @@ object Strings {
     const val home_screen_banner_text ="Get cheap flights from 100s of airlines and travel agents"
     const val btn_book_now="Book Now"
 
+    const val our_categories="Our Categories"
+    const val category_flight="Flight"
+    const val category_hotel="Hotel"
+    const val category_car="Car"
+    const val category_taxi="Taxi"
+    const val category_bike="Bike"
+    const val category_simcard="Sim/eSim"
+
+    const val top_5_flights="Top 5 Flights"
+    const val view_all="View All"
+
 }

@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 private val LightColorScheme = lightColorScheme(
     background = Color.White,
     secondary = Orange,
+    secondaryContainer= Orange_alpha_5,
     primary = Yellow,
     onPrimary = Color.Black,
 )
