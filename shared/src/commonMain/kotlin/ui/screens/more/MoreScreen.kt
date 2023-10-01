@@ -1,4 +1,4 @@
-package presentation.more
+package ui.screens.more
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import presentation.components.BoxListItem
+import ui.components.BoxListItem
 
 @Composable
 fun MoreScreen(modifier: Modifier = Modifier) {

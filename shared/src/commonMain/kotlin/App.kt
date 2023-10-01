@@ -1,8 +1,8 @@
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import presentation.about.AboutScreen
-import theme.MyApplicationTheme
+import ui.screens.about.AboutScreen
+import ui.theme.MyApplicationTheme
 
 @OptIn(ExperimentalResourceApi::class, ExperimentalFoundationApi::class)
 @Composable
@@ -13,7 +13,3 @@ fun App() {
         AboutScreen()
     }
 }
-
-
-
-expect fun getPlatformName(): String

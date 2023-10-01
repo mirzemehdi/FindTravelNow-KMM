@@ -1,4 +1,4 @@
-package presentation.onboarding
+package ui.screens.onboarding
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -43,13 +43,13 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import theme.Black_28
-import theme.Black_34
-import theme.Orange
-import theme.Orange_51
-import theme.Silver
-import theme.Yellow_alpha_0
-import theme.Yellow_alpha_39
+import ui.theme.Black_28
+import ui.theme.Black_34
+import ui.theme.Orange
+import ui.theme.Orange_51
+import ui.theme.Silver
+import ui.theme.Yellow_alpha_0
+import ui.theme.Yellow_alpha_39
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

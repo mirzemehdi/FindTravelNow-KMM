@@ -1,6 +1,6 @@
-package presentation.onboarding
+package ui.screens.onboarding
 
-import theme.strings.Strings
+import ui.theme.strings.Strings
 
 data class OnBoardingScreenData(val title: String, val description: String, val imageRes: String)
 data class OnBoardingScreenUiState(

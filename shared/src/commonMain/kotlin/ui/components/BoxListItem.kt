@@ -1,4 +1,4 @@
-package presentation.components
+package ui.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -21,9 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,11 +32,11 @@ import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import theme.Black_22
-import theme.Black_alpha_8
-import theme.Gray
-import theme.Orange_alpha_5
-import theme.Orange_alpha_50
+import ui.theme.Black_22
+import ui.theme.Black_alpha_8
+import ui.theme.Gray
+import ui.theme.Orange_alpha_5
+import ui.theme.Orange_alpha_50
 
 
 @Composable

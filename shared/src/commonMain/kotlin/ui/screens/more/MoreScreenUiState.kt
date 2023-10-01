@@ -1,6 +1,6 @@
-package presentation.more
+package ui.screens.more
 
-import theme.strings.Strings
+import ui.theme.strings.Strings
 
 
 data class MoreScreenUiState(

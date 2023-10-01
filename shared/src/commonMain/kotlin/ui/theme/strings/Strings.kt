@@ -1,4 +1,4 @@
-package theme.strings
+package ui.theme.strings
 
 object Strings {
     const val onboarding_title_1="Trusted and free"

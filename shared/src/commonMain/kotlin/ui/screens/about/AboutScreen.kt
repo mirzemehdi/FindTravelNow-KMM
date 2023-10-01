@@ -1,8 +1,7 @@
-package presentation.about
+package ui.screens.about
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -32,9 +31,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import presentation.components.ExpandableBoxItem
-import theme.Black_alpha_8
-import theme.strings.Strings
+import ui.components.ExpandableBoxItem
+import ui.theme.Black_alpha_8
+import ui.theme.strings.Strings
 
 @Composable
 fun AboutScreen(modifier: Modifier = Modifier) {

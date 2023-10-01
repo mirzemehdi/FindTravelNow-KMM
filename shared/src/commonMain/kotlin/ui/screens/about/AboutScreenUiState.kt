@@ -1,6 +1,6 @@
-package presentation.about
+package ui.screens.about
 
-import theme.strings.Strings
+import ui.theme.strings.Strings
 
 
 data class AboutScreenUiState(
