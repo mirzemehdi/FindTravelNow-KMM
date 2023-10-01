@@ -55,6 +55,11 @@ val Typography
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
             fontFamily = popinsFontFamily
+        ),
+        bodySmall = TextStyle(
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Normal,
+            fontFamily = popinsFontFamily
         )
 
     )

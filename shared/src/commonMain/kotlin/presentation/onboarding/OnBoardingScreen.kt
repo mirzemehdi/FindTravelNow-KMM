@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import theme.Black
+import theme.Black_28
 import theme.Black_34
 import theme.Orange
 import theme.Orange_51
@@ -181,7 +181,7 @@ private fun OnBoardingPager(
             modifier = Modifier.padding(top = 50.dp),
             text = onBoardingScreenData.title,
             style = MaterialTheme.typography.displayMedium,
-            color = Black,
+            color = Black_28,
             textAlign = TextAlign.Center
         )
 
@@ -189,7 +189,7 @@ private fun OnBoardingPager(
             modifier = Modifier.padding(top = 20.dp),
             text = onBoardingScreenData.description,
             style = MaterialTheme.typography.bodyMedium,
-            color = Black,
+            color = Black_28,
             textAlign = TextAlign.Center
         )
     }

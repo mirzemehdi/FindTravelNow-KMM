@@ -16,6 +16,17 @@ object Strings {
     const val privacy_policy="Privacy Policy"
 
     const val about_findtravelnow="About FindTravelNow"
+    const val about_findtravelnow_text="FindTravelNow - Your travel companion- Making Travel Easy. We help you to get cheap flights, hotels, cars, taxis & bikes"
     const val contact_details="Contact Details"
     const val app_details="App Details"
+
+    const val email_address_title ="Email Address"
+    const val email_address_description ="findtravelnow@gmail.com"
+
+    const val developer_title ="Developer"
+    const val developer_description ="Measify"
+
+    const val app_version_title ="Version"
+    const val app_version_description ="2.0.0"
+
 }

@@ -2,7 +2,7 @@ package theme
 
 import androidx.compose.ui.graphics.Color
 
-val Black = Color(0xFF262628)
+val Black_28 = Color(0xFF262628)
 val Black_34 = Color(0xFF110034)
 val Black_22 = Color(0xFF222222)
 val Black_alpha_8 = Color(0,0,0,21)
