@@ -28,9 +28,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import onboarding.OnBoardingScreen
+import presentation.onboarding.OnBoardingScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import presentation.about.AboutScreen
+import presentation.more.MoreScreen
 import theme.Black
 import theme.MyApplicationTheme
 import theme.Yellow_alpha_0
@@ -40,7 +42,9 @@ import theme.Yellow_alpha_39
 @Composable
 fun App() {
     MyApplicationTheme {
-        OnBoardingScreen()
+//        OnBoardingScreen()
+//        MoreScreen()
+        AboutScreen()
     }
 }
 

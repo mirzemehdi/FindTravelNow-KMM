@@ -1,4 +1,4 @@
-package onboarding
+package presentation.onboarding
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
