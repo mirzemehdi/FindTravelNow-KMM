@@ -33,6 +33,8 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import ui.components.ExpandableBoxItem
 import ui.theme.Black_alpha_8
+import ui.theme.Orange_55
+import ui.theme.Red_48
 import ui.theme.strings.Strings
 
 @Composable
@@ -109,8 +111,8 @@ private fun ImageTitleDescription(
 ) {
     Row(modifier = modifier) {
         val gradientBackground = Brush.radialGradient(
-            0f to Color(0xFFDE3048),
-            1f to Color(0xFFF9A455)
+            0f to Red_48,
+            1f to Orange_55
         )
         val imageShape = RoundedCornerShape(6.dp)
         Image(

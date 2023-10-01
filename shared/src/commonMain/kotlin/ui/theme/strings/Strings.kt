@@ -1,6 +1,7 @@
 package ui.theme.strings
 
 object Strings {
+    const val home_screen_title="Find your travel plans with us"
     const val onboarding_title_1="Trusted and free"
     const val onboarding_title_2="Book with flexibility"
     const val onboarding_title_3="Explore great deals"
@@ -28,5 +29,8 @@ object Strings {
 
     const val app_version_title ="Version"
     const val app_version_description ="2.0.0"
+
+    const val home_screen_banner_text ="Get cheap flights from 100s of airlines and travel agents"
+    const val btn_book_now="Book Now"
 
 }
