@@ -1,6 +1,5 @@
 package ui.screens.home
 
-import androidx.compose.material3.TextButton
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,13 +18,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,53 +52,55 @@ import ui.theme.strings.Strings
 fun HomeScreen() {
 
     val uiState by remember { mutableStateOf(HomeScreenUiState()) }
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
 //            .verticalScroll(rememberScrollState())
             .padding(horizontal = 30.dp)
     ) {
-        Spacer(modifier = Modifier.height(36.dp))
-        TopTitleSection(modifier = Modifier.fillMaxWidth())
-        Spacer(modifier = Modifier.height(20.dp))
-        CardViewBanner()
+        item { Spacer(modifier = Modifier.height(36.dp)) }
+        item { TopTitleSection(modifier = Modifier.fillMaxWidth()) }
+        item { Spacer(modifier = Modifier.height(20.dp)) }
+        item { CardViewBanner() }
 
-        CategoriesTitle()
-        CategoriesSection(modifier = Modifier.padding(top = 18.dp), categories = uiState.categories)
+        item { CategoriesTitle() }
+        item {
+            CategoriesSection(
+                modifier = Modifier.padding(top = 18.dp),
+                categories = uiState.categories
+            )
+        }
 
-        Top5FlightsSection(modifier = Modifier.padding(top = 24.dp))
-        Spacer(modifier = Modifier.height(16.dp))
+        top5FlightsSection(modifier = Modifier.padding(top = 24.dp))
+        item { Spacer(modifier = Modifier.height(16.dp)) }
     }
 }
 
-@Composable
-fun Top5FlightsSection(modifier: Modifier = Modifier) {
-    LazyColumn(modifier.fillMaxWidth()) {
-        item {
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+private fun LazyListScope.top5FlightsSection(modifier: Modifier = Modifier) {
+    item {
+        Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = Strings.top_5_flights,
+                style = MaterialTheme.typography.titleSmall,
+                color = Color.Black,
+                textAlign = TextAlign.Start,
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            TextButton(
+                onClick = {
+                    /* Do something! */
+                }
+            ) {
                 Text(
-                    text = Strings.top_5_flights,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = Color.Black,
+                    text = Strings.view_all,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.secondary,
                     textAlign = TextAlign.Start,
                 )
-                Spacer(modifier=Modifier.weight(1f))
-
-                TextButton(
-                    onClick = {
-                        /* Do something! */
-                    }
-                ) {
-                    Text(
-                        text = Strings.view_all,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.secondary,
-                        textAlign = TextAlign.Start,
-                    )
-                }
             }
         }
     }
+
 }
 
 @Composable
@@ -125,7 +126,12 @@ private fun CategoriesSection(modifier: Modifier = Modifier, categories: List<Ca
         categories.forEach {
             CategoryItem(
                 categoryData = it,
-                modifier = Modifier.sizeIn(minWidth = 100.dp, minHeight = 100.dp, maxWidth = 120.dp, maxHeight = 120.dp)
+                modifier = Modifier.sizeIn(
+                    minWidth = 100.dp,
+                    minHeight = 100.dp,
+                    maxWidth = 100.dp,
+                    maxHeight = 100.dp
+                )
             )
         }
     }
