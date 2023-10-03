@@ -13,7 +13,7 @@ fun App() {
 //        OnBoardingScreen()
 //        MoreScreen()
 //        AboutScreen()
-        HomeScreen()
-//        Top5FlightsScreen()
+//        HomeScreen()
+        Top5FlightsScreen()
     }
 }

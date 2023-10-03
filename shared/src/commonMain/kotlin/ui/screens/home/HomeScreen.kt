@@ -58,7 +58,6 @@ fun HomeScreen() {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-//            .verticalScroll(rememberScrollState())
             .padding(horizontal = 30.dp)
     ) {
         item { Spacer(modifier = Modifier.height(36.dp)) }

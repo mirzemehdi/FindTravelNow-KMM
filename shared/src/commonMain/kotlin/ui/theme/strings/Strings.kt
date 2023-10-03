@@ -43,5 +43,8 @@ object Strings {
 
     const val top_5_flights="Top 5 Flights"
     const val view_all="View All"
+    const val origin="Origin: "
+    const val last_update="Last update: "
+    const val next_update="Next update: "
 
 }
