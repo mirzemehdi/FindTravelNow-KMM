@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -39,8 +40,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import domain.model.FlightInfo
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import ui.components.FlightInfoItem
 import ui.theme.Black_10
 import ui.theme.Black_alpha_8
 import ui.theme.Orange_55
@@ -71,12 +74,15 @@ fun HomeScreen() {
             )
         }
 
-        top5FlightsSection(modifier = Modifier.padding(top = 24.dp))
+        top5FlightsSection(modifier = Modifier.padding(top = 18.dp), topFlightInfoList = uiState.topFlightInfoList)
         item { Spacer(modifier = Modifier.height(16.dp)) }
     }
 }
 
-private fun LazyListScope.top5FlightsSection(modifier: Modifier = Modifier) {
+private fun LazyListScope.top5FlightsSection(
+    modifier: Modifier = Modifier,
+    topFlightInfoList: List<FlightInfo>,
+) {
     item {
         Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Text(
@@ -100,6 +106,11 @@ private fun LazyListScope.top5FlightsSection(modifier: Modifier = Modifier) {
             }
         }
     }
+
+    items(topFlightInfoList) {
+        FlightInfoItem(modifier=Modifier.fillMaxWidth().padding(bottom = 10.dp), flightInfo = it)
+    }
+
 
 }
 
@@ -148,12 +159,6 @@ private fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryDa
 
     Column(
         modifier = modifier
-            .shadow(
-                elevation = 19.dp,
-                spotColor = Black_alpha_8,
-                ambientColor = Black_alpha_8,
-                shape = shape
-            )
             .border(
                 width = 1.dp,
                 color = borderColor,
