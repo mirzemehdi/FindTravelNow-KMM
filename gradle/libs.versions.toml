@@ -5,14 +5,20 @@ androidGradlePlugin="8.0.2"
 androidxAvtivityCpmpose="1.7.2"
 androidxAppCompat="1.6.1"
 androidxCore="1.10.1"
+koin = "3.5.0"
+koinCompose = "1.1.0"
 
 
 
 [libraries]
-#androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose",version.ref="androidxAvtivityCpmpose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat",version.ref="androidxAppCompat" }
 androidx-core = { module = "androidx.core:core-ktx",version.ref="androidxCore" }
+
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koinCompose" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
