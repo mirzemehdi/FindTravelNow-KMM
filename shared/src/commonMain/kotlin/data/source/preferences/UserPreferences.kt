@@ -14,4 +14,6 @@ interface UserPreferences {
     suspend fun putString(key: String, value: String)
     suspend fun putInt(key: String, value: Int)
     suspend fun putBoolean(key: String, value: Boolean)
+
+    suspend fun clear()
 }

@@ -28,6 +28,7 @@ kotlin {
                 implementation(compose.components.resources)
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)
+                implementation(libs.multiplatformSettings.noargs)
             }
         }
         val androidMain by getting {
