@@ -8,6 +8,7 @@ androidxCore="1.10.1"
 koin = "3.5.0"
 koinCompose = "1.1.0"
 multiplatformSettings = "1.0.0"
+voyager = "1.0.0-rc05"
 
 
 
@@ -22,6 +23,16 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 
 multiplatformSettings-noargs = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref="multiplatformSettings" }
 
+#Navigation Library
+voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
+voyager-tabNavigator = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyager" }
+voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyager" }
+voyager-koin = { group = "cafe.adriel.voyager", name = "voyager-koin", version.ref = "voyager" }
+
+
+[bundles]
+voyager = ["voyager-navigator", "voyager-tabNavigator", "voyager-transitions","voyager-koin"]
+koin-multiplatform = ["koin-core", "koin-compose"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
