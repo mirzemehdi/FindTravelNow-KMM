@@ -37,6 +37,7 @@ kotlin {
                 api(libs.androidx.activity.compose)
                 api(libs.androidx.appcompat)
                 api(libs.androidx.core)
+                api(libs.androidx.lifecycle.runtime.compose)
                 api(libs.koin.android)
             }
         }

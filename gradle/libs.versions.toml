@@ -3,6 +3,7 @@ compose = "1.5.2"
 kotlin="1.9.10"
 androidGradlePlugin="8.0.2"
 androidxAvtivityCpmpose="1.7.2"
+androidxLifecycleRuntimeCpmpose="2.6.2"
 androidxAppCompat="1.6.1"
 androidxCore="1.10.1"
 koin = "3.5.0"
@@ -14,6 +15,7 @@ voyager = "1.0.0-rc05"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose",version.ref="androidxAvtivityCpmpose" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose",version.ref="androidxLifecycleRuntimeCpmpose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat",version.ref="androidxAppCompat" }
 androidx-core = { module = "androidx.core:core-ktx",version.ref="androidxCore" }
 
@@ -27,11 +29,10 @@ multiplatformSettings-noargs = { module = "com.russhwolf:multiplatform-settings-
 voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
 voyager-tabNavigator = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyager" }
 voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyager" }
-voyager-koin = { group = "cafe.adriel.voyager", name = "voyager-koin", version.ref = "voyager" }
 
 
 [bundles]
-voyager = ["voyager-navigator", "voyager-tabNavigator", "voyager-transitions","voyager-koin"]
+voyager = ["voyager-navigator", "voyager-tabNavigator", "voyager-transitions"]
 koin-multiplatform = ["koin-core", "koin-compose"]
 
 [plugins]
