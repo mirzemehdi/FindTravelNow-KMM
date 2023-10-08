@@ -13,49 +13,47 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
 import data.source.preferences.UserPreferences
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
-import root.navigation.Screens
 import presentation.theme.MyApplicationTheme
+import root.navigation.RootAppDestinations
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
-
+    var appUiState by remember { mutableStateOf(AppUiState()) }
     MyApplicationTheme {
         val userPreferences: UserPreferences = koinInject()
-        var isLoading: Boolean by remember { mutableStateOf(true) }
-        var isOnBoardShown by remember { mutableStateOf(false) }
         val coroutineScope = rememberCoroutineScope()
 
         coroutineScope.launch {
-            val value = userPreferences.getBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN)
-            isOnBoardShown = value
-            isLoading = false
+            val isOnBoardShown = userPreferences.getBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN)
+//            if (isOnBoardShown)  userPreferences.putBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN,false)
+            appUiState = AppUiState(isLoading = false, isOnBoardShown = isOnBoardShown)
         }
 
-        if (isLoading) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                //TODO change with app logo
-                Image(
-                    painter = painterResource("drawable/ic_horizontal_flight.xml"),
-                    contentDescription = null
-                )
-            }
-        } else {
-            val startScreen = if (isOnBoardShown) Screens.Home else Screens.OnBoarding
-            Navigator(screen = startScreen)
+        when (appUiState.isLoading) {
+            true -> SplashScreen()
+            false -> AppNavigation(isOnBoardShown = appUiState.isOnBoardShown)
         }
+    }
+}
 
-//        OnBoardingScreen()
-//        MoreScreen()
-//        AboutScreen()
-//        HomeScreen()
-//        Top5FlightsScreen()
+@Composable
+private fun AppNavigation(isOnBoardShown: Boolean) {
+    val startScreen = if (isOnBoardShown) RootAppDestinations.Main else RootAppDestinations.OnBoarding
+    Navigator(screen = startScreen)
+}
 
-
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+private fun SplashScreen() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        //TODO change with app logo
+        Image(
+            painter = painterResource("drawable/ic_horizontal_flight.xml"),
+            contentDescription = null
+        )
     }
 }

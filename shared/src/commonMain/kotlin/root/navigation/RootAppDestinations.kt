@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import presentation.screens.home.HomeScreen
+import presentation.screens.main.MainScreen
 import presentation.screens.onboarding.OnBoardingScreen
 import presentation.screens.onboarding.OnBoardingStateHolder
 import util.getUiStateHolder
 
-object Screens {
+object RootAppDestinations {
     object OnBoarding : Screen {
         @Composable
         override fun Content() {
@@ -17,13 +17,13 @@ object Screens {
             val onBoardingStateHolder = getUiStateHolder<OnBoardingStateHolder>()
             OnBoardingScreen(
                 uiStateHolder = onBoardingStateHolder,
-                onNavigateMain = { navigator.replace(Home) }
+                onNavigateMain = { navigator.replace(Main) }
             )
         }
     }
 
-    object Home : Screen {
+    object Main : Screen {
         @Composable
-        override fun Content() = HomeScreen()
+        override fun Content() = MainScreen()
     }
 }

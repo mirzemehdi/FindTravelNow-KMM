@@ -58,11 +58,11 @@ fun OnBoardingScreen(
     onNavigateMain: () -> Unit,
 ) {
     val uiState by uiStateHolder.uiState.asState()
-
+    if (uiState.onBoardIsShown) onNavigateMain()
     OnBoardingScreen(
         modifier = modifier,
         uiState = uiState,
-        onNavigateMain = onNavigateMain
+        onClickNavigateNext = uiStateHolder::onClickNavigateNext
     )
 }
 
@@ -71,7 +71,7 @@ fun OnBoardingScreen(
 fun OnBoardingScreen(
     modifier: Modifier = Modifier,
     uiState: OnBoardingScreenUiState = OnBoardingScreenUiState(),
-    onNavigateMain: () -> Unit,
+    onClickNavigateNext: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -120,14 +120,14 @@ fun OnBoardingScreen(
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                GetStartedButton(modifier = Modifier.fillMaxWidth(), onClick = onNavigateMain)
+                GetStartedButton(modifier = Modifier.fillMaxWidth(), onClick = onClickNavigateNext)
             }
             this@Column.AnimatedVisibility(
                 visible = isLastPage.not(),
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                SkipButton(onClick = onNavigateMain)
+                SkipButton(onClick = onClickNavigateNext)
             }
         }
 

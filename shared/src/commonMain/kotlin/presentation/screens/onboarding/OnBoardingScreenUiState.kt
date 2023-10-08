@@ -1,9 +1,10 @@
 package presentation.screens.onboarding
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import presentation.theme.strings.Strings
 
 data class OnBoardingScreenData(val title: String, val description: String, val imageRes: String)
-data class OnBoardingScreenUiState(
+data class OnBoardingScreenUiState @OptIn(ExperimentalFoundationApi::class) constructor(
     val pages: List<OnBoardingScreenData> = listOf(
         OnBoardingScreenData(
             Strings.onboarding_title_1,
@@ -21,4 +22,5 @@ data class OnBoardingScreenUiState(
             "drawable/onboarding_3.xml"
         ),
     ),
+    val onBoardIsShown: Boolean = false,
 )
