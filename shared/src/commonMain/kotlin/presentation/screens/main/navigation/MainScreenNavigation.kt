@@ -18,6 +18,8 @@ import cafe.adriel.voyager.navigator.Navigator
 import presentation.screens.home.HomeScreen
 import presentation.screens.main.MainScreen
 import presentation.screens.more.MoreScreen
+import presentation.screens.top5flights.Top5FlightsScreen
+import presentation.theme.strings.Strings
 
 interface MainScreenDestination {
 
@@ -34,12 +36,32 @@ interface MainScreenDestination {
         override fun Content() {
             MoreScreen()
         }
+
+        override fun getTitle(): String = Strings.title_screen_more
+
+    }
+
+    object Top5Flights : Screen, MainScreenDestination {
+        @Composable
+        override fun Content() {
+            Top5FlightsScreen()
+        }
+
+        override fun getTitle(): String = Strings.title_screen_top5_flights
+    }
+
+    fun getTitle(): String{
+        return ""
     }
 
 }
 
 fun MainScreenDestination.isTopLevelScreen(): Boolean {
-    val topLevelScreens = listOf(MainScreenDestination.Home, MainScreenDestination.More)
+    val topLevelScreens = listOf(
+        MainScreenDestination.Home,
+        MainScreenDestination.More,
+        MainScreenDestination.Top5Flights
+    )
     return topLevelScreens.any { it::class == this::class }
 }
 
@@ -65,8 +87,12 @@ fun MainScreenNavigation() {
                     else -> navigator.push(destinationScreen)
 
                 }
+            },
+            onNavigateBack = {
+                navigator.pop()
             }
         ) {
+//            CurrentScreen()
             AnimatedTransition(navigator)
         }
     }
@@ -78,17 +104,12 @@ private fun AnimatedTransition(navigator: Navigator) {
         targetState = navigator.lastItem,
         transitionSpec = {
 
-            val (initialOffset, targetOffset) = when (navigator.lastEvent) {
-                StackEvent.Pop -> ({ size: Int -> -size }) to ({ size: Int -> size })
-                else -> ({ size: Int -> size }) to ({ size: Int -> -size })
-            }
-
             val (initialScale, targetScale) = when (navigator.lastEvent) {
                 StackEvent.Pop -> 1f to 0.85f
                 else -> 0.85f to 1f
             }
 
-            val stiffness = Spring.StiffnessLow
+            val stiffness = Spring.StiffnessMediumLow
             val enterTransition = fadeIn(tween(easing = EaseIn)) + scaleIn(
                 spring(stiffness = stiffness),
                 initialScale = initialScale

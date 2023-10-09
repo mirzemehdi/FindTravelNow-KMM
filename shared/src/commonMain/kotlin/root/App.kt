@@ -1,8 +1,11 @@
 package root
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,26 +25,34 @@ import root.navigation.RootAppNavigation
 
 @Composable
 fun App() {
-    var appUiState by remember { mutableStateOf(AppUiState()) }
+
     MyApplicationTheme {
-        val userPreferences: UserPreferences = koinInject()
-        val coroutineScope = rememberCoroutineScope()
+        Box(
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+        ) {
+            var appUiState by remember { mutableStateOf(AppUiState()) }
+            val userPreferences: UserPreferences = koinInject()
+            val coroutineScope = rememberCoroutineScope()
 
-        coroutineScope.launch {
-            val isOnBoardShown = userPreferences.getBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN)
-            appUiState = AppUiState(isLoading = false, isOnBoardShown = isOnBoardShown)
+            coroutineScope.launch {
+                val isOnBoardShown =
+                    userPreferences.getBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN)
+                appUiState = AppUiState(isLoading = false, isOnBoardShown = isOnBoardShown)
+            }
+
+            when (appUiState.isLoading) {
+                true -> SplashScreen()
+                false -> AppNavigation(isOnBoardShown = appUiState.isOnBoardShown)
+            }
         }
 
-        when (appUiState.isLoading) {
-            true -> SplashScreen()
-            false -> AppNavigation(isOnBoardShown = appUiState.isOnBoardShown)
-        }
     }
 }
 
 @Composable
 private fun AppNavigation(isOnBoardShown: Boolean) {
-    val startDestination = if (isOnBoardShown) RootAppDestination.Main else RootAppDestination.OnBoarding
+    val startDestination =
+        if (isOnBoardShown) RootAppDestination.Main else RootAppDestination.OnBoarding
     RootAppNavigation(startDestination = startDestination)
 }
 

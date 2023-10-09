@@ -1,8 +1,10 @@
 package presentation.theme.strings
 
 object Strings {
-    const val price="Price"
-    const val date="Date"
+    const val title_screen_more: String = "More"
+    const val title_screen_top5_flights: String = "Top5 Flights"
+    const val price = "Price"
+    const val date = "Date"
     const val sort_by = "Sort by"
     const val home_screen_title = "Find your travel plans with us"
     const val onboarding_title_1 = "Trusted and free"
