@@ -107,11 +107,6 @@ fun BoxListItem(
     val shape = RoundedCornerShape(10.dp)
     Box(
         modifier = modifier
-            .shadow(
-                elevation = 19.dp,
-                spotColor = Black_alpha_8,
-                ambientColor = Black_alpha_8
-            )
             .border(
                 width = 1.dp,
                 color = Color(0xFFF1E9E9),

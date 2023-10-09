@@ -11,14 +11,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.navigator.Navigator
 import data.source.preferences.UserPreferences
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 import presentation.theme.MyApplicationTheme
-import root.navigation.RootAppDestinations
+import root.navigation.RootAppDestination
+import root.navigation.RootAppNavigation
 
 @Composable
 fun App() {
@@ -29,7 +29,6 @@ fun App() {
 
         coroutineScope.launch {
             val isOnBoardShown = userPreferences.getBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN)
-//            if (isOnBoardShown)  userPreferences.putBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN,false)
             appUiState = AppUiState(isLoading = false, isOnBoardShown = isOnBoardShown)
         }
 
@@ -42,8 +41,8 @@ fun App() {
 
 @Composable
 private fun AppNavigation(isOnBoardShown: Boolean) {
-    val startScreen = if (isOnBoardShown) RootAppDestinations.Main else RootAppDestinations.OnBoarding
-    Navigator(screen = startScreen)
+    val startDestination = if (isOnBoardShown) RootAppDestination.Main else RootAppDestination.OnBoarding
+    RootAppNavigation(startDestination = startDestination)
 }
 
 @OptIn(ExperimentalResourceApi::class)

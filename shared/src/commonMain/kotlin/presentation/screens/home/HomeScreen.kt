@@ -30,6 +30,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +42,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import domain.model.FlightInfo
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import presentation.components.FlightInfoItem
@@ -53,6 +57,7 @@ import presentation.theme.strings.Strings
 fun HomeScreen() {
 
     val uiState by remember { mutableStateOf(HomeScreenUiState()) }
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -71,7 +76,10 @@ fun HomeScreen() {
             )
         }
 
-        top5FlightsSection(modifier = Modifier.padding(top = 18.dp), topFlightInfoList = uiState.topFlightInfoList)
+        top5FlightsSection(
+            modifier = Modifier.padding(top = 18.dp),
+            topFlightInfoList = uiState.topFlightInfoList
+        )
         item { Spacer(modifier = Modifier.height(16.dp)) }
     }
 }
@@ -105,7 +113,7 @@ private fun LazyListScope.top5FlightsSection(
     }
 
     items(topFlightInfoList) {
-        FlightInfoItem(modifier=Modifier.fillMaxWidth().padding(bottom = 10.dp), flightInfo = it)
+        FlightInfoItem(modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp), flightInfo = it)
     }
 
 
