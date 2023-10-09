@@ -11,12 +11,15 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
@@ -58,10 +61,13 @@ fun HomeScreen() {
 
     val uiState by remember { mutableStateOf(HomeScreenUiState()) }
 
+    val systemBarPaddingValues= WindowInsets.systemBars.asPaddingValues()
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 30.dp)
+            .padding(start = 30.dp,end=30.dp, top = systemBarPaddingValues.calculateTopPadding()),
+
     ) {
         item { Spacer(modifier = Modifier.height(36.dp)) }
         item { TopTitleSection(modifier = Modifier.fillMaxWidth()) }
