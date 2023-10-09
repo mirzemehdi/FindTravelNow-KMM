@@ -1,13 +1,15 @@
 package presentation.screens.main.navigation
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
@@ -82,18 +84,18 @@ private fun AnimatedTransition(navigator: Navigator) {
             }
 
             val (initialScale, targetScale) = when (navigator.lastEvent) {
-                StackEvent.Pop -> 1f to 0.8f
-                else -> 0.8f to 1f
+                StackEvent.Pop -> 1f to 0.85f
+                else -> 0.85f to 1f
             }
 
             val stiffness = Spring.StiffnessLow
-            val enterTransition = fadeIn(spring(stiffness =stiffness)) + slideInVertically(
-                animationSpec = spring(stiffness =stiffness),
-                initialOffsetY = initialOffset
-            ) + scaleIn(spring(stiffness =stiffness), initialScale = initialScale)
+            val enterTransition = fadeIn(tween(easing = EaseIn)) + scaleIn(
+                spring(stiffness = stiffness),
+                initialScale = initialScale
+            )
 
-            val exitTransition = fadeOut(spring(stiffness =stiffness)) + scaleOut(
-                spring(stiffness =stiffness),
+            val exitTransition = fadeOut(spring(stiffness = stiffness)) + scaleOut(
+                tween(easing = EaseOut),
                 targetScale = targetScale
             )
 
