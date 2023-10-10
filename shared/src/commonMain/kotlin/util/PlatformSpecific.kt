@@ -10,5 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 expect fun <T> StateFlow<T>.asState(): State<T>
+
 @Composable
 expect fun font(res: String, weight: FontWeight, style: FontStyle): Font
+

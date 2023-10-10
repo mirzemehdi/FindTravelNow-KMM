@@ -33,8 +33,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,8 +43,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import domain.model.FlightInfo
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import presentation.components.FlightInfoItem
@@ -57,18 +53,22 @@ import presentation.theme.Red_48
 import presentation.theme.strings.Strings
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onNavigateTop5Flights: () -> Unit, onNavigateCategory: (CategoryData) -> Unit) {
 
     val uiState by remember { mutableStateOf(HomeScreenUiState()) }
 
-    val systemBarPaddingValues= WindowInsets.systemBars.asPaddingValues()
+    val systemBarPaddingValues = WindowInsets.systemBars.asPaddingValues()
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 30.dp,end=30.dp, top = systemBarPaddingValues.calculateTopPadding()),
+            .padding(
+                start = 30.dp,
+                end = 30.dp,
+                top = systemBarPaddingValues.calculateTopPadding()
+            ),
 
-    ) {
+        ) {
         item { Spacer(modifier = Modifier.height(36.dp)) }
         item { TopTitleSection(modifier = Modifier.fillMaxWidth()) }
         item { Spacer(modifier = Modifier.height(20.dp)) }
@@ -78,13 +78,17 @@ fun HomeScreen() {
         item {
             CategoriesSection(
                 modifier = Modifier.padding(top = 18.dp),
-                categories = uiState.categories
+                categories = uiState.categories,
+                onClickCategory = { categoryData ->
+                    onNavigateCategory(categoryData)
+                }
             )
         }
 
         top5FlightsSection(
             modifier = Modifier.padding(top = 18.dp),
-            topFlightInfoList = uiState.topFlightInfoList
+            topFlightInfoList = uiState.topFlightInfoList,
+            onClickViewAll = onNavigateTop5Flights
         )
         item { Spacer(modifier = Modifier.height(16.dp)) }
     }
@@ -93,6 +97,7 @@ fun HomeScreen() {
 private fun LazyListScope.top5FlightsSection(
     modifier: Modifier = Modifier,
     topFlightInfoList: List<FlightInfo>,
+    onClickViewAll: () -> Unit,
 ) {
     item {
         Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -105,7 +110,7 @@ private fun LazyListScope.top5FlightsSection(
             Spacer(modifier = Modifier.weight(1f))
             TextButton(
                 onClick = {
-                    /* Do something! */
+                    onClickViewAll()
                 }
             ) {
                 Text(
@@ -139,7 +144,11 @@ fun CategoriesTitle() {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun CategoriesSection(modifier: Modifier = Modifier, categories: List<CategoryData>) {
+private fun CategoriesSection(
+    modifier: Modifier = Modifier,
+    categories: List<CategoryData>,
+    onClickCategory: (CategoryData) -> Unit,
+) {
     FlowRow(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -153,7 +162,10 @@ private fun CategoriesSection(modifier: Modifier = Modifier, categories: List<Ca
                     minHeight = 100.dp,
                     maxWidth = 100.dp,
                     maxHeight = 100.dp
-                )
+                ),
+                onClickCategoryData = {
+                    onClickCategory(it)
+                }
             )
         }
     }
@@ -162,7 +174,11 @@ private fun CategoriesSection(modifier: Modifier = Modifier, categories: List<Ca
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-private fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryData) {
+private fun CategoryItem(
+    modifier: Modifier = Modifier,
+    categoryData: CategoryData,
+    onClickCategoryData: () -> Unit,
+) {
 
     val shape = RoundedCornerShape(11.dp)
     val backgroundColor = MaterialTheme.colorScheme.secondaryContainer
@@ -177,7 +193,7 @@ private fun CategoryItem(modifier: Modifier = Modifier, categoryData: CategoryDa
             )
             .background(backgroundColor, shape)
             .clip(shape)
-            .clickable { },
+            .clickable { onClickCategoryData() },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

@@ -15,4 +15,8 @@ data class HomeScreenUiState(
     val topFlightInfoList: List<FlightInfo> = listOf(FlightInfo(), FlightInfo()),
 )
 
-data class CategoryData(val title: String = "", val iconRes: String = "")
+data class CategoryData(
+    val title: String = "",
+    val iconRes: String = "",
+    val url: String = "",
+)

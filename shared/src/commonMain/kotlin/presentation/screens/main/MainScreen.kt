@@ -16,6 +16,7 @@ import org.jetbrains.compose.resources.painterResource
 import presentation.components.MyAppToolbar
 import presentation.screens.main.navigation.MainScreenDestination
 import presentation.screens.main.navigation.MainScreenNavigation
+import presentation.screens.main.navigation.isTopLevelScreen
 import presentation.theme.Silver_d8
 
 
@@ -36,7 +37,7 @@ fun MainScreen(
 
     Column(modifier = modifier.fillMaxSize()) {
 
-        AnimatedVisibility(currentDestination!=MainScreenDestination.Home){
+        AnimatedVisibility(currentDestination != MainScreenDestination.Home) {
             MyAppToolbar(
                 title = currentDestination.getTitle(),
                 onNavigationIconClick = { onNavigateBack() }
@@ -47,11 +48,14 @@ fun MainScreen(
             content()
         }
 
-        BottomNavigation(
-            selectedNavItem = currentDestination.asBottomNavItem(),
-            onNavigationItemSelected = {
-                onDestinationChanged(it.asTopLevelDestination())
-            })
+        AnimatedVisibility(currentDestination.isTopLevelScreen()) {
+
+            BottomNavigation(
+                selectedNavItem = currentDestination.asBottomNavItem(),
+                onNavigationItemSelected = {
+                    onDestinationChanged(it.asTopLevelDestination())
+                })
+        }
 
 
     }

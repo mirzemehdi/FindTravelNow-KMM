@@ -21,7 +21,7 @@ enum class BottomNavItem(val iconRes: String) {
 fun MainScreenDestination.asBottomNavItem(): BottomNavItem {
     return when (this) {
         MainScreenDestination.Home -> BottomNavItem.HOME
-        MainScreenDestination.More -> BottomNavItem.More
+        MainScreenDestination.More, MainScreenDestination.AboutUs -> BottomNavItem.More
         MainScreenDestination.Top5Flights -> BottomNavItem.Top5Flights
         else -> BottomNavItem.HOME
     }
