@@ -1,4 +1,4 @@
-package presentation
+package presentation.di
 
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module

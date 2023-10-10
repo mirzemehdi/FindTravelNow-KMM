@@ -53,4 +53,6 @@ object Strings {
     const val last_update = "Last update: "
     const val next_update = "Next update: "
 
+
+
 }
