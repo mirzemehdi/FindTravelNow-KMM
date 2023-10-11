@@ -38,7 +38,6 @@ import presentation.theme.Gray
 import presentation.theme.Orange_alpha_5
 import presentation.theme.Orange_alpha_50
 
-
 @Composable
 fun ExpandableBoxItem(
     modifier: Modifier = Modifier,
