@@ -14,7 +14,6 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.stack.StackEvent
-import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -62,9 +61,17 @@ interface MainScreenDestination {
         @Composable
         override fun Content() {
             val navigator = LocalNavigator.currentOrThrow
-            MoreScreen(onNavigateAboutUs = {
-                navigator.navigate(AboutUs)
-            })
+            MoreScreen(
+                onNavigateAboutUs = { navigator.navigate(AboutUs) },
+                onNavigatePrivacyPolicy = {
+                    navigator.navigate(
+                        WebView(
+                            url = Strings.url_privacy_policy,
+                            title = Strings.privacy_policy
+                        )
+                    )
+                }
+            )
         }
 
         override fun getTitle(): String = Strings.title_screen_more
@@ -93,7 +100,8 @@ interface MainScreenDestination {
         return ""
     }
 
-    data class WebView(val url: String, private val title: String = "") : Screen, MainScreenDestination {
+    data class WebView(val url: String, private val title: String = "") : Screen,
+        MainScreenDestination {
         @Composable
         override fun Content() {
             WebViewScreen(url = url)

@@ -79,7 +79,7 @@ private fun ContactDetailsExpandedContent() {
         ImageTitleDescription(
             imageRes = "drawable/ic_email.xml",
             title = Strings.email_address_title,
-            description = Strings.email_address_description,
+            description = Strings.contact_email_address,
         )
     }
 }

@@ -30,6 +30,7 @@ kotlin {
                 implementation(libs.multiplatformSettings.noargs)
                 implementation(libs.bundles.koin.multiplatform)
                 implementation(libs.bundles.voyager)
+                api("io.github.kevinnzou:compose-webview-multiplatform:1.4.0")
             }
         }
         val androidMain by getting {

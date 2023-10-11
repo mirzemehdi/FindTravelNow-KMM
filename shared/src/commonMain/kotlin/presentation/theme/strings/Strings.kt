@@ -1,6 +1,7 @@
 package presentation.theme.strings
 
 object Strings {
+    const val app_name = "FindTravelNow"
     const val title_screen_more: String = "More"
     const val title_screen_top5_flights: String = "Top5 Flights"
     const val price = "Price"
@@ -28,7 +29,7 @@ object Strings {
     const val app_details = "App Details"
 
     const val email_address_title = "Email Address"
-    const val email_address_description = "findtravelnow@gmail.com"
+    const val contact_email_address = "findtravelnow@gmail.com"
 
     const val developer_title = "Developer"
     const val developer_description = "Measify"
@@ -52,7 +53,8 @@ object Strings {
     const val origin = "Origin: "
     const val last_update = "Last update: "
     const val next_update = "Next update: "
-
+    const val url_privacy_policy = "https://appfindtravelnow.blogspot.com/p/privacy-policy.html"
+    const val msg_share_app = "Let us find cheap flight, hotel, car prices together"
 
 
 }

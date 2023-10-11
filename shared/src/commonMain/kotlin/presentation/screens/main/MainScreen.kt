@@ -48,15 +48,13 @@ fun MainScreen(
             content()
         }
 
-        AnimatedVisibility(currentDestination.isTopLevelScreen()) {
-
+        if (currentDestination.isTopLevelScreen()){
             BottomNavigation(
                 selectedNavItem = currentDestination.asBottomNavItem(),
                 onNavigationItemSelected = {
                     onDestinationChanged(it.asTopLevelDestination())
                 })
         }
-
 
     }
 }
