@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalViewConfiguration
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,6 +23,7 @@ fun MyAppToolbar(
     title: String,
     onNavigationIconClick: () -> Unit,
     modifier: Modifier = Modifier,
+    navigationIcon :ImageVector = Icons.Filled.KeyboardArrowLeft,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
@@ -37,7 +39,7 @@ fun MyAppToolbar(
         navigationIcon = {
             IconButton(onClick = onNavigationIconClick) {
                 Icon(
-                    imageVector = Icons.Filled.KeyboardArrowLeft,
+                    imageVector = navigationIcon,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onPrimary
                 )

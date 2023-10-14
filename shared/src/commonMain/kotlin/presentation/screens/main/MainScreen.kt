@@ -4,6 +4,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -48,7 +51,7 @@ fun MainScreen(
             content()
         }
 
-        if (currentDestination.isTopLevelScreen()){
+        if (currentDestination.isTopLevelScreen()) {
             BottomNavigation(
                 selectedNavItem = currentDestination.asBottomNavItem(),
                 onNavigationItemSelected = {
