@@ -1,6 +1,6 @@
 package di
 
-import data.dataModule
+import data.di.dataModule
 import domain.di.domainModule
 import org.koin.core.module.Module
 import presentation.di.presentationModule

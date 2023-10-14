@@ -10,19 +10,30 @@ koin = "3.5.0"
 koinCompose = "1.1.0"
 multiplatformSettings = "1.0.0"
 voyager = "1.0.0-rc05"
+kotlinxSerialization = "1.6.0"
+ktor="2.3.5"
 
 
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose",version.ref="androidxAvtivityCpmpose" }
-androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose",version.ref="androidxLifecycleRuntimeCpmpose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat",version.ref="androidxAppCompat" }
 androidx-core = { module = "androidx.core:core-ktx",version.ref="androidxCore" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose",version.ref="androidxLifecycleRuntimeCpmpose" }
 
+#Koin - Dependency Injection
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koinCompose" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 
+#Ktor - Networking Library
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+#Preference Library
 multiplatformSettings-noargs = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref="multiplatformSettings" }
 
 #Navigation Library
@@ -30,10 +41,15 @@ voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator",
 voyager-tabNavigator = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyager" }
 voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyager" }
 
+#Kotlinx Serialization
+kotlinx-serialization={ group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+
 
 [bundles]
 voyager = ["voyager-navigator", "voyager-tabNavigator", "voyager-transitions"]
-koin-multiplatform = ["koin-core", "koin-compose"]
+koin = ["koin-core", "koin-compose"]
+ktor = ["ktor-client-core", "ktor-client-cio","ktor-client-logging","ktor-client-content-negotiation","ktor-serialization-kotlinx-json"]
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -41,4 +57,5 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }

@@ -72,7 +72,11 @@ fun HomeScreen(onNavigateTop5Flights: () -> Unit, onNavigateCategory: (CategoryD
         item { Spacer(modifier = Modifier.height(36.dp)) }
         item { TopTitleSection(modifier = Modifier.fillMaxWidth()) }
         item { Spacer(modifier = Modifier.height(20.dp)) }
-        item { CardViewBanner() }
+        item {
+            CardViewBanner(onClickBookNow = {
+                onNavigateCategory(uiState.categories[0])
+            })
+        }
 
         item { CategoriesTitle() }
         item {
@@ -218,7 +222,7 @@ private fun CategoryItem(
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-private fun CardViewBanner(modifier: Modifier = Modifier) {
+private fun CardViewBanner(modifier: Modifier = Modifier, onClickBookNow: () -> Unit) {
     val shape = RoundedCornerShape(9.dp)
     val gradient = Brush.verticalGradient(
         0f to Red_48, 1f to Orange_55
@@ -260,7 +264,7 @@ private fun CardViewBanner(modifier: Modifier = Modifier) {
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Black_10
                 ),
-                onClick = {}) {
+                onClick = { onClickBookNow() }) {
                 Text(
                     text = Strings.btn_book_now,
                     color = Color.White,

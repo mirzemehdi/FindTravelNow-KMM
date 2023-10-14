@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose)
 }
@@ -28,8 +29,10 @@ kotlin {
                 implementation(compose.components.resources)
 
                 implementation(libs.multiplatformSettings.noargs)
-                implementation(libs.bundles.koin.multiplatform)
+                implementation(libs.bundles.koin)
                 implementation(libs.bundles.voyager)
+                implementation(libs.kotlinx.serialization)
+                implementation(libs.bundles.ktor)
                 api("io.github.kevinnzou:compose-webview-multiplatform:1.4.0")
             }
         }
