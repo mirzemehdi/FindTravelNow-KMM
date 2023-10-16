@@ -51,7 +51,7 @@ import presentation.theme.strings.Strings
 import util.asState
 
 @Composable
-fun Top5FlightsScreen(uiStateHolder: Top5FlightsStateHolder) {
+fun Top5FlightsScreen(uiStateHolder: Top5FlightsUiStateHolder) {
     val uiState by uiStateHolder.uiState.asState()
     Top5FlightsScreen(uiState = uiState, onSelectSort = uiStateHolder::onSelectSort)
 }

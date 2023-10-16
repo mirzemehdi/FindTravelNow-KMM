@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import util.UiStateHolder
 import util.uiStateHolderScope
 
-class OnBoardingStateHolder(private val userPreferences: UserPreferences) : UiStateHolder() {
+class OnBoardingUiStateHolder(private val userPreferences: UserPreferences) : UiStateHolder() {
 
     private val _uiState = MutableStateFlow(OnBoardingScreenUiState())
     val uiState = _uiState.asStateFlow()

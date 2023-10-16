@@ -7,7 +7,7 @@ import root.AppInitializer
 class MainApplication:Application() {
     override fun onCreate() {
         super.onCreate()
-        AppInitializer.initialize(isDebug=true) {
+        AppInitializer.initialize(isDebug=BuildConfig.DEBUG) {
             androidContext(this@MainApplication)
         }
     }

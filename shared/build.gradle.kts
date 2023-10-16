@@ -36,6 +36,7 @@ kotlin {
                 implementation(libs.multiplatformSettings.noargs)
                 implementation(libs.kotlinx.serialization)
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.napier)
                 api("io.github.kevinnzou:compose-webview-multiplatform:1.4.0")
             }
         }
@@ -77,8 +78,5 @@ android {
         jvmToolchain(17)
     }
 
-    buildFeatures {
-        buildConfig = true
-    }
 }
 

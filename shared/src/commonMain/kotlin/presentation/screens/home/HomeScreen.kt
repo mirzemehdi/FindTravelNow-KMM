@@ -53,7 +53,7 @@ import util.asState
 
 @Composable
 fun HomeScreen(
-    uiStateHolder: HomeStateHolder,
+    uiStateHolder: HomeUiStateHolder,
     onNavigateTop5Flights: () -> Unit,
     onNavigateCategory: (CategoryData) -> Unit,
 ) {

@@ -7,4 +7,6 @@ import presentation.di.presentationModule
 
 
 internal expect val platformModule: Module
-val appModules: List<Module> = platformModule + domainModule + dataModule + presentationModule
+val appModules: List<Module>
+    get() =
+        platformModule + domainModule + dataModule + presentationModule

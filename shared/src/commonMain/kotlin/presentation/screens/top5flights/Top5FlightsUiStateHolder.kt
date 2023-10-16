@@ -8,21 +8,20 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import kotlinx.datetime.toInstant
 import util.UiStateHolder
 import util.extensions.toLocalDateString
+import util.logging.AppLogger
 import util.uiStateHolderScope
 
-class Top5FlightsStateHolder(private val flightsRepository: FlightsRepository) : UiStateHolder() {
+class Top5FlightsUiStateHolder(private val flightsRepository: FlightsRepository) : UiStateHolder() {
     private val _uiState = MutableStateFlow(Top5FlightsUiState(isLoading = true))
     val uiState = _uiState.asStateFlow()
 
     init {
-        println("UiStateHolder- Top5Flights  is created")
-
+        AppLogger.d("UiStateHolder is initialized")
         getTop5Flights()
     }
 

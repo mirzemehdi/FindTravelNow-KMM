@@ -2,12 +2,12 @@ package presentation.di
 
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
-import presentation.screens.home.HomeStateHolder
-import presentation.screens.onboarding.OnBoardingStateHolder
-import presentation.screens.top5flights.Top5FlightsStateHolder
+import presentation.screens.home.HomeUiStateHolder
+import presentation.screens.onboarding.OnBoardingUiStateHolder
+import presentation.screens.top5flights.Top5FlightsUiStateHolder
 
 val presentationModule = module {
-    factoryOf(::OnBoardingStateHolder)
-    factoryOf(::Top5FlightsStateHolder)
-    factoryOf(::HomeStateHolder)
+    factoryOf(::OnBoardingUiStateHolder)
+    factoryOf(::Top5FlightsUiStateHolder)
+    factoryOf(::HomeUiStateHolder)
 }

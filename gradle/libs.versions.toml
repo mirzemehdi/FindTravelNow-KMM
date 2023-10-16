@@ -1,27 +1,28 @@
 [versions]
 compose = "1.5.2"
-kotlin="1.9.10"
-androidGradlePlugin="8.0.2"
-androidxAvtivityCpmpose="1.7.2"
-androidxLifecycleRuntimeCpmpose="2.6.2"
-androidxAppCompat="1.6.1"
-androidxCore="1.10.1"
+kotlin = "1.9.10"
+androidGradlePlugin = "8.0.2"
+androidxAvtivityCpmpose = "1.7.2"
+androidxLifecycleRuntimeCpmpose = "2.6.2"
+androidxAppCompat = "1.6.1"
+androidxCore = "1.10.1"
 koin = "3.5.0"
 koinCompose = "1.1.0"
 multiplatformSettings = "1.0.0"
 voyager = "1.0.0-rc05"
 kotlinxSerialization = "1.6.0"
-kotlinxDateTime="0.4.1"
-ktor="2.3.5"
-logback="1.2.11"
+kotlinxDateTime = "0.4.1"
+ktor = "2.3.5"
+logback = "1.2.11"
+napier = "2.6.1"
 
 
 
 [libraries]
-androidx-activity-compose = { module = "androidx.activity:activity-compose",version.ref="androidxAvtivityCpmpose" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat",version.ref="androidxAppCompat" }
-androidx-core = { module = "androidx.core:core-ktx",version.ref="androidxCore" }
-androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose",version.ref="androidxLifecycleRuntimeCpmpose" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxAvtivityCpmpose" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppCompat" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycleRuntimeCpmpose" }
 
 #Koin - Dependency Injection
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
@@ -38,7 +39,7 @@ ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serializatio
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 #Preference Library
-multiplatformSettings-noargs = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref="multiplatformSettings" }
+multiplatformSettings-noargs = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
 
 #Navigation Library
 voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
@@ -46,16 +47,19 @@ voyager-tabNavigator = { group = "cafe.adriel.voyager", name = "voyager-tab-navi
 voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyager" }
 
 #Kotlinx Serialization
-kotlinx-serialization={ group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
 #Kotlinx DateTime
-kotlinx-datetime={ group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDateTime" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDateTime" }
+
+#Napier - Logging library
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 
 
 [bundles]
 voyager = ["voyager-navigator", "voyager-tabNavigator", "voyager-transitions"]
 koin = ["koin-core", "koin-compose"]
-ktor = ["ktor-client-core", "ktor-client-cio","ktor-client-logging","ktor-client-content-negotiation","ktor-serialization-kotlinx-json","logback"]
+ktor = ["ktor-client-core", "ktor-client-cio", "ktor-client-logging", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json", "logback"]
 
 
 [plugins]

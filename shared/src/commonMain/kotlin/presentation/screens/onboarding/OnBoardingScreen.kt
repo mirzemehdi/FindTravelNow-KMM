@@ -54,7 +54,7 @@ import util.asState
 @Composable
 fun OnBoardingScreen(
     modifier: Modifier = Modifier,
-    uiStateHolder: OnBoardingStateHolder,
+    uiStateHolder: OnBoardingUiStateHolder,
     onNavigateMain: () -> Unit,
 ) {
     val uiState by uiStateHolder.uiState.asState()

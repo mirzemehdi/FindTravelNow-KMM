@@ -19,11 +19,11 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import presentation.screens.about.AboutScreen
 import presentation.screens.home.HomeScreen
-import presentation.screens.home.HomeStateHolder
+import presentation.screens.home.HomeUiStateHolder
 import presentation.screens.main.MainScreen
 import presentation.screens.more.MoreScreen
 import presentation.screens.top5flights.Top5FlightsScreen
-import presentation.screens.top5flights.Top5FlightsStateHolder
+import presentation.screens.top5flights.Top5FlightsUiStateHolder
 import presentation.screens.webview.WebViewScreen
 import presentation.theme.strings.Strings
 import util.getUiStateHolder
@@ -42,7 +42,7 @@ interface MainScreenDestination {
         @Composable
         override fun Content() {
             val navigator = LocalNavigator.currentOrThrow
-            val uiStateHolder = getUiStateHolder<HomeStateHolder>()
+            val uiStateHolder = getUiStateHolder<HomeUiStateHolder>()
             HomeScreen(
                 uiStateHolder =uiStateHolder,
                 onNavigateTop5Flights = {
@@ -86,7 +86,7 @@ interface MainScreenDestination {
     object Top5Flights : Screen, TopLevelScreenDestination {
         @Composable
         override fun Content() {
-            val uiStateHolder = getUiStateHolder<Top5FlightsStateHolder>()
+            val uiStateHolder = getUiStateHolder<Top5FlightsUiStateHolder>()
             Top5FlightsScreen(uiStateHolder = uiStateHolder)
         }
 
