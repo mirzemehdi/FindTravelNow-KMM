@@ -120,12 +120,6 @@ private fun ImageTitleDescription(
                 .padding(top=4.dp)
                 .size(32.dp)
                 .clip(imageShape)
-                .shadow(
-                    elevation = 19.dp,
-                    spotColor = Black_alpha_8,
-                    ambientColor = Black_alpha_8,
-                    shape = imageShape
-                )
                 .background(gradientBackground, shape = imageShape)
                 .padding(6.dp),
             painter = painterResource(imageRes),

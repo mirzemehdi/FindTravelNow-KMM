@@ -28,7 +28,7 @@ private val preferencesSourceModule = module {
 
 private val remoteSourceModule = module {
     single {
-        HttpClient(engineFactory = CIO) {
+        HttpClient() {
             defaultRequest {
                 url {
                     protocol = URLProtocol.HTTPS

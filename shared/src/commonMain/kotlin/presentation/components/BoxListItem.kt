@@ -52,12 +52,6 @@ fun ExpandableBoxItem(
     val iconRotation by animateFloatAsState(if (isExpanded) 90f else 0f)
 
     Column(modifier = modifier
-        .shadow(
-            elevation = 19.dp,
-            spotColor = Black_alpha_8,
-            ambientColor = Black_alpha_8,
-            shape = shape
-        )
         .border(
             width = 1.dp,
             color = borderColor,
