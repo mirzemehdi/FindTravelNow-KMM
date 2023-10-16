@@ -21,6 +21,8 @@ class Top5FlightsStateHolder(private val flightsRepository: FlightsRepository) :
     val uiState = _uiState.asStateFlow()
 
     init {
+        println("UiStateHolder- Top5Flights  is created")
+
         getTop5Flights()
     }
 

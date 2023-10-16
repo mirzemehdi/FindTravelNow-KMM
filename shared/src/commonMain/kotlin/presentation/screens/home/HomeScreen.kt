@@ -31,8 +31,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,11 +49,28 @@ import presentation.theme.Orange_55
 import presentation.theme.Orange_alpha_50
 import presentation.theme.Red_48
 import presentation.theme.strings.Strings
+import util.asState
 
 @Composable
-fun HomeScreen(onNavigateTop5Flights: () -> Unit, onNavigateCategory: (CategoryData) -> Unit) {
+fun HomeScreen(
+    uiStateHolder: HomeStateHolder,
+    onNavigateTop5Flights: () -> Unit,
+    onNavigateCategory: (CategoryData) -> Unit,
+) {
+    val uiState by uiStateHolder.uiState.asState()
+    HomeScreen(
+        uiState = uiState,
+        onNavigateTop5Flights = onNavigateTop5Flights,
+        onNavigateCategory = onNavigateCategory
+    )
+}
 
-    val uiState by remember { mutableStateOf(HomeScreenUiState()) }
+@Composable
+fun HomeScreen(
+    uiState: HomeScreenUiState,
+    onNavigateTop5Flights: () -> Unit,
+    onNavigateCategory: (CategoryData) -> Unit,
+) {
 
     val systemBarPaddingValues = WindowInsets.systemBars.asPaddingValues()
 

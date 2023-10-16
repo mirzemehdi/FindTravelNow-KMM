@@ -37,7 +37,7 @@ data class HomeScreenUiState(
             url = "https://drimsim.tp.st/XyHi4PxG"
         ),
     ),
-    val topFlightInfoList: List<FlightInfo> = listOf(FlightInfo(), FlightInfo()),
+    val topFlightInfoList: List<FlightInfo> = listOf(),
 )
 
 data class CategoryData(
