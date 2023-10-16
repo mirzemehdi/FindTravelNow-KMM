@@ -22,8 +22,10 @@ import presentation.screens.home.HomeScreen
 import presentation.screens.main.MainScreen
 import presentation.screens.more.MoreScreen
 import presentation.screens.top5flights.Top5FlightsScreen
+import presentation.screens.top5flights.Top5FlightsStateHolder
 import presentation.screens.webview.WebViewScreen
 import presentation.theme.strings.Strings
+import util.getUiStateHolder
 
 interface TopLevelScreenDestination : MainScreenDestination {
     companion object {
@@ -81,7 +83,8 @@ interface MainScreenDestination {
     object Top5Flights : Screen, TopLevelScreenDestination {
         @Composable
         override fun Content() {
-            Top5FlightsScreen()
+            val uiStateHolder = getUiStateHolder<Top5FlightsStateHolder>()
+            Top5FlightsScreen(uiStateHolder = uiStateHolder)
         }
 
         override fun getTitle(): String = Strings.title_screen_top5_flights

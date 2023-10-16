@@ -28,11 +28,12 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
 
-                implementation(libs.multiplatformSettings.noargs)
                 implementation(libs.bundles.koin)
                 implementation(libs.bundles.voyager)
-                implementation(libs.kotlinx.serialization)
                 implementation(libs.bundles.ktor)
+                implementation(libs.multiplatformSettings.noargs)
+                implementation(libs.kotlinx.serialization)
+                implementation(libs.kotlinx.datetime)
                 api("io.github.kevinnzou:compose-webview-multiplatform:1.4.0")
             }
         }

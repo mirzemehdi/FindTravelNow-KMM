@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -40,33 +41,66 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import domain.model.FlightInfo
+import domain.model.FlightLocation
+import domain.model.FlightSort
 import presentation.components.FlightInfoItem
+import presentation.components.MyAppCircularProgressIndicator
 import presentation.theme.Alabaster
 import presentation.theme.Orange_alpha_12
 import presentation.theme.strings.Strings
+import util.asState
 
 @Composable
-fun Top5FlightsScreen() {
+fun Top5FlightsScreen(uiStateHolder: Top5FlightsStateHolder) {
+    val uiState by uiStateHolder.uiState.asState()
+    Top5FlightsScreen(uiState = uiState, onSelectSort = uiStateHolder::onSelectSort)
+}
 
-
-    val uiState by remember { mutableStateOf(Top5FlightsUiState()) }
+@Composable
+private fun Top5FlightsScreen(uiState: Top5FlightsUiState, onSelectSort: (FlightSort) -> Unit) {
 
 
     Column(modifier = Modifier.fillMaxSize()) {
-
-        SortByDropDown(modifier = Modifier.padding(end = 30.dp, top = 20.dp))
-        FLightsListUI(
-            modifier = Modifier.weight(1f).padding(horizontal = 30.dp, vertical = 10.dp),
-            uiState.flights
+        SortByDropDown(
+            modifier = Modifier.padding(end = 30.dp, top = 20.dp),
+            sortBy = uiState.sortBy,
+            onSelectSort = onSelectSort
         )
-        BottomInfoSection(modifier = Modifier.fillMaxWidth())
+
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (uiState.isLoading)
+                MyAppCircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            else {
+
+                Column(modifier = Modifier.fillMaxSize()) {
+                    FLightsListUI(
+                        modifier = Modifier.weight(1f)
+                            .padding(horizontal = 30.dp, vertical = 10.dp),
+                        uiState.flights
+                    )
+                    BottomInfoSection(
+                        modifier = Modifier.fillMaxWidth(),
+                        origin = uiState.origin,
+                        lastUpdateDate = uiState.lastUpdateDate,
+                        nextUpdateInDays = uiState.nextUpdateInDays
+                    )
+                }
+            }
+
+        }
+
+
     }
 
 
 }
 
 @Composable
-private fun SortByDropDown(modifier: Modifier) {
+private fun SortByDropDown(
+    modifier: Modifier,
+    sortBy: FlightSort? = null,
+    onSelectSort: (FlightSort) -> Unit,
+) {
     val shape = RoundedCornerShape(5.dp)
     var isExpanded by remember { mutableStateOf(false) }
     Row(
@@ -83,7 +117,11 @@ private fun SortByDropDown(modifier: Modifier) {
     ) {
         Text(
             modifier = Modifier.padding(end = 44.dp),
-            text = Strings.sort_by,
+            text = when (sortBy) {
+                FlightSort.BY_DATE -> Strings.date
+                FlightSort.BY_PRICE -> Strings.price
+                null -> Strings.sort_by
+            },
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Start,
             color = Color.Black
@@ -112,6 +150,7 @@ private fun SortByDropDown(modifier: Modifier) {
                 },
                 onClick = {
                     isExpanded = false
+                    onSelectSort(FlightSort.BY_PRICE)
                 }
             )
             Divider(color = Alabaster)
@@ -127,6 +166,7 @@ private fun SortByDropDown(modifier: Modifier) {
                 },
                 onClick = {
                     isExpanded = false
+                    onSelectSort(FlightSort.BY_DATE)
                 }
             )
         }
@@ -137,7 +177,12 @@ private fun SortByDropDown(modifier: Modifier) {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun BottomInfoSection(modifier: Modifier) {
+fun BottomInfoSection(
+    origin: FlightLocation,
+    modifier: Modifier = Modifier,
+    lastUpdateDate: String = "",
+    nextUpdateInDays: Int = 0,
+) {
     Column(
         modifier = modifier.background(Orange_alpha_12)
             .padding(start = 35.dp, top = 20.dp, bottom = 14.dp, end = 35.dp)
@@ -149,7 +194,7 @@ fun BottomInfoSection(modifier: Modifier) {
                 withStyle(
                     style = SpanStyle(fontWeight = FontWeight.SemiBold)
                 ) { // AnnotatedString.Builder
-                    append("Budapest,Hungary(BUD)")
+                    append("${origin.city},${origin.country}(${origin.iataCode})")
                 }
 
             },
@@ -172,7 +217,7 @@ fun BottomInfoSection(modifier: Modifier) {
                     withStyle(
                         style = SpanStyle(fontWeight = FontWeight.SemiBold)
                     ) { // AnnotatedString.Builder
-                        append("2023-09-25")
+                        append(lastUpdateDate)
                     }
 
                 },
@@ -189,8 +234,12 @@ fun BottomInfoSection(modifier: Modifier) {
                     append(Strings.next_update)
                     withStyle(
                         style = SpanStyle(fontWeight = FontWeight.SemiBold)
-                    ) { // AnnotatedString.Builder
-                        append("6 Days later")
+                    ) {
+
+                        val textDaysLater = if (nextUpdateInDays > 1) Strings.n_days_later
+                        else Strings.one_day_later
+                        append("$nextUpdateInDays $textDaysLater")
+
                     }
 
                 },

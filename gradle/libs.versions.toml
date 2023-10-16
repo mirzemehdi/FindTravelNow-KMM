@@ -11,7 +11,9 @@ koinCompose = "1.1.0"
 multiplatformSettings = "1.0.0"
 voyager = "1.0.0-rc05"
 kotlinxSerialization = "1.6.0"
+kotlinxDateTime="0.4.1"
 ktor="2.3.5"
+logback="1.2.11"
 
 
 
@@ -32,6 +34,7 @@ ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 #Preference Library
 multiplatformSettings-noargs = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref="multiplatformSettings" }
@@ -44,11 +47,14 @@ voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitio
 #Kotlinx Serialization
 kotlinx-serialization={ group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
+#Kotlinx DateTime
+kotlinx-datetime={ group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDateTime" }
+
 
 [bundles]
 voyager = ["voyager-navigator", "voyager-tabNavigator", "voyager-transitions"]
 koin = ["koin-core", "koin-compose"]
-ktor = ["ktor-client-core", "ktor-client-cio","ktor-client-logging","ktor-client-content-negotiation","ktor-serialization-kotlinx-json"]
+ktor = ["ktor-client-core", "ktor-client-cio","ktor-client-logging","ktor-client-content-negotiation","ktor-serialization-kotlinx-json","logback"]
 
 
 [plugins]

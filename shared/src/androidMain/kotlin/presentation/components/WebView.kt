@@ -10,8 +10,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -86,9 +84,8 @@ actual fun WebView(modifier: Modifier, url: String) {
         )
 
         if (isLoading)
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center),
-                color = MaterialTheme.colorScheme.secondary
+            MyAppCircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
             )
     }
 

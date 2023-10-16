@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.StateFlow
 @Composable
 actual fun font(res: String, weight: FontWeight, style: FontStyle): Font {
     val context = LocalContext.current
-    println("MyPackageName: ${context.packageName}")
     val id = context.resources.getIdentifier(res, "font", context.packageName)
     return Font(id, weight, style)
 }

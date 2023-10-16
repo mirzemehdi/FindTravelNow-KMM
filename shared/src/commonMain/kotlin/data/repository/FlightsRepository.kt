@@ -1,7 +1,9 @@
 package data.repository
 
 import data.source.remote.apiservice.FlightsApiService
-import domain.model.FlightInfo
+import domain.model.FlightLocation
+import domain.model.FlightSort
+import domain.model.Top5Flights
 import domain.model.result.ErrorEntity
 import domain.model.result.Result
 import kotlinx.coroutines.Dispatchers
@@ -15,14 +17,15 @@ class FlightsRepository(
 ) {
 
     suspend fun getTop5Flights(
-        origin: String,
-        maxPrice: String,
-        sortBy: String,
-    ): Result<List<FlightInfo>> = withContext(backgroundScope) {
+        origin: FlightLocation,
+        maxPrice: Int = 50,
+        sortBy: FlightSort = FlightSort.BY_PRICE,
+    ): Result<Top5Flights> = withContext(backgroundScope) {
         try {
-            val apiResponse = flightsApiService.getTop5Flights(origin, maxPrice, sortBy)
+            val apiResponse =
+                flightsApiService.getTop5Flights(origin.iataCode, maxPrice.toString(), sortBy.value)
             if (apiResponse.hasSuccessfulData())
-                Result.success(emptyList())//TODO FIX this
+                Result.success(apiResponse.getSuccessfulData().mapToDomainModel())
             else
                 Result.error(
                     ErrorEntity.apiError(
@@ -34,4 +37,5 @@ class FlightsRepository(
             Result.error(ErrorEntity.apiError(exception = e))
         }
     }
+
 }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -58,7 +59,7 @@ fun FlightInfoItem(modifier: Modifier = Modifier, flightInfo: FlightInfo) {
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
                     modifier = Modifier,
-                    text = flightInfo.price,
+                    text = flightInfo.priceWithCurrency,
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Start,
                     color = MaterialTheme.colorScheme.secondary
@@ -94,7 +95,7 @@ fun FlightOriginDestinationInnerBox(flightInfo: FlightInfo) {
         ) {
             Text(
                 modifier = Modifier,
-                text = flightInfo.originCode,
+                text = flightInfo.origin.iataCode,
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp
@@ -108,7 +109,7 @@ fun FlightOriginDestinationInnerBox(flightInfo: FlightInfo) {
             Spacer(modifier = Modifier.weight(0.2f))
             Text(
                 modifier = Modifier,
-                text = flightInfo.destinationCode,
+                text = flightInfo.destination.iataCode,
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp
@@ -120,18 +121,19 @@ fun FlightOriginDestinationInnerBox(flightInfo: FlightInfo) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Text(
                 modifier = Modifier,
-                text = "${flightInfo.originCity}(${flightInfo.originCountry})",
+                text = "${flightInfo.origin.city} (${flightInfo.origin.country})",
                 style = MaterialTheme.typography.bodySmall,
-                textAlign = TextAlign.Start,
+                textAlign = TextAlign.Center,
                 color = Color.Black
             )
 
             Spacer(modifier = Modifier.weight(1f))
+
             Text(
-                modifier = Modifier,
-                text = "${flightInfo.destinationCity}(${flightInfo.destinationCountry})",
+                modifier = Modifier.padding(start = 8.dp),
+                text = "${flightInfo.destination.city} (${flightInfo.destination.country})",
                 style = MaterialTheme.typography.bodySmall,
-                textAlign = TextAlign.Start,
+                textAlign = TextAlign.End,
                 color = Color.Black
             )
         }
