@@ -1,0 +1,74 @@
+name: Publishing app to PlayStore
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish_app:
+    name: Publishing app
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    env:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build Release apk with Gradle
+        run: ./gradlew assembleRelease
+
+      - name: Get App Name With Version semantics
+        run: |
+          appName=$(./gradlew -q getAppName)
+          echo "APP_NAME=${appName}" >> $GITHUB_ENV
+          echo "APK_PATH=androidApp/build/outputs/apk/release/${appName}.apk" >> $GITHUB_ENV
+
+      - name: Rename APK
+        run: |
+          mv androidApp/build/outputs/apk/release/androidApp-release.apk ${{ env.APK_PATH }}
+
+      - name: Upload apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.APP_NAME }}
+          path: ${{ env.APK_PATH }}
+
+
+      - name: Build Release app bundle with Gradle
+        run: ./gradlew bundleRelease
+
+      - name: Create release from tag
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            androidApp/build/outputs/bundle/release/androidApp-release.aab
+            ${{ env.APK_PATH }}
+          body_path: distribution/whatsnew/whatsnew-en-US
+          token: ${{ env.github_token }}
+            
+
+      - name: Deploy release app to Play Store (Alpha track)
+        id: deploy
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.travelapp.findtravelnow
+          releaseFiles: androidApp/build/outputs/bundle/release/androidApp-release.aab
+          track: alpha
+          whatsNewDirectory: distribution/whatsnew
