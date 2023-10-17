@@ -18,7 +18,7 @@ import kotlin.math.min
 actual class DebugAntilog actual constructor(
     private val defaultTag: String,
     private val excludedClassList: List<String>
-    ) : Antilog() {
+    ) : Antilog()  {
 
     companion object {
         private const val MAX_LOG_LENGTH = 4000
