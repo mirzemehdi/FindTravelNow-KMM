@@ -5,13 +5,13 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -36,7 +36,7 @@ import presentation.theme.Black_alpha_60
 import presentation.theme.Orange_alpha_50
 
 @Composable
-fun FlightInfoItem(modifier: Modifier = Modifier, flightInfo: FlightInfo) {
+fun FlightInfoItem(modifier: Modifier = Modifier, flightInfo: FlightInfo, onClickItem: () -> Unit) {
     val shape = RoundedCornerShape(11.dp)
 
     OutlinedCard(
@@ -46,7 +46,12 @@ fun FlightInfoItem(modifier: Modifier = Modifier, flightInfo: FlightInfo) {
         modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(1.dp)
     ) {
-        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onClickItem() }
+                .padding(16.dp)
+        ) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     modifier = Modifier,

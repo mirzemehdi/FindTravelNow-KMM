@@ -51,13 +51,24 @@ import presentation.theme.strings.Strings
 import util.asState
 
 @Composable
-fun Top5FlightsScreen(uiStateHolder: Top5FlightsUiStateHolder) {
+fun Top5FlightsScreen(
+    uiStateHolder: Top5FlightsUiStateHolder,
+    onNavigateFlightInfo: (FlightInfo) -> Unit,
+) {
     val uiState by uiStateHolder.uiState.asState()
-    Top5FlightsScreen(uiState = uiState, onSelectSort = uiStateHolder::onSelectSort)
+    Top5FlightsScreen(
+        uiState = uiState,
+        onSelectSort = uiStateHolder::onSelectSort,
+        onNavigateFlightInfo = onNavigateFlightInfo
+    )
 }
 
 @Composable
-private fun Top5FlightsScreen(uiState: Top5FlightsUiState, onSelectSort: (FlightSort) -> Unit) {
+private fun Top5FlightsScreen(
+    uiState: Top5FlightsUiState,
+    onSelectSort: (FlightSort) -> Unit,
+    onNavigateFlightInfo: (FlightInfo) -> Unit,
+) {
 
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -76,7 +87,8 @@ private fun Top5FlightsScreen(uiState: Top5FlightsUiState, onSelectSort: (Flight
                     FLightsListUI(
                         modifier = Modifier.weight(1f)
                             .padding(horizontal = 30.dp, vertical = 10.dp),
-                        uiState.flights
+                        flights = uiState.flights,
+                        onClickFlightItem = onNavigateFlightInfo
                     )
                     BottomInfoSection(
                         modifier = Modifier.fillMaxWidth(),
@@ -255,12 +267,17 @@ fun BottomInfoSection(
 }
 
 @Composable
-private fun FLightsListUI(modifier: Modifier = Modifier, flights: List<FlightInfo>) {
+private fun FLightsListUI(
+    modifier: Modifier = Modifier,
+    flights: List<FlightInfo>,
+    onClickFlightItem: (FlightInfo) -> Unit,
+) {
     LazyColumn(modifier = modifier) {
         items(flights) {
             FlightInfoItem(
                 flightInfo = it,
-                modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp)
+                modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
+                onClickItem = { onClickFlightItem(it) }
             )
         }
     }

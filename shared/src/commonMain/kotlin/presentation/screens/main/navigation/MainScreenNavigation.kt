@@ -44,7 +44,7 @@ interface MainScreenDestination {
             val navigator = LocalNavigator.currentOrThrow
             val uiStateHolder = getUiStateHolder<HomeUiStateHolder>()
             HomeScreen(
-                uiStateHolder =uiStateHolder,
+                uiStateHolder = uiStateHolder,
                 onNavigateTop5Flights = {
                     navigator.navigate(Top5Flights)
                 },
@@ -56,6 +56,14 @@ interface MainScreenDestination {
                         )
                     )
 
+                },
+                onNavigateFlightInfo = {flightInfo ->
+                    navigator.navigate(
+                        WebView(
+                            title = Strings.category_flight,
+                            url = flightInfo.getUrl()
+                        )
+                    )
                 }
 
             )
@@ -84,10 +92,19 @@ interface MainScreenDestination {
     }
 
     object Top5Flights : Screen, TopLevelScreenDestination {
+
         @Composable
         override fun Content() {
+            val navigator = LocalNavigator.currentOrThrow
             val uiStateHolder = getUiStateHolder<Top5FlightsUiStateHolder>()
-            Top5FlightsScreen(uiStateHolder = uiStateHolder)
+            Top5FlightsScreen(uiStateHolder = uiStateHolder, onNavigateFlightInfo = {
+                navigator.navigate(
+                    WebView(
+                        title = Strings.category_flight,
+                        url = it.getUrl()
+                    )
+                )
+            })
         }
 
         override fun getTitle(): String = Strings.title_screen_top5_flights

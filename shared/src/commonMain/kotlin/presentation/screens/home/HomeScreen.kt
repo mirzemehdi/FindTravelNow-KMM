@@ -56,12 +56,14 @@ fun HomeScreen(
     uiStateHolder: HomeUiStateHolder,
     onNavigateTop5Flights: () -> Unit,
     onNavigateCategory: (CategoryData) -> Unit,
+    onNavigateFlightInfo: (FlightInfo) -> Unit,
 ) {
     val uiState by uiStateHolder.uiState.asState()
     HomeScreen(
         uiState = uiState,
         onNavigateTop5Flights = onNavigateTop5Flights,
-        onNavigateCategory = onNavigateCategory
+        onNavigateCategory = onNavigateCategory,
+        onNavigateFlightInfo = onNavigateFlightInfo,
     )
 }
 
@@ -70,6 +72,7 @@ fun HomeScreen(
     uiState: HomeScreenUiState,
     onNavigateTop5Flights: () -> Unit,
     onNavigateCategory: (CategoryData) -> Unit,
+    onNavigateFlightInfo: (FlightInfo) -> Unit,
 ) {
 
     val systemBarPaddingValues = WindowInsets.systemBars.asPaddingValues()
@@ -107,7 +110,8 @@ fun HomeScreen(
         top5FlightsSection(
             modifier = Modifier.padding(top = 18.dp),
             topFlightInfoList = uiState.topFlightInfoList,
-            onClickViewAll = onNavigateTop5Flights
+            onClickViewAll = onNavigateTop5Flights,
+            onNavigateFlightInfo = onNavigateFlightInfo
         )
         item { Spacer(modifier = Modifier.height(16.dp)) }
     }
@@ -117,6 +121,7 @@ private fun LazyListScope.top5FlightsSection(
     modifier: Modifier = Modifier,
     topFlightInfoList: List<FlightInfo>,
     onClickViewAll: () -> Unit,
+    onNavigateFlightInfo: (FlightInfo) -> Unit,
 ) {
     item {
         Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -143,7 +148,13 @@ private fun LazyListScope.top5FlightsSection(
     }
 
     items(topFlightInfoList) {
-        FlightInfoItem(modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp), flightInfo = it)
+        FlightInfoItem(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
+            flightInfo = it,
+            onClickItem = {
+                onNavigateFlightInfo(it)
+            }
+        )
     }
 
 

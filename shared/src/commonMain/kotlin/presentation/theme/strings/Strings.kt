@@ -57,6 +57,8 @@ object Strings {
     const val msg_share_app = "Let us find cheap flight, hotel, car prices together"
     const val n_days_later = "Days later"
     const val one_day_later = "Day later"
+    const val web_url_search_flight = "https://search.findtravelnow.com/flights/"
+
 
 
 }
