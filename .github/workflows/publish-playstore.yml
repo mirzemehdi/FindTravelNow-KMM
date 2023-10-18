@@ -34,6 +34,7 @@ jobs:
 
       - name: Decode Keystore
         run: |
+          mkdir -p keystore
           echo $encoded_keystore_file_string > keystore-b64.txt
           base64 -d -i keystore-b64.txt > keystore/findtravelnow.jks
           echo $encoded_keystore_properties_string > keystore-props-b64.txt
