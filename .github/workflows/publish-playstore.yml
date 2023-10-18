@@ -1,7 +1,6 @@
 name: Publishing app to PlayStore
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - 'v*'
@@ -74,7 +73,7 @@ jobs:
           token: ${{ env.github_token }}
             
 
-      - name: Deploy release app to Play Store (Alpha track)
+      - name: Deploy release app to Play Store (Internal track)
         id: deploy
         uses: r0adkll/upload-google-play@v1
         with:
