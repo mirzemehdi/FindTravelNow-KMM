@@ -14,6 +14,8 @@ jobs:
       contents: write
     env:
       github_token: ${{ secrets.GITHUB_TOKEN }}
+      encoded_keystore_file_string: ${{ secrets.SIGNING_KEY_STORE_FILE_BASE64 }}
+      encoded_keystore_properties_string: ${{ secrets.SIGNING_KEY_STORE_PROPERTIES_BASE64 }}
 
     steps:
       - uses: actions/checkout@v3
@@ -29,6 +31,13 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Decode Keystore
+        run: |
+          echo $encoded_keystore_file_string > keystore-b64.txt
+          base64 -d -i keystore-b64.txt > keystore/findtravelnow.jks
+          echo $encoded_keystore_properties_string > keystore-props-b64.txt
+          base64 -d -i keystore-props-b64.txt > keystore/keystore.properties
 
       - name: Build Release apk with Gradle
         run: ./gradlew assembleRelease
@@ -64,12 +73,12 @@ jobs:
           token: ${{ env.github_token }}
             
 
-      - name: Deploy release app to Play Store (Alpha track)
-        id: deploy
-        uses: r0adkll/upload-google-play@v1
-        with:
-          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: com.travelapp.findtravelnow
-          releaseFiles: androidApp/build/outputs/bundle/release/androidApp-release.aab
-          track: alpha
-          whatsNewDirectory: distribution/whatsnew
+#      - name: Deploy release app to Play Store (Alpha track)
+#        id: deploy
+#        uses: r0adkll/upload-google-play@v1
+#        with:
+#          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+#          packageName: com.travelapp.findtravelnow
+#          releaseFiles: androidApp/build/outputs/bundle/release/androidApp-release.aab
+#          track: alpha
+#          whatsNewDirectory: distribution/whatsnew

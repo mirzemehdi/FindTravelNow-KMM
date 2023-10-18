@@ -33,17 +33,18 @@ android {
     }
 
     val keystorePropertiesFile = rootProject.file("androidApp/keystore/keystore.properties")
+    val isSigningKeyExists = keystorePropertiesFile.exists()
     val keystoreProperties = Properties()
-    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    if (isSigningKeyExists) keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
     signingConfigs {
-        create("release") {
-            storeFile = file(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["keystorePassword"] as String?
-            keyAlias = keystoreProperties["keyAlias"] as String?
-//            keyPassword = keystoreProperties["keyPassword"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
-        }
+        if (isSigningKeyExists)
+            create("release") {
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["keystorePassword"] as String?
+                keyAlias = keystoreProperties["keyAlias"] as String?
+                keyPassword = keystoreProperties["keyPassword"] as String?
+            }
     }
 
     buildTypes {
@@ -59,7 +60,7 @@ android {
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("release")
+            if (isSigningKeyExists) signingConfig = signingConfigs.getByName("release")
         }
     }
 
