@@ -34,11 +34,11 @@ jobs:
 
       - name: Decode Keystore
         run: |
-          mkdir -p keystore
+          mkdir -p androidApp/keystore
           echo $encoded_keystore_file_string > keystore-b64.txt
-          base64 -d -i keystore-b64.txt > keystore/findtravelnow.jks
+          base64 -d -i keystore-b64.txt > androidApp/keystore/findtravelnow.jks
           echo $encoded_keystore_properties_string > keystore-props-b64.txt
-          base64 -d -i keystore-props-b64.txt > keystore/keystore.properties
+          base64 -d -i keystore-props-b64.txt > androidApp/keystore/keystore.properties
 
       - name: Build Release apk with Gradle
         run: ./gradlew assembleRelease
