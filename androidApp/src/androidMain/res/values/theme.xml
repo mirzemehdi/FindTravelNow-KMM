@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.App" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Set the splash screen background, animated icon, and animation
+        duration. -->
+        <item name="android:windowBackground">@android:color/white</item>
+
+    </style>
+
+</resources>

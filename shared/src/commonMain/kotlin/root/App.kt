@@ -1,9 +1,13 @@
 package root
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -14,6 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import data.source.preferences.UserPreferences
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -60,10 +65,10 @@ private fun AppNavigation(isOnBoardShown: Boolean) {
 @Composable
 private fun SplashScreen() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        //TODO change with app logo
         Image(
-            painter = painterResource("drawable/ic_horizontal_flight.xml"),
-            contentDescription = null
+            painter = painterResource("drawable/ic_logo.xml"),
+            contentDescription = null,
+            modifier = Modifier.size(180.dp)
         )
     }
 }
