@@ -10,5 +10,6 @@ data class MoreScreenUiState(
         Strings.rate_app,
         Strings.about_us,
         Strings.privacy_policy,
+        Strings.terms_conditions,
     ),
 )

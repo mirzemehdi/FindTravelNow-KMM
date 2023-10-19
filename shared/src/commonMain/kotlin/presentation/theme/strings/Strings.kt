@@ -21,6 +21,7 @@ object Strings {
     const val rate_app = "Rate App"
     const val about_us = "About Us"
     const val privacy_policy = "Privacy Policy"
+    const val terms_conditions = "Terms & Conditions"
 
     const val about_findtravelnow = "About FindTravelNow"
     const val about_findtravelnow_text =
@@ -54,10 +55,15 @@ object Strings {
     const val last_update = "Last update: "
     const val next_update = "Next update: "
     const val url_privacy_policy = "https://appfindtravelnow.blogspot.com/p/privacy-policy.html"
+    const val url_terms_conditions = "https://appfindtravelnow.blogspot.com/p/terms-and-conditions.html"
     const val msg_share_app = "Let us find cheap flight, hotel, car prices together"
     const val n_days_later = "Days later"
     const val one_day_later = "Day later"
     const val web_url_search_flight = "https://search.findtravelnow.com/flights/"
+    const val txt_accept_privacy_policy_and_terms = "I have read and agree to the "
+    const val and = "and"
+    const val btn_get_started = "GET STARTED"
+    const val btn_skip = "SKIP"
 
 
 

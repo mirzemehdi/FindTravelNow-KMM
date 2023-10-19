@@ -14,7 +14,12 @@ class OnBoardingUiStateHolder(private val userPreferences: UserPreferences) : Ui
     val uiState = _uiState.asStateFlow()
 
     fun onClickNavigateNext() = uiStateHolderScope.launch {
+        if (_uiState.value.isPrivacyPolicyChecked.not()) return@launch
         userPreferences.putBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN, true)
         _uiState.update { it.copy(onBoardIsShown = true) }
+    }
+
+    fun onCheckPrivacyPolicy() {
+        _uiState.update { it.copy(isPrivacyPolicyChecked = it.isPrivacyPolicyChecked.not()) }
     }
 }

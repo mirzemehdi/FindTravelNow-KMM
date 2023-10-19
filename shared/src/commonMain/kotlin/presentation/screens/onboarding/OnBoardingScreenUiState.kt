@@ -23,4 +23,5 @@ data class OnBoardingScreenUiState @OptIn(ExperimentalFoundationApi::class) cons
         ),
     ),
     val onBoardIsShown: Boolean = false,
+    val isPrivacyPolicyChecked: Boolean = false,
 )

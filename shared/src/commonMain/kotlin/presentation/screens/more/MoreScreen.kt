@@ -18,7 +18,12 @@ import presentation.theme.strings.Strings
 import util.AppOpenerUtil
 
 @Composable
-fun MoreScreen(modifier: Modifier = Modifier, onNavigateAboutUs: () -> Unit,onNavigatePrivacyPolicy: () -> Unit) {
+fun MoreScreen(
+    modifier: Modifier = Modifier,
+    onNavigateAboutUs: () -> Unit,
+    onNavigatePrivacyPolicy: () -> Unit,
+    onNavigateTermsConditions: () -> Unit,
+) {
     val moreScreenUiState by remember { mutableStateOf(MoreScreenUiState()) }
     val appOpenerUtil = koinInject<AppOpenerUtil>()
     LazyColumn(
@@ -37,6 +42,7 @@ fun MoreScreen(modifier: Modifier = Modifier, onNavigateAboutUs: () -> Unit,onNa
                         Strings.about_us -> onNavigateAboutUs()
                         Strings.rate_app -> appOpenerUtil.openStorePage()
                         Strings.privacy_policy -> onNavigatePrivacyPolicy()
+                        Strings.terms_conditions -> onNavigateTermsConditions()
                         Strings.share_app -> appOpenerUtil.shareApp()
                         Strings.feedback -> appOpenerUtil.openFeedbackMail()
                         else -> Unit

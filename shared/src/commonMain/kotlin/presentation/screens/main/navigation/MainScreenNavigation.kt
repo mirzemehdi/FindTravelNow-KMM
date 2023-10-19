@@ -83,6 +83,14 @@ interface MainScreenDestination {
                             title = Strings.privacy_policy
                         )
                     )
+                },
+                onNavigateTermsConditions = {
+                    navigator.navigate(
+                        WebView(
+                            url = Strings.url_terms_conditions,
+                            title = Strings.terms_conditions
+                        )
+                    )
                 }
             )
         }
