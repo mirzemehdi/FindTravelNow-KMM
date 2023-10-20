@@ -1,6 +1,11 @@
 package presentation.screens.onboarding
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.AnimationVector1D
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -16,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -34,10 +40,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,6 +54,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -102,7 +107,9 @@ fun OnBoardingScreen(
                     0.7f to Yellow_alpha_0,
                     1.0f to Yellow_alpha_39,
                 )
-            ).padding(top = 40.dp, bottom = 56.dp),
+            )
+            .padding(top = 40.dp, bottom = 56.dp)
+        ,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val pagerState = rememberPagerState(
@@ -132,13 +139,18 @@ fun OnBoardingScreen(
         Column(
             modifier = Modifier
                 .padding(start = 40.dp, end = 40.dp)
-                .weight(1f),
+                .weight(1f)
+            ,
 
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val isLastPage = pagerState.currentPage == (pagerState.pageCount - 1)
+            val offsetX = remember { Animatable(0f) }
             AcceptPrivacyPolicyTermsConditionsText(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .offset(offsetX.value.dp, 0.dp)
+                    .padding(bottom = 10.dp),
                 isChecked = uiState.isPrivacyPolicyChecked,
                 onClickPrivacyPolicy = onClickPrivacyPolicy,
                 onClickTermsService = onClickTermsService,
@@ -149,14 +161,21 @@ fun OnBoardingScreen(
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                GetStartedButton(modifier = Modifier.fillMaxWidth(), onClick = onClickNavigateNext)
+                GetStartedButton(modifier = Modifier.fillMaxWidth(), onClick = {
+                    if (uiState.isPrivacyPolicyChecked) onClickNavigateNext()
+                    else coroutineScope.shakePrivacyPolicyText(offsetX)
+
+                })
             }
             AnimatedVisibility(
                 visible = isLastPage.not(),
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                SkipButton(onClick = onClickNavigateNext)
+                SkipButton(onClick = {
+                    if (uiState.isPrivacyPolicyChecked) onClickNavigateNext()
+                    else coroutineScope.shakePrivacyPolicyText(offsetX)
+                })
             }
         }
 
@@ -164,10 +183,34 @@ fun OnBoardingScreen(
     }
 }
 
+private fun CoroutineScope.shakePrivacyPolicyText(offset: Animatable<Float, AnimationVector1D>) {
+    val shakeKeyframes: AnimationSpec<Float> = keyframes {
+        durationMillis = 800
+        val easing = FastOutLinearInEasing
+        // generate 8 keyframes
+        for (i in 1..8) {
+            val x = when (i % 3) {
+                0 -> 4f
+                1 -> -4f
+                else -> 0f
+            }
+            x at durationMillis / 10 * i with easing
+        }
+    }
+
+    this.launch {
+        offset.animateTo(
+            targetValue = 0f,
+            animationSpec = shakeKeyframes,
+        )
+    }
+}
+
+
 @Composable
 fun AcceptPrivacyPolicyTermsConditionsText(
     modifier: Modifier,
-    isChecked:Boolean,
+    isChecked: Boolean,
     onClickPrivacyPolicy: () -> Unit,
     onClickTermsService: () -> Unit,
     onCheckPrivacyPolicy: () -> Unit,
@@ -335,4 +378,9 @@ private fun HorizontalPagerIndicator(
             )
         }
     }
+}
+
+
+private fun CoroutineScope.animateOffsetX() {
+
 }

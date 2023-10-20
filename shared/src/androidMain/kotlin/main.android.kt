@@ -1,7 +1,7 @@
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalView
-import root.App
+import root.RootApp
 
 
 @Composable
@@ -18,5 +18,5 @@ fun MainView() {
     }
 
 
-    App()
+    RootApp()
 }

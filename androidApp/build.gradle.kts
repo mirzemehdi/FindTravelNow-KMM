@@ -28,8 +28,8 @@ android {
         applicationId = "com.travelapp.findtravelnow"
         minSdk = (findProperty("android.minSdk") as String).toInt()
         targetSdk = (findProperty("android.targetSdk") as String).toInt()
-        versionCode = 8
-        versionName = "2.0.0-alpha02"
+        versionCode = 9
+        versionName = "2.0.0-alpha03"
     }
 
     val keystorePropertiesFile = rootProject.file("androidApp/keystore/keystore.properties")

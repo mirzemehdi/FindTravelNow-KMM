@@ -1,5 +1,5 @@
 import androidx.compose.ui.window.ComposeUIViewController
-import root.App
+import root.RootApp
 
 
-fun MainViewController() = ComposeUIViewController { App() }
+fun MainViewController() = ComposeUIViewController { RootApp() }
