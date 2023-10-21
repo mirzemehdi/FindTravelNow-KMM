@@ -36,6 +36,7 @@ import presentation.theme.Black_alpha_8
 import presentation.theme.Orange_55
 import presentation.theme.Red_48
 import presentation.theme.strings.Strings
+import util.config.AppConfig
 
 @Composable
 fun AboutScreen(modifier: Modifier = Modifier) {
@@ -96,7 +97,7 @@ private fun AppDetailsExpandedContent() {
         ImageTitleDescription(
             imageRes = "drawable/ic_app_version.xml",
             title = Strings.app_version_title,
-            description = Strings.app_version_description,
+            description = AppConfig.versionName,
         )
     }
 }

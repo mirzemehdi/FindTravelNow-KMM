@@ -12,6 +12,7 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.stack.StackEvent
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -21,11 +22,13 @@ import presentation.screens.about.AboutScreen
 import presentation.screens.home.HomeScreen
 import presentation.screens.home.HomeUiStateHolder
 import presentation.screens.main.MainScreen
+import presentation.screens.main.MainUiStateHolder
 import presentation.screens.more.MoreScreen
 import presentation.screens.top5flights.Top5FlightsScreen
 import presentation.screens.top5flights.Top5FlightsUiStateHolder
 import presentation.screens.webview.WebViewScreen
 import presentation.theme.strings.Strings
+import util.asState
 import util.getUiStateHolder
 
 interface TopLevelScreenDestination : MainScreenDestination {
@@ -57,7 +60,7 @@ interface MainScreenDestination {
                     )
 
                 },
-                onNavigateFlightInfo = {flightInfo ->
+                onNavigateFlightInfo = { flightInfo ->
                     navigator.navigate(
                         WebView(
                             title = Strings.category_flight,
@@ -165,12 +168,14 @@ fun Navigator.navigate(destination: MainScreenDestination) {
 }
 
 @Composable
-fun MainScreenNavigation() {
+fun MainScreenNavigation(uiStateHolder: MainUiStateHolder) {
     val startScreen = TopLevelScreenDestination.getStartScreen() as Screen
     Navigator(screen = startScreen) { navigator ->
         val currentScreen = navigator.lastItem
         val currentDestination = currentScreen as MainScreenDestination
+        val uiState by uiStateHolder.uiState.asState()
         MainScreen(
+            uiState = uiState,
             currentDestination = currentDestination,
             onDestinationChanged = {
                 navigator.navigate(it)

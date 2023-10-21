@@ -1,6 +1,7 @@
 package presentation.screens.main
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +15,10 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import presentation.components.AppUpgradeRequiredDialog
 import presentation.components.MyAppToolbar
 import presentation.screens.main.navigation.MainScreenDestination
 import presentation.screens.main.navigation.MainScreenNavigation
@@ -24,18 +27,23 @@ import presentation.theme.Silver_d8
 
 
 @Composable
-fun MainScreen() {
-    MainScreenNavigation()
+fun MainScreen(uiStateHolder: MainUiStateHolder) {
+    MainScreenNavigation(uiStateHolder)
 }
 
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier.fillMaxSize(),
+    uiState: MainScreenUiState,
     currentDestination: MainScreenDestination,
     onDestinationChanged: (MainScreenDestination) -> Unit,
     onNavigateBack: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+
+    if (uiState.isAppVersionUpgradeRequired){
+        AppUpgradeRequiredDialog()
+    }
 
 
     Column(modifier = modifier.fillMaxSize()) {

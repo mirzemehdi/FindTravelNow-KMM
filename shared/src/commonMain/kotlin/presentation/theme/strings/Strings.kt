@@ -1,6 +1,10 @@
 package presentation.theme.strings
 
 object Strings {
+    const val title_app_upgrade_dialog: String = "Update Required"
+    const val btn_update: String = "Update"
+    const val description_app_upgrade_dialog: String =
+        "You need to update application to the latest version for better improvements."
     const val app_name = "FindTravelNow"
     const val title_screen_more: String = "More"
     const val title_screen_top5_flights: String = "Top5 Flights"
@@ -55,7 +59,8 @@ object Strings {
     const val last_update = "Last update: "
     const val next_update = "Next update: "
     const val url_privacy_policy = "https://appfindtravelnow.blogspot.com/p/privacy-policy.html"
-    const val url_terms_conditions = "https://appfindtravelnow.blogspot.com/p/terms-and-conditions.html"
+    const val url_terms_conditions =
+        "https://appfindtravelnow.blogspot.com/p/terms-and-conditions.html"
     const val msg_share_app = "Let us find cheap flight, hotel, car prices together"
     const val n_days_later = "Days later"
     const val one_day_later = "Day later"
@@ -64,7 +69,6 @@ object Strings {
     const val and = "and"
     const val btn_get_started = "GET STARTED"
     const val btn_skip = "SKIP"
-
 
 
 }

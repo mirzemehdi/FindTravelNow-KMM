@@ -6,6 +6,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import presentation.screens.main.MainScreen
+import presentation.screens.main.MainUiStateHolder
 import presentation.screens.main.navigation.MainScreenDestination
 import presentation.screens.main.navigation.navigate
 import presentation.screens.onboarding.OnBoardingScreen
@@ -45,7 +46,8 @@ interface RootAppDestination {
     object Main : Screen, RootAppDestination {
         @Composable
         override fun Content() {
-            MainScreen()
+            val mainScreenMainUiStateHolder = getUiStateHolder<MainUiStateHolder>()
+            MainScreen(uiStateHolder = mainScreenMainUiStateHolder)
         }
 
     }

@@ -62,6 +62,7 @@ private fun RootAppNavigation(isOnBoardShown: Boolean) {
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun SplashScreen() {
+
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Image(
             painter = painterResource("drawable/ic_logo.xml"),
