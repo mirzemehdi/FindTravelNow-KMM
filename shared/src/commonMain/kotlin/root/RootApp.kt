@@ -25,11 +25,13 @@ import root.navigation.RootAppDestination
 import root.navigation.RootAppNavigation
 
 @Composable
-fun RootApp() {
+fun RootApp(modifier: Modifier=Modifier) {
 
     MyApplicationTheme {
         Box(
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+            modifier = modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
         ) {
             var rootAppUiState by remember { mutableStateOf(RootAppUiState()) }
             val userPreferences: UserPreferences = koinInject()

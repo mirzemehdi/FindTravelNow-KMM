@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -91,7 +92,8 @@ fun HomeScreen(
         item { TopTitleSection(modifier = Modifier.fillMaxWidth()) }
         item { Spacer(modifier = Modifier.height(20.dp)) }
         item {
-            CardViewBanner(onClickBookNow = {
+            CardViewBanner(
+                onClickBookNow = {
                 onNavigateCategory(uiState.categories[0])
             })
         }
@@ -263,14 +265,18 @@ private fun CardViewBanner(modifier: Modifier = Modifier, onClickBookNow: () -> 
             Image(
                 painter = painterResource("drawable/ic_ellipse.xml"),
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.BottomEnd).padding(end = 4.dp, bottom = 11.dp),
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 4.dp, bottom = 11.dp),
                 contentScale = ContentScale.Fit,
 
                 )
             Image(
                 painter = painterResource("drawable/img_travel_person.png"),
                 contentDescription = null,
-                modifier = Modifier.fillMaxWidth().padding(top = 24.dp, bottom = 19.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 24.dp, bottom = 19.dp),
                 contentScale = ContentScale.Crop,
             )
 

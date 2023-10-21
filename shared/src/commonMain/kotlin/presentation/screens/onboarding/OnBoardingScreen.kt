@@ -6,6 +6,7 @@ import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -17,20 +18,26 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -39,6 +46,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -99,17 +107,23 @@ fun OnBoardingScreen(
     onClickTermsService: () -> Unit,
     onCheckPrivacyPolicy: () -> Unit,
 ) {
+    val scrollState = rememberScrollState()
+    LaunchedEffect(true){
+        scrollState.animateScrollTo(scrollState.maxValue, tween(1500))
+    }
+    val windowInsetsPadding = WindowInsets.systemBars.asPaddingValues()
     Column(
         modifier = modifier
+            .padding(windowInsetsPadding)
             .fillMaxSize()
+            .verticalScroll(scrollState)
             .background(
                 Brush.verticalGradient(
                     0.7f to Yellow_alpha_0,
                     1.0f to Yellow_alpha_39,
                 )
             )
-            .padding(top = 40.dp, bottom = 56.dp)
-        ,
+            .padding(top = 40.dp, bottom = 40.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val pagerState = rememberPagerState(
@@ -117,11 +131,11 @@ fun OnBoardingScreen(
             initialPageOffsetFraction = 0f,
             pageCount = { uiState.pages.size }
         )
-        HorizontalPager(state = pagerState, modifier = Modifier.fillMaxHeight(0.60f)) { pageIndex ->
+        HorizontalPager(state = pagerState, modifier = Modifier) { pageIndex ->
             val onBoardingScreenData = uiState.pages[pageIndex]
             OnBoardingPager(
                 onBoardingScreenData = onBoardingScreenData,
-                modifier = Modifier.fillMaxSize().padding(horizontal = 40.dp)
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 40.dp)
             )
         }
         val coroutineScope = rememberCoroutineScope()
@@ -137,18 +151,14 @@ fun OnBoardingScreen(
         Spacer(modifier = Modifier.weight(1f))
 
         Column(
-            modifier = Modifier
-                .padding(start = 40.dp, end = 40.dp)
-                .weight(1f)
-            ,
-
+            modifier = Modifier.padding(start = 40.dp, end = 40.dp, top = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val isLastPage = pagerState.currentPage == (pagerState.pageCount - 1)
             val offsetX = remember { Animatable(0f) }
             AcceptPrivacyPolicyTermsConditionsText(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .wrapContentWidth()
                     .offset(offsetX.value.dp, 0.dp)
                     .padding(bottom = 10.dp),
                 isChecked = uiState.isPrivacyPolicyChecked,
@@ -156,27 +166,33 @@ fun OnBoardingScreen(
                 onClickTermsService = onClickTermsService,
                 onCheckPrivacyPolicy = onCheckPrivacyPolicy,
             )
-            AnimatedVisibility(
-                visible = isLastPage,
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
-                GetStartedButton(modifier = Modifier.fillMaxWidth(), onClick = {
-                    if (uiState.isPrivacyPolicyChecked) onClickNavigateNext()
-                    else coroutineScope.shakePrivacyPolicyText(offsetX)
 
-                })
+            Box(modifier = Modifier.height(64.dp), contentAlignment = Alignment.Center) {
+
+                this@Column.AnimatedVisibility(
+                    visible = isLastPage,
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    GetStartedButton(modifier = Modifier.fillMaxWidth(), onClick = {
+                        if (uiState.isPrivacyPolicyChecked) onClickNavigateNext()
+                        else coroutineScope.shakePrivacyPolicyText(offsetX)
+
+                    })
+                }
+                this@Column.AnimatedVisibility(
+                    visible = isLastPage.not(),
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    SkipButton(
+                        onClick = {
+                            if (uiState.isPrivacyPolicyChecked) onClickNavigateNext()
+                            else coroutineScope.shakePrivacyPolicyText(offsetX)
+                        })
+                }
             }
-            AnimatedVisibility(
-                visible = isLastPage.not(),
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
-                SkipButton(onClick = {
-                    if (uiState.isPrivacyPolicyChecked) onClickNavigateNext()
-                    else coroutineScope.shakePrivacyPolicyText(offsetX)
-                })
-            }
+
         }
 
 
@@ -329,9 +345,7 @@ private fun OnBoardingPager(
         Image(
             painter = painterResource(onBoardingScreenData.imageRes),
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxHeight(0.6f)
-                .fillMaxWidth(0.8f)
+            modifier = Modifier.height(300.dp)
         )
 
         Text(
