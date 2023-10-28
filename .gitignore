@@ -8,7 +8,7 @@ build/
 .externalNativeBuild
 .cxx
 androidApp/keystore/
-shared/src/commonMain/kotlin/util/config
+secrets.local.properties
 iosApp/iosApp.xcworkspace/*
 iosApp/iosApp.xcodeproj/*
 !iosApp/iosApp.xcodeproj/project.pbxproj

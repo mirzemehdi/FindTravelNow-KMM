@@ -11,9 +11,7 @@ kotlin {
     iosSimulatorArm64()
 
     listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
+        iosX64(), iosArm64(), iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "shared"
@@ -21,14 +19,42 @@ kotlin {
         }
     }
 
+
+    //Generating BuildConfig for multiplatform
+    val buildConfigGenerator by tasks.registering(Sync::class) {
+        val packageName = "secrets"
+        val secretProperties = readPropertiesFromFile("secrets.properties")
+        from(
+            resources.text.fromString(
+                """
+        |package $packageName
+        |
+        |object BuildConfig {
+        |  const val API_KEY = "${secretProperties.getPropertyValue("API_KEY")}"
+        |}
+        |
+      """.trimMargin()
+            )
+        )
+        {
+            rename { "BuildConfig.kt" } // set the file name
+            into(packageName) // change the directory to match the package
+        }
+        into(layout.buildDirectory.dir("generated-src/kotlin/"))
+    }
+
     sourceSets {
         val commonMain by getting {
+            kotlin.srcDir(
+                // convert the task to a file-provider
+                buildConfigGenerator.map { it.destinationDir })
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class) implementation(
+                    compose.components.resources
+                )
 
                 implementation(libs.bundles.koin)
                 implementation(libs.bundles.voyager)
@@ -50,7 +76,7 @@ kotlin {
             }
         }
         val iosSimulatorArm64Main by getting
-        val iosMain by getting{
+        val iosMain by getting {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation(libs.ktor.client.darwin)
@@ -78,5 +104,51 @@ android {
         jvmToolchain(17)
     }
 
+}
+/**
+ * Property File name example secrets.properties
+ * two local file can be created
+ * secrets.properties (can be pushed to Git) as template to show the keys,
+ * secrets.local.properties with actual values (should be added to .gitignore)
+ *
+ * Properties file content should be like this.
+ * key=value
+ * key2=value2
+ */
+fun readPropertiesFromFile(fileName: String): Map<String, String> {
+    val parts = fileName.split('.')
+    val localPropertyFileName = if (parts.size >= 2) {
+        val nameWithoutExtension = parts.dropLast(1).joinToString(".")
+        val extension = parts.last()
+        "$nameWithoutExtension.local.$extension"
+    } else {
+        fileName
+    }
+    val isLocalFileExists= File(localPropertyFileName).exists()
+    val fileContent = try {
+        File(if (isLocalFileExists) localPropertyFileName else fileName).readText()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return emptyMap()
+    }
+
+    val properties = mutableMapOf<String, String>()
+
+    fileContent.lines().forEach { line ->
+        val keyValuePair = line.split('=')
+        if (keyValuePair.size == 2) {
+            properties[keyValuePair[0].trim()] = keyValuePair[1]
+        }
+    }
+    return properties
+}
+
+/**
+ * If System.env value exists it will be returned value which can be useful for CI/CD pipeline
+ */
+fun Map<String, String>.getPropertyValue(key: String): String? {
+    val envValue = System.getenv(key)
+    if (envValue.isNullOrEmpty().not()) return envValue
+    return this.getOrDefault(key, null)
 }
 

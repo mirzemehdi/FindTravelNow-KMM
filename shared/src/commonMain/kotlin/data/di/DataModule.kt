@@ -21,6 +21,7 @@ import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import secrets.BuildConfig
 import util.config.AppConfig
 import kotlin.coroutines.CoroutineContext
 
@@ -36,7 +37,7 @@ private val remoteSourceModule = module {
                 url {
                     protocol = URLProtocol.HTTPS
                     host = "api.findtravelnow.com"
-                    parameters.append("api_key", AppConfig.API_KEY)
+                    parameters.append("api_key", BuildConfig.API_KEY)
                 }
             }
             install(Logging) {
