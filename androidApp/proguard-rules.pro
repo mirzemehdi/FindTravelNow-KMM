@@ -15,3 +15,4 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.findtravelnow {
 #   public *;
 #}
+-dontwarn org.slf4j.impl.StaticLoggerBinder

@@ -10,7 +10,9 @@ import data.source.remote.apiservice.GlobalApiService
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.URLProtocol
 import io.ktor.serialization.kotlinx.json.json
@@ -21,6 +23,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import secrets.BuildConfig
+import util.logging.AppLogger
 import kotlin.coroutines.CoroutineContext
 
 private val preferencesSourceModule = module {
@@ -39,6 +42,12 @@ private val remoteSourceModule = module {
                 }
             }
             install(Logging) {
+                logger=object :Logger{
+                    override fun log(message: String) {
+                        AppLogger.d("NetworkRequest: $message")
+                    }
+
+                }
                 level = LogLevel.ALL
             }
             install(ContentNegotiation) {
