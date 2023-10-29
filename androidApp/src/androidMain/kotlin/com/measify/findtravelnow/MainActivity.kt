@@ -7,8 +7,12 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import com.measify.findtravelnow.permission.permissionUtil
+import util.logging.AppLogger
 
 class MainActivity : AppCompatActivity() {
+
+    private val permissionUtil by permissionUtil()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -16,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
         setContent {
             MainView()
+        }
+        permissionUtil.askNotificationPermission {
+            AppLogger.d("HasNotification Permission: $it")
         }
     }
 

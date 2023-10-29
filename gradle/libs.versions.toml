@@ -63,6 +63,7 @@ napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
 
 [bundles]
 voyager = ["voyager-navigator", "voyager-tabNavigator", "voyager-transitions"]

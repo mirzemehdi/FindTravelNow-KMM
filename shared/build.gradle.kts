@@ -73,9 +73,12 @@ kotlin {
                 api(libs.androidx.core)
                 api(libs.androidx.lifecycle.runtime.compose)
                 api(libs.koin.android)
+
+                //Firebase
                 implementation(project.dependencies.platform(libs.firebase.bom))
                 api(libs.firebase.analytics)
                 api(libs.firebase.crashlytics)
+                api(libs.firebase.messaging)
 
             }
         }
