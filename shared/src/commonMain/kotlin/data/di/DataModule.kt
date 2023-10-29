@@ -8,7 +8,6 @@ import data.source.preferences.UserPreferencesImpl
 import data.source.remote.apiservice.FlightsApiService
 import data.source.remote.apiservice.GlobalApiService
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -22,7 +21,6 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import secrets.BuildConfig
-import util.config.AppConfig
 import kotlin.coroutines.CoroutineContext
 
 private val preferencesSourceModule = module {

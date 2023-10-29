@@ -23,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -31,16 +30,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
 import presentation.components.ExpandableBoxItem
-import presentation.theme.Black_alpha_8
 import presentation.theme.Orange_55
 import presentation.theme.Red_48
 import presentation.theme.strings.Strings
-import util.config.AppConfig
+import util.AppVersion
 
 @Composable
 fun AboutScreen(modifier: Modifier = Modifier) {
     var aboutScreenUiState by remember { mutableStateOf(AboutScreenUiState()) }
+    val appVersion = koinInject<AppVersion>()
+
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(horizontal = 30.dp, vertical = 35.dp)
@@ -57,7 +58,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                 when (item) {
                     Strings.about_findtravelnow -> AboutFindTravelNowExpandedContent()
                     Strings.contact_details -> ContactDetailsExpandedContent()
-                    Strings.app_details -> AppDetailsExpandedContent()
+                    Strings.app_details -> AppDetailsExpandedContent(appVersionName = appVersion.name())
                     else -> Unit
                 }
             }
@@ -86,7 +87,7 @@ private fun ContactDetailsExpandedContent() {
 }
 
 @Composable
-private fun AppDetailsExpandedContent() {
+private fun AppDetailsExpandedContent(appVersionName:String) {
     Column {
         ImageTitleDescription(
             imageRes = "drawable/ic_developer.xml",
@@ -97,7 +98,7 @@ private fun AppDetailsExpandedContent() {
         ImageTitleDescription(
             imageRes = "drawable/ic_app_version.xml",
             title = Strings.app_version_title,
-            description = AppConfig.versionName,
+            description = appVersionName,
         )
     }
 }
