@@ -4,6 +4,7 @@ import data.repository.FlightsRepository
 import domain.model.FlightSort
 import domain.model.result.onError
 import domain.model.result.onSuccess
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

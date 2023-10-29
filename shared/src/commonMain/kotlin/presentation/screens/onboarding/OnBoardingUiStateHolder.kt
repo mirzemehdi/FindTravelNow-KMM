@@ -16,7 +16,7 @@ class OnBoardingUiStateHolder(private val userPreferences: UserPreferences) : Ui
     private val _uiState = MutableStateFlow(OnBoardingScreenUiState())
     val uiState = _uiState.asStateFlow()
 
-    fun onClickNavigateNext() = uiStateHolderScope.launch(Dispatchers.Main.immediate) {
+    fun onClickNavigateNext() = uiStateHolderScope.launch {
         if (_uiState.value.isPrivacyPolicyChecked.not()) return@launch
         withContext(Dispatchers.IO) {
             userPreferences.putBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN, true)
