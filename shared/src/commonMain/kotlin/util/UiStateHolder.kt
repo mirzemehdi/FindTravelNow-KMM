@@ -27,7 +27,7 @@ val UiStateHolder.uiStateHolderScope: CoroutineScope
     get() = coroutineScope
 
 @Composable
-public inline fun <reified T : UiStateHolder> Screen.getUiStateHolder(
+inline fun <reified T : UiStateHolder> Screen.getUiStateHolder(
     qualifier: Qualifier? = null,
     noinline parameters: ParametersDefinition? = null,
 ): T {

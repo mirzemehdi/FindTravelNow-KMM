@@ -15,6 +15,10 @@ kotlinxDateTime = "0.4.1"
 ktor = "2.3.5"
 logback = "1.2.11"
 napier = "2.6.1"
+firebaseBom="32.4.1"
+googleServices="4.4.0"
+firebaseCrashlytics = "2.9.9"
+
 
 
 
@@ -55,6 +59,10 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 #Napier - Logging library
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 
+#Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 
 [bundles]
 voyager = ["voyager-navigator", "voyager-tabNavigator", "voyager-transitions"]
@@ -70,3 +78,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }

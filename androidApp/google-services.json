@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "400988245981",
+    "project_id": "findtravelnow-fb53b",
+    "storage_bucket": "findtravelnow-fb53b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400988245981:android:b23b0cac37e3ce1d7b3034",
+        "android_client_info": {
+          "package_name": "com.travelapp.findtravelnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400988245981-a4rvdtv12pk7a5eh9cg08eh4dv1d0i4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.travelapp.findtravelnow",
+            "certificate_hash": "eeb32fc9a3dfb66fec9842f79ebc0147cc370a7f"
+          }
+        },
+        {
+          "client_id": "400988245981-ma8gof7b9e3np2670aalfg8kuepl0odi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.travelapp.findtravelnow",
+            "certificate_hash": "a74d02710561e879d790898a076071e81875664e"
+          }
+        },
+        {
+          "client_id": "400988245981-834b2f8ej4v57o5scp45a308n3q3fn25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjEg0sq_4ZF0CSoIfhw-zDGZJ6JV5Q0xw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400988245981-834b2f8ej4v57o5scp45a308n3q3fn25.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-7855973381729091~5419283688"
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -73,6 +73,10 @@ kotlin {
                 api(libs.androidx.core)
                 api(libs.androidx.lifecycle.runtime.compose)
                 api(libs.koin.android)
+                implementation(project.dependencies.platform(libs.firebase.bom))
+                api(libs.firebase.analytics)
+                api(libs.firebase.crashlytics)
+
             }
         }
         val iosSimulatorArm64Main by getting
