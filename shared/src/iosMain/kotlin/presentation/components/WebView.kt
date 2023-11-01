@@ -13,50 +13,57 @@ import androidx.compose.ui.interop.UIKitView
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
+import platform.Foundation.NSError
 import platform.Foundation.NSURL
 import platform.Foundation.NSURLRequest
+import platform.WebKit.WKNavigation
+import platform.WebKit.WKNavigationAction
+import platform.WebKit.WKNavigationDelegateProtocol
+import platform.WebKit.WKPreferences
+import platform.WebKit.WKUIDelegateProtocol
 import platform.WebKit.WKWebView
 import platform.WebKit.WKWebViewConfiguration
+import platform.WebKit.WKWindowFeatures
 import platform.WebKit.javaScriptEnabled
+import platform.darwin.NSObject
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun WebView(modifier: Modifier, url: String) {
     Box(modifier = modifier) {
-        var isLoading by remember { mutableStateOf(false) }
-//        val state = rememberWebViewState(url)
-//        state.webSettings.apply {
-//            isJavaScriptEnabled = true
-//        }
-//        isLoading = state.isLoading
-//        val list = state.errorsForCurrentRequest.toList()
-//        println("WebViewErrors: $list")
-//        com.multiplatform.webview.web.WebView(state)
+        var isLoading by remember { mutableStateOf(true) }
 
-
-//        webview.navigationDelegate = WKNavigationDelegate {
-//            isLoading = it
-//        }
-
-
+        val uiDelegate = remember { WKUiDelegate() }
+        val navigationDelegate = remember {
+            WKNavigationDelegate {
+                isLoading = it
+            }
+        }
         UIKitView(
             modifier = Modifier.fillMaxSize(),
             factory = {
                 val config = WKWebViewConfiguration().apply {
                     allowsInlineMediaPlayback = true
-                    preferences.javaScriptCanOpenWindowsAutomatically = true
-                    preferences.javaScriptEnabled = true
-
+                    preferences = WKPreferences().apply {
+                        javaScriptEnabled = true
+                        javaScriptCanOpenWindowsAutomatically = true
+                    }
                 }
-                println("NewWebViewCreation")
                 WKWebView(
                     frame = CGRectZero.readValue(),
                     configuration = config
-                )
-                    .also {
-                        it.loadRequest(request = NSURLRequest(NSURL(string = url)))
-                    }
+                ).apply {
+                    userInteractionEnabled = true
+                    allowsBackForwardNavigationGestures = true
+                    this.setUIDelegate(uiDelegate)
+                    this.navigationDelegate = navigationDelegate
+                    loadRequest(request = NSURLRequest(NSURL(string = url)))
+                }
 
+            },
+            onRelease = {
+                it.navigationDelegate = null
+                it.setUIDelegate(null)
             })
 
         if (isLoading)
@@ -66,36 +73,54 @@ actual fun WebView(modifier: Modifier, url: String) {
     }
 }
 
-//private class WKNavigationDelegate(private val onLoadingStateChanged: (Boolean) -> Unit) :
-//    NSObject(),
-//    WKNavigationDelegateProtocol {
-//
-//    override fun webView(webView: WKWebView, didStartProvisionalNavigation: WKNavigation?) {
-//        // Called when the web view starts loading a new page.
-//        super.webView(webView, didStartProvisionalNavigation)
-//        onLoadingStateChanged(true)
-//    }
-//
-////    override fun webView(
-////        webView: WKWebView,
-////        didFinishNavigation: WKNavigation?,
-////    ) {
-////        // Called when the web view has successfully finished loading a page.
-////        onLoadingStateChanged(false)
-////
-////
-////    }
-//
-//
-//    override fun webView(
-//        webView: WKWebView,
-//        didFailProvisionalNavigation: WKNavigation?,
-//        withError: NSError,
-//    ) {
-//        // Called when the web view encounters an error during loading.
-//        onLoadingStateChanged(false)
-//
-//
-//    }
-//
-//}
+/**
+ * This solves new window or new tab opening in ios web view
+ */
+private class WKUiDelegate : WKUIDelegateProtocol, NSObject() {
+    override fun webView(
+        webView: WKWebView,
+        createWebViewWithConfiguration: WKWebViewConfiguration,
+        forNavigationAction: WKNavigationAction,
+        windowFeatures: WKWindowFeatures,
+    ): WKWebView? {
+        val frame = forNavigationAction.targetFrame
+        val isMainFrame = frame?.isMainFrame() ?: false
+        if (!isMainFrame) webView.loadRequest(forNavigationAction.request)
+        return null
+    }
+}
+
+@Suppress("CONFLICTING_OVERLOADS")
+class WKNavigationDelegate(private val onLoadingStateChanged: (Boolean) -> Unit = {}) : NSObject(),
+    WKNavigationDelegateProtocol {
+
+    //On start loading
+    override fun webView(
+        webView: WKWebView,
+        didStartProvisionalNavigation: WKNavigation?,
+    ) {
+        onLoadingStateChanged(true)
+    }
+
+    /**
+     * onRequest loaded
+     */
+    override fun webView(
+        webView: WKWebView,
+        didFinishNavigation: WKNavigation?,
+    ) {
+        onLoadingStateChanged(false)
+    }
+
+    /**
+     * onRequestError
+     */
+    override fun webView(
+        webView: WKWebView,
+        didFailProvisionalNavigation: WKNavigation?,
+        withError: NSError,
+    ) {
+        onLoadingStateChanged(false)
+    }
+}
+

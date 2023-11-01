@@ -63,7 +63,6 @@ kotlin {
                 implementation(libs.kotlinx.serialization)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.napier)
-                api("io.github.kevinnzou:compose-webview-multiplatform:1.4.0")
             }
         }
         val androidMain by getting {
