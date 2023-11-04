@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>400988245981-a4rvdtv12pk7a5eh9cg08eh4dv1d0i4u.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAXTpOyK73Ip_fXHEXX2BpLFKJTmITR4xo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>400988245981</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.measify.findtravelnow</string>
+	<key>PROJECT_ID</key>
+	<string>findtravelnow-fb53b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>findtravelnow-fb53b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:400988245981:ios:38fa281563565b287b3034</string>
+</dict>
+</plist>
