@@ -28,6 +28,9 @@ jobs:
       - name: Build Android Debug app
         run: ./gradlew assembleDebug
 
+      - name: Build iOS Debug app
+        run: xcodebuild -project iosApp/iosApp.xcodeproj -configuration Debug -scheme iosApp -sdk iphoneos build
+
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
