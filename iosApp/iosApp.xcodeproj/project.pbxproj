@@ -11,9 +11,9 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		A6886A992AFBEB87000FC219 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6886A982AFBEB87000FC219 /* GoogleService-Info.plist */; };
 		A689DB122AF5F91200EC7353 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A689DB112AF5F91200EC7353 /* FirebaseAnalytics */; };
 		A68EBF9F2AF5ACA30038BFFD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A68EBF9E2AF5ACA30038BFFD /* FirebaseCrashlytics */; };
-		A691377D2AF5FDAA00B99393 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A691377C2AF5FDAA00B99393 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +24,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A621B42A2AF4899C00D87165 /* iosAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosAppRelease.entitlements; sourceTree = "<group>"; };
-		A691377C2AF5FDAA00B99393 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/untitled folder/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A6886A982AFBEB87000FC219 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Documents/FindTravelNow/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,8 +77,8 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				A691377C2AF5FDAA00B99393 /* GoogleService-Info.plist */,
 				A621B42A2AF4899C00D87165 /* iosAppRelease.entitlements */,
+				A6886A982AFBEB87000FC219 /* GoogleService-Info.plist */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -165,7 +165,7 @@
 			files = (
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
-				A691377D2AF5FDAA00B99393 /* GoogleService-Info.plist in Resources */,
+				A6886A992AFBEB87000FC219 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
