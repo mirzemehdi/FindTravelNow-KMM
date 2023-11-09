@@ -47,6 +47,12 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
+      - name: Install iTMSTransporter
+        run: |
+          wget https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/resources/download/public/Transporter__OSX/bin/ -O /Applications/Xcode_14.2.app/Contents/SharedFrameworks/ContentDeliveryServices.framework/itms/bin/iTMSTransporter.pkg
+          sudo installer -pkg iTMSTransporter.pkg -target /Applications/Xcode_14.2.app/Contents/SharedFrameworks/ContentDeliveryServices.framework/itms/bin/iTMSTransporter
+    
+
       - name: Publish app to AppStore
         run : |
          
