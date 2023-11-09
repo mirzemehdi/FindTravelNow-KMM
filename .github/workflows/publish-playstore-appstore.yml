@@ -1,9 +1,13 @@
 name: Publishing app to PlayStore and AppStore
 
+#on:
+#  push:
+#    tags:
+#      - 'v*'
+
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
+
 
 jobs:
   publish_app:
@@ -147,7 +151,7 @@ jobs:
 
       - name: Publish iOS app to AppStore
         run: |
-          xcrun altool --upload-app -f $RUNNER_TEMP/build/FindTravelNow.ipa -t ios \
+          xcrun altool --upload-package -f $RUNNER_TEMP/build/FindTravelNow.ipa -t ios \
           --apiKey $APPSTORE_API_KEY_ID \
           --apiIssuer $APPSTORE_API_KEY_ISSUER_ID --verbose
 
