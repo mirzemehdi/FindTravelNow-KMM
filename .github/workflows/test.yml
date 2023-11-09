@@ -50,7 +50,7 @@ jobs:
         run : |
          
          
-          xcrun altool --upload-package FindTravelNow.ipa -t ios \
+          xcrun altool --upload-package distribution/FindTravelNow.ipa -t ios \
           --apple-id 6471192930 \
           --bundle-id com.measify.findtravelnow \
           --bundle-short-version-string 1.0.4 \
