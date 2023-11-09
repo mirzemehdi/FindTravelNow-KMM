@@ -11,6 +11,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Create directory for App Store Connect private keys
+        run: mkdir -p ~/.appstoreconnect/private_keys
+
       - name: Install the Apple certificate and provisioning profile
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_APP_DISTRIBUTION_CERT_BASE64 }}
