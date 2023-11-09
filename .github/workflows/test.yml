@@ -56,12 +56,10 @@ jobs:
       - name: Publish app to AppStore
         run : |
          
-          echo $APPSTORE_API_KEY_ID 
-          echo $APPSTORE_API_KEY_ISSUER_ID
           xcrun altool --upload-package distribution/FindTravelNow.ipa -t ios \
           --apple-id 6471192930 \
           --bundle-id com.measify.findtravelnow \
           --bundle-short-version-string 1.0.4 \
           --bundle-version 15 \
-          --apiKey $APPSTORE_API_KEY_ID \
-          --apiIssuer $APPSTORE_API_KEY_ISSUER_ID --verbose
+          --apiKey 84G83SYQB8 \
+          --apiIssuer 8c711432-3453-4780-93b5-6c5f24d82c84 --verbose
