@@ -32,7 +32,7 @@ jobs:
       - name: Caching/Restoring Swift Package
         uses: actions/cache@v3
         with:
-          path: .build
+          path: /Users/runner/Library/Developer/Xcode/DerivedData/**/SourcePackages/checkouts
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
@@ -68,6 +68,9 @@ jobs:
 
 
         #      iOS building, signing
+
+      - name: Create directory for App Store Connect private keys
+        run: mkdir -p ~/.appstoreconnect/private_keys
 
       - name: Install the Apple certificate and provisioning profile
         env:
