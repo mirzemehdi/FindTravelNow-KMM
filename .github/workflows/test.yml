@@ -20,8 +20,6 @@ jobs:
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_APP_PROVISION_PROFILE_BASE64 }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
           APPSTORE_CONNECT_API_KEY_BASE64: ${{ secrets.IOS_APPSTORE_CONNECT_API_KEY_BASE64 }}
-          APPSTORE_API_KEY_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ID }}
-          APPSTORE_API_KEY_ISSUER_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ISSUER_ID }}
         run: |
           # create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
@@ -54,12 +52,17 @@ jobs:
     
 
       - name: Publish app to AppStore
+        env:
+          APPSTORE_API_KEY_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ID }}
+          APPSTORE_API_KEY_ISSUER_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ISSUER_ID }}
         run : |
          
+          echo $APPSTORE_API_KEY_ID 
+          echo $APPSTORE_API_KEY_ISSUER_ID
           xcrun altool --upload-package distribution/FindTravelNow.ipa -t ios \
           --apple-id 6471192930 \
           --bundle-id com.measify.findtravelnow \
           --bundle-short-version-string 1.0.4 \
           --bundle-version 15 \
-          --apiKey 84G83SYQB8 \
-          --apiIssuer 8c711432-3453-4780-93b5-6c5f24d82c84 --verbose
+          --apiKey $APPSTORE_API_KEY_ID \
+          --apiIssuer $APPSTORE_API_KEY_ISSUER_ID --verbose
