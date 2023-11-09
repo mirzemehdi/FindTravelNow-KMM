@@ -17,15 +17,20 @@ jobs:
           P12_PASSWORD: ${{ secrets.IOS_APP_CERT_PASS }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_APP_PROVISION_PROFILE_BASE64 }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          APPSTORE_CONNECT_API_KEY_BASE64: ${{ secrets.IOS_APPSTORE_CONNECT_API_KEY_BASE64 }}
+          APPSTORE_API_KEY_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ID }}
+          APPSTORE_API_KEY_ISSUER_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ISSUER_ID }}
         run: |
           # create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          APPSTORE_API_KEY_PATH=~/.appstoreconnect/private_keys/AuthKey_$APPSTORE_API_KEY_ISSUER_ID.p8
 
-          # import certificate and provisioning profile from secrets
+          # import certificate, provisioning profile and apikey from secrets
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
           echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          echo -n "$APPSTORE_CONNECT_API_KEY_BASE64" | base64 --decode -o $APPSTORE_API_KEY_PATH
 
           # create temporary keychain
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -63,3 +68,9 @@ jobs:
           name: iosAppArtifacts
           path: ${{ runner.temp }}/build
           retention-days: 7
+
+      - name: Publish app to AppStore
+        run : |
+          xcrun altool --upload-app -f $RUNNER_TEMP/build/FindTravelNow.ipa -t ios \
+          --apiKey "$APPSTORE_API_KEY_ID" \
+          --apiIssuer "$APPSTORE_API_KEY_ISSUER_ID" --verbose
