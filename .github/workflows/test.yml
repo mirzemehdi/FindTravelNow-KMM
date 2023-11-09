@@ -62,5 +62,5 @@ jobs:
           --bundle-id com.measify.findtravelnow \
           --bundle-short-version-string 1.0.4 \
           --bundle-version 15 \
-          --apiKey $APPSTORE_API_KEY_ID \
-          --apiIssuer $APPSTORE_API_KEY_ISSUER_ID --verbose
+          --apiKey "$APPSTORE_API_KEY_ID" \
+          --apiIssuer "$APPSTORE_API_KEY_ISSUER_ID" --verbose
