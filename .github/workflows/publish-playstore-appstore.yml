@@ -145,8 +145,8 @@ jobs:
       - name: Publish iOS app to AppStore
         run: |
           xcrun altool --upload-app -f $RUNNER_TEMP/build/FindTravelNow.ipa -t ios \
-          --apiKey "$APPSTORE_API_KEY_ID" \
-          --apiIssuer "$APPSTORE_API_KEY_ISSUER_ID" --verbose
+          --apiKey $APPSTORE_API_KEY_ID \
+          --apiIssuer $APPSTORE_API_KEY_ISSUER_ID --verbose
 
       - name: Create new release from tag
         uses: softprops/action-gh-release@v1
