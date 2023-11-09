@@ -1,13 +1,9 @@
 name: Publishing app to PlayStore and AppStore
 
-#on:
-#  push:
-#    tags:
-#      - 'v*'
-
 on:
-  workflow_dispatch:
-
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   publish_app:
@@ -74,7 +70,7 @@ jobs:
         #      iOS building, signing
 
       - name: Create directory for App Store Connect private keys
-        run: mkdir -p ~/.appstoreconnect/private_keys
+        run: mkdir -p ~/private_keys
 
       - name: Install the Apple certificate and provisioning profile
         env:
@@ -84,18 +80,16 @@ jobs:
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
           APPSTORE_CONNECT_API_KEY_BASE64: ${{ secrets.IOS_APPSTORE_CONNECT_API_KEY_BASE64 }}
           APPSTORE_API_KEY_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ID }}
-          APPSTORE_API_KEY_ISSUER_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ISSUER_ID }}
         run: |
           # create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-          APPSTORE_API_KEY_PATH=~/.appstoreconnect/private_keys/AuthKey_$APPSTORE_API_KEY_ISSUER_ID.p8
 
           # import certificate, provisioning profile and apikey from secrets
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
           echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
-          echo -n "$APPSTORE_CONNECT_API_KEY_BASE64" | base64 --decode -o $APPSTORE_API_KEY_PATH
+          echo -n "$APPSTORE_CONNECT_API_KEY_BASE64" | base64 --decode -o ~/private_keys/AuthKey_$APPSTORE_API_KEY_ID.p8
 
           # create temporary keychain
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -139,19 +133,31 @@ jobs:
 
 
 
-#      - name: Publish android app to Play Store (Alpha track)
-#        id: deploy
-#        uses: r0adkll/upload-google-play@v1
-#        with:
-#          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-#          packageName: com.travelapp.findtravelnow
-#          releaseFiles: androidApp/build/outputs/bundle/release/androidApp-release.aab
-#          track: alpha
-#          whatsNewDirectory: distribution/whatsnew
+      - name: Publish android app to Play Store (Alpha track)
+        id: deploy
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.travelapp.findtravelnow
+          releaseFiles: androidApp/build/outputs/bundle/release/androidApp-release.aab
+          track: alpha
+          whatsNewDirectory: distribution/whatsnew
+
+      - name: Install iTMSTransporter
+        run: |
+          wget https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/resources/download/public/Transporter__OSX/bin/ -O iTMSTransporter.pkg
+          sudo installer -pkg iTMSTransporter.pkg -target /
 
       - name: Publish iOS app to AppStore
+        env:
+          APPSTORE_API_KEY_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ID }}
+          APPSTORE_API_KEY_ISSUER_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ISSUER_ID }}
         run: |
-          xcrun altool --upload-package -f $RUNNER_TEMP/build/FindTravelNow.ipa -t ios \
+          xcrun altool --upload-package $RUNNER_TEMP/build/FindTravelNow.ipa -t ios \
+          --apple-id 6471192930 \
+          --bundle-id com.measify.findtravelnow \
+          --bundle-short-version-string 1.0.4 \
+          --bundle-version 15 \
           --apiKey $APPSTORE_API_KEY_ID \
           --apiIssuer $APPSTORE_API_KEY_ISSUER_ID --verbose
 
