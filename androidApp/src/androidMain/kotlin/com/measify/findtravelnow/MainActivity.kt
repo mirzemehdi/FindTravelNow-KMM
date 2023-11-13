@@ -2,12 +2,12 @@ package com.measify.findtravelnow
 
 import MainView
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import com.measify.findtravelnow.permission.permissionUtil
+import com.mmk.kmpnotifier.notification.NotifierManager
+import com.mmk.kmpnotifier.permission.permissionUtil
 import util.logging.AppLogger
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +24,11 @@ class MainActivity : AppCompatActivity() {
         permissionUtil.askNotificationPermission {
             AppLogger.d("HasNotification Permission: $it")
         }
+        NotifierManager.addListener(object :NotifierManager.Listener{
+            override fun onNewToken(token: String) {
+                AppLogger.d("FirebaseToken: $token")
+            }
+        })
     }
 
 

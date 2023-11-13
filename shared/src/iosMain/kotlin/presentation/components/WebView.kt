@@ -32,7 +32,6 @@ import platform.darwin.NSObject
 actual fun WebView(modifier: Modifier, url: String) {
     Box(modifier = modifier) {
         var isLoading by remember { mutableStateOf(true) }
-
         val uiDelegate = remember { WKUiDelegate() }
         val navigationDelegate = remember {
             WKNavigationDelegate {

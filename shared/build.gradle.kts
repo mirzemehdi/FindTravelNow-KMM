@@ -7,8 +7,7 @@ plugins {
 
 kotlin {
     androidTarget()
-    ios()
-    iosSimulatorArm64()
+
 
     listOf(
         iosX64(), iosArm64(), iosSimulatorArm64()
@@ -44,7 +43,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             kotlin.srcDir(
                 // convert the task to a file-provider
                 buildConfigGenerator.map { it.destinationDir })
@@ -63,9 +62,10 @@ kotlin {
                 implementation(libs.kotlinx.serialization)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.napier)
+                api(libs.kmpNotifier)
             }
         }
-        val androidMain by getting {
+        androidMain  {
             dependencies {
                 api(libs.androidx.activity.compose)
                 api(libs.androidx.appcompat)
@@ -74,16 +74,14 @@ kotlin {
                 api(libs.koin.android)
 
                 //Firebase
-                implementation(project.dependencies.platform(libs.firebase.bom))
+                api(project.dependencies.platform(libs.firebase.bom))
                 api(libs.firebase.analytics)
                 api(libs.firebase.crashlytics)
                 api(libs.firebase.messaging)
 
             }
         }
-        val iosSimulatorArm64Main by getting
-        val iosMain by getting {
-            iosSimulatorArm64Main.dependsOn(this)
+        iosMain {
             dependencies {
                 implementation(libs.ktor.client.darwin)
             }

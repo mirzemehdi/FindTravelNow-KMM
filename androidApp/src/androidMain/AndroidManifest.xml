@@ -22,15 +22,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".pushnotification.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-
-        </service>
-
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
             -->
         <meta-data

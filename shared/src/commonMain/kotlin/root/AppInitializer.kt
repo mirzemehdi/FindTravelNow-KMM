@@ -12,6 +12,7 @@ object AppInitializer {
             onKoinStart()
             modules(appModules)
         }
+
         if (isDebug) AppLogger.initialize()
     }
 }
