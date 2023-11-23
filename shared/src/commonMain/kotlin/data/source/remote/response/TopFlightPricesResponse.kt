@@ -1,6 +1,7 @@
 package data.source.remote.response
 
 import domain.mapper.DomainMapper
+import domain.model.FlightLocation
 import domain.model.Top5Flights
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,6 +15,14 @@ data class TopFlightPricesResponse(
     override fun mapToDomainModel(): Top5Flights {
         return Top5Flights(
             flights = flights.map { it.mapToDomainModel() },
+            origin = flights.firstOrNull()?.let { firstFlight ->
+                FlightLocation(
+                    city = firstFlight.originCity,
+                    country = firstFlight.originCountry,
+                    iataCode = firstFlight.originCode
+                )
+            }
+                ?: FlightLocation.getDefault(),
             lastUpdateDate = lastUpdateDate,
             nextUpdateDate = nextUpdateDate
         )

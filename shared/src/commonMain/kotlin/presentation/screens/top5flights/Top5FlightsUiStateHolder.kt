@@ -36,7 +36,7 @@ class Top5FlightsUiStateHolder(private val flightsRepository: FlightsRepository)
         _uiState.update { it.copy(isLoading = true) }
         with(_uiState.value) {
             flightsRepository.getTop5Flights(
-                origin = origin,
+                origin = null,
                 maxPrice = maxPrice,
                 sortBy = sortBy ?: FlightSort.BY_PRICE
             )
@@ -45,6 +45,7 @@ class Top5FlightsUiStateHolder(private val flightsRepository: FlightsRepository)
                         it.copy(
                             isLoading = false,
                             flights = resultData.flights,
+                            origin =resultData.origin,
                             lastUpdateDate = resultData.lastUpdateDate
                                 .toInstant().toLocalDateString(),
                             nextUpdateInDays = Clock.System.now()

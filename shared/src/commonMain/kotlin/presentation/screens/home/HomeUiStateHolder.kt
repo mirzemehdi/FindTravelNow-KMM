@@ -24,7 +24,7 @@ class HomeUiStateHolder(private val flightsRepository: FlightsRepository) : UiSt
     private fun getTop5Flights() = uiStateHolderScope.launch {
 
         with(_uiState.value) {
-            flightsRepository.getTop5Flights(origin = FlightLocation.getDefault())
+            flightsRepository.getTop5Flights(origin = null)
                 .onSuccess { resultData ->
                     _uiState.update {
                         it.copy(topFlightInfoList = resultData.flights.take(2))

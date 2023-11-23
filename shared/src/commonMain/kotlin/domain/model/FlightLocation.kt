@@ -6,6 +6,6 @@ data class FlightLocation(
     val iataCode: String = "",
 ) {
     companion object {
-        fun getDefault() = FlightLocation(city = "Budapest", "Hungary", "BUD")
+        fun getDefault() = FlightLocation(city = "Budapest", country="Hungary", iataCode = "BUD")
     }
 }

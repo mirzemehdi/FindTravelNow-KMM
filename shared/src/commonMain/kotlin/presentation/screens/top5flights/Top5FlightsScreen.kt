@@ -206,7 +206,7 @@ fun BottomInfoSection(
                 withStyle(
                     style = SpanStyle(fontWeight = FontWeight.SemiBold)
                 ) { // AnnotatedString.Builder
-                    append("${origin.city},${origin.country}(${origin.iataCode})")
+                    append("${origin.city}, ${origin.country}(${origin.iataCode})")
                 }
 
             },

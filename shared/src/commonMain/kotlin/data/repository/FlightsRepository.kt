@@ -17,22 +17,22 @@ class FlightsRepository(
 ) {
 
     suspend fun getTop5Flights(
-        origin: FlightLocation,
+        origin: FlightLocation? = null,
         maxPrice: Int = 50,
         sortBy: FlightSort = FlightSort.BY_PRICE,
     ): Result<Top5Flights> = withContext(backgroundScope) {
         try {
-            val apiResponse =
-                flightsApiService.getTop5Flights(origin.iataCode, maxPrice.toString(), sortBy.value)
-            if (apiResponse.hasSuccessfulData())
-                Result.success(apiResponse.getSuccessfulData().mapToDomainModel())
-            else
-                Result.error(
-                    ErrorEntity.apiError(
-                        errorMessage = apiResponse.errorMessage,
-                        responseCode = apiResponse.responseCode
-                    )
+            val apiResponse = flightsApiService.getTop5Flights(
+                origin?.iataCode, maxPrice.toString(), sortBy.value
+            )
+            if (apiResponse.hasSuccessfulData()) Result.success(
+                apiResponse.getSuccessfulData().mapToDomainModel()
+            )
+            else Result.error(
+                ErrorEntity.apiError(
+                    errorMessage = apiResponse.errorMessage, responseCode = apiResponse.responseCode
                 )
+            )
         } catch (e: Exception) {
             Result.error(ErrorEntity.apiError(exception = e))
         }
