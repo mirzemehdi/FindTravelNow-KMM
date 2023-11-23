@@ -8,12 +8,12 @@ import presentation.theme.strings.Strings
 
 class AppOpenerUtilImpl : AppOpenerUtil {
     override fun openStorePage() {
-        val appId = "" //TODO Update app ID
+        val appId = "6471192930"
         val url = NSURL(string = "itms-apps://apps.apple.com/app/id$appId")
         if (UIApplication.sharedApplication.canOpenURL(url)) {
             UIApplication.sharedApplication.openURL(url)
         } else {
-            val appStoreLink = "https://findtravelnow.com"
+            val appStoreLink = getAppStoreLink()
             val appLinkUrl = NSURL(string = appStoreLink)
             UIApplication.sharedApplication.openURL(appLinkUrl)
         }
@@ -42,7 +42,7 @@ class AppOpenerUtilImpl : AppOpenerUtil {
     }
 
     private fun getAppStoreLink(): String {
-        val appId = "" //TODO Update app ID
-        return "https://apps.apple.com/app/$appId"
+        val appId = "6471192930" //TODO Update app ID
+        return "https://apps.apple.com/app/id$appId"
     }
 }
