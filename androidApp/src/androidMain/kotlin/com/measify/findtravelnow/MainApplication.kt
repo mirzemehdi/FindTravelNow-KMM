@@ -9,9 +9,7 @@ import root.AppInitializer
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        AppInitializer.initialize(isDebug = BuildConfig.DEBUG) {
-            androidContext(this@MainApplication)
-        }
+
         NotifierManager.initialize(
             NotificationPlatformConfiguration.Android(
                 notificationIconResId = R.drawable.ic_notification,
@@ -22,5 +20,8 @@ class MainApplication : Application() {
                 )
             )
         )
+        AppInitializer.initialize(isDebug = BuildConfig.DEBUG) {
+            androidContext(this@MainApplication)
+        }
     }
 }

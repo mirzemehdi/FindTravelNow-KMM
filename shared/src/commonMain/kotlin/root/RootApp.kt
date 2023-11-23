@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mmk.kmpnotifier.notification.NotifierManager
 import data.source.preferences.UserPreferences
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -23,9 +25,10 @@ import org.koin.compose.koinInject
 import presentation.theme.MyApplicationTheme
 import root.navigation.RootAppDestination
 import root.navigation.RootAppNavigation
+import util.logging.AppLogger
 
 @Composable
-fun RootApp(modifier: Modifier=Modifier) {
+fun RootApp(modifier: Modifier = Modifier) {
 
     MyApplicationTheme {
         Box(
@@ -41,6 +44,10 @@ fun RootApp(modifier: Modifier=Modifier) {
                 val isOnBoardShown =
                     userPreferences.getBoolean(UserPreferences.KEY_IS_ONBOARD_SHOWN)
                 rootAppUiState = RootAppUiState(isLoading = false, isOnBoardShown = isOnBoardShown)
+            }
+            LaunchedEffect(true){
+                val firebasePushToken = NotifierManager.getPushNotifier().getToken()
+                AppLogger.d("FirebaseToken: $firebasePushToken")
             }
 
             when (rootAppUiState.isLoading) {

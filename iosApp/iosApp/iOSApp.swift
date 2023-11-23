@@ -1,6 +1,7 @@
 import SwiftUI
 import shared
 import FirebaseCore
+import FirebaseMessaging
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 
@@ -8,12 +9,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     
-    AppInitializer.shared.initialize(isDebug: true, onKoinStart: { _ in })
     FirebaseApp.configure()
+    NotifierManager.shared.initialize(configuration: NotificationPlatformConfigurationIos.shared)
+    AppInitializer.shared.initialize(isDebug: true, onKoinStart: { _ in })
+    
+      
       
     return true
 
   }
+    
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+            Messaging.messaging().apnsToken = deviceToken
+    }
 
 }
 

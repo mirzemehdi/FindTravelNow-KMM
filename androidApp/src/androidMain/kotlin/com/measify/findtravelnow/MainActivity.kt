@@ -24,11 +24,6 @@ class MainActivity : AppCompatActivity() {
         permissionUtil.askNotificationPermission {
             AppLogger.d("HasNotification Permission: $it")
         }
-        NotifierManager.addListener(object :NotifierManager.Listener{
-            override fun onNewToken(token: String) {
-                AppLogger.d("FirebaseToken: $token")
-            }
-        })
     }
 
 
