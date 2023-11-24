@@ -42,6 +42,10 @@
 - [Napier](https://github.com/AAkira/Napier) - Multiplatform Logging library
 - [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) - Multiplatform library for saving simple key-value data
 
+## CI/CD
+In each push to any branch debug application for both android and ios will be built.  
+Whenever new tag is pushed release app will be distributed to both Google Play and AppStore in testing track. 
+
 ## Contributing
 Feel free to open new issue for feature suggestion, or bug fixing or anything related to project architecture, or just a suggestion :).
 
