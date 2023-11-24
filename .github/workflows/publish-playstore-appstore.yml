@@ -156,8 +156,8 @@ jobs:
           xcrun altool --upload-package $RUNNER_TEMP/build/FindTravelNow.ipa -t ios \
           --apple-id 6471192930 \
           --bundle-id com.measify.findtravelnow \
-          --bundle-short-version-string 1.0.4 \
-          --bundle-version 15 \
+          --bundle-short-version-string 1.0.5 \
+          --bundle-version 17 \
           --apiKey $APPSTORE_API_KEY_ID \
           --apiIssuer $APPSTORE_API_KEY_ISSUER_ID --verbose
 
