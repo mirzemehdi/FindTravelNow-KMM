@@ -11,6 +11,16 @@
 |:-:|:-:|
 | [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="50">](https://play.google.com/store/apps/details?id=com.travelapp.findtravelnow) | [<img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" height="50">](https://apps.apple.com/gr/app/findtravelnow/id6471192930) |
 
+## Screenshots
+
+<p style="text-align: center;">
+  <img src="distribution/screenshots/1.png" width="220" alt="Screen1"/>
+  <img src="distribution/screenshots/2.png" width="220" alt="Screen2"/>
+  <img src="distribution/screenshots/3.png" width="220" alt="Screen3"/>
+  <img src="distribution/screenshots/4.png" width="220" alt="Screen4"/>
+
+</p>
+
 
 ## Features
   - 🎒 All in one travel features
