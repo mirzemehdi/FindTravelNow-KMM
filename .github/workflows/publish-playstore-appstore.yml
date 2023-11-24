@@ -153,11 +153,13 @@ jobs:
           APPSTORE_API_KEY_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ID }}
           APPSTORE_API_KEY_ISSUER_ID: ${{ secrets.IOS_APPSTORE_API_KEY_ISSUER_ID }}
         run: |
+          bundleShortVersion=$(plutil -extract CFBundleShortVersionString raw -o - iosApp/iosApp/Info.plist)
+          bundleVersion=$(plutil -extract CFBundleVersion raw -o - iosApp/iosApp/Info.plist)
           xcrun altool --upload-package $RUNNER_TEMP/build/FindTravelNow.ipa -t ios \
           --apple-id 6471192930 \
           --bundle-id com.measify.findtravelnow \
-          --bundle-short-version-string 1.0.5 \
-          --bundle-version 17 \
+          --bundle-short-version-string ${bundleShortVersion} \
+          --bundle-version ${bundleVersion} \
           --apiKey $APPSTORE_API_KEY_ID \
           --apiIssuer $APPSTORE_API_KEY_ISSUER_ID --verbose
 
