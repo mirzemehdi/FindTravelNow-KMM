@@ -14,10 +14,10 @@
 ## Screenshots
 
 <p style="text-align: center;">
-  <img src="distribution/screenshots/1.png" width="220" alt="Screen1"/>
-  <img src="distribution/screenshots/2.png" width="220" alt="Screen2"/>
-  <img src="distribution/screenshots/3.png" width="220" alt="Screen3"/>
-  <img src="distribution/screenshots/4.png" width="220" alt="Screen4"/>
+  <img src="distribution/screenshots/1.png" width="200" alt="Screen1"/>
+  <img src="distribution/screenshots/2.png" width="200" alt="Screen2"/>
+  <img src="distribution/screenshots/3.png" width="200" alt="Screen3"/>
+  <img src="distribution/screenshots/4.png" width="200" alt="Screen4"/>
 
 </p>
 
