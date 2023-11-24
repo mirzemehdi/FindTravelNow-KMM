@@ -30,5 +30,8 @@
 - [Voyager](https://github.com/adrielcafe/voyager) - Multiplatform Navigation library
 - [KMPNotifier](https://github.com/mirzemehdi/KMPNotifier/) - Multiplatform Push Notification library
 - [Napier](https://github.com/AAkira/Napier) - Multiplatform Logging library
-- [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) - Multiplatform library for saving simple key-value data 
+- [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) - Multiplatform library for saving simple key-value data
+
+## Contributing
+Feel free to open new issue for feature suggestion, or bug fixing or anything related to project architecture, or just a suggestion :).
 
