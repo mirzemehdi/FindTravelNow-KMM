@@ -40,7 +40,6 @@ object Strings {
     const val developer_description = "Measify"
 
     const val app_version_title = "Version"
-    const val app_version_description = "2.0.0"
 
     const val home_screen_banner_text = "Get cheap flights from 100s of airlines and travel agents"
     const val btn_book_now = "Book Now"
@@ -51,7 +50,7 @@ object Strings {
     const val category_car = "Car"
     const val category_taxi = "Taxi"
     const val category_bike = "Bike"
-    const val category_simcard = "Sim/eSim"
+    const val category_simcard = "eSim"
 
     const val top_5_flights = "Top 5 Flights"
     const val view_all = "View All"

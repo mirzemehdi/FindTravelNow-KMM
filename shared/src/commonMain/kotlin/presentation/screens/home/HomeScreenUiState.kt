@@ -34,7 +34,7 @@ data class HomeScreenUiState(
         CategoryData(
             title = Strings.category_simcard,
             iconRes = "drawable/ic_category_sim.xml",
-            url = "https://drimsim.tp.st/XyHi4PxG"
+            url = "https://appfindtravelnow.blogspot.com/p/esim.html"
         ),
     ),
     val topFlightInfoList: List<FlightInfo> = listOf(),
