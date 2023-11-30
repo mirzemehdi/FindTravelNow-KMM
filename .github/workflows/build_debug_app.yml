@@ -1,15 +1,12 @@
 name: Building Debug app
 
-#on:
-#  push:
-#    branches:
-#      - '**'
-#  pull_request:
-#    branches:
-#      - '**'
-
-
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
 
 
 
@@ -17,6 +14,8 @@ jobs:
   build_app:
     name: Building app
     runs-on: macos-latest
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
 
     steps:
       - uses: actions/checkout@v3

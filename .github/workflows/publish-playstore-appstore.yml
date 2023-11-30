@@ -13,6 +13,8 @@ jobs:
       contents: write
     env:
       github_token: ${{ secrets.GITHUB_TOKEN }}
+      API_KEY: ${{ secrets.API_KEY }}
+
 
     steps:
       - uses: actions/checkout@v3
