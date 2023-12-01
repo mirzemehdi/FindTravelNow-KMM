@@ -1,6 +1,6 @@
 [versions]
-compose = "1.5.10"
-kotlin = "1.9.20"
+compose = "1.5.11"
+kotlin = "1.9.21"
 androidGradlePlugin = "8.1.3"
 androidxAvtivityCpmpose = "1.7.2"
 androidxLifecycleRuntimeCpmpose = "2.6.2"
