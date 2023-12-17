@@ -9,7 +9,7 @@ build/
 .cxx
 androidApp/keystore/
 secrets.local.properties
-iosApp/iosApp.xcworkspace/*
+#iosApp/iosApp.xcworkspace/*
 iosApp/iosApp.xcodeproj/*
 !iosApp/iosApp.xcodeproj/project.pbxproj
 distribution/android/*
