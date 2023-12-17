@@ -16,3 +16,8 @@
 #   public *;
 #}
 -dontwarn org.slf4j.impl.StaticLoggerBinder
+-keep class io.kotzilla.json.** { *; }
+-keep class io.kotzilla.cloudinject.** { *; }
+-keepclassmembers class kotlinx.** { volatile <fields>; }
+-keepclassmembers class io.ktor.** { volatile <fields>; }
+

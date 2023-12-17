@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
 }
+apply(plugin="cloud-inject")
 
 kotlin {
     androidTarget()
@@ -15,6 +16,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(project(":shared"))
+                implementation(libs.koin.cloudInject)
             }
         }
     }
