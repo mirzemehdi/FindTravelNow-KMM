@@ -39,6 +39,7 @@ kotlin {
         |
         |object BuildConfig {
         |  const val API_KEY = "${secretProperties.getPropertyValue("API_KEY")}"
+        |  const val GOOGLE_AUTH_SERVER_ID = "${secretProperties.getPropertyValue("GOOGLE_AUTH_SERVER_ID")}"
         |}
         |
       """.trimMargin()
