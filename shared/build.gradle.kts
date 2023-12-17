@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlinNativeCocoapods)
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose)
 }
@@ -8,15 +9,22 @@ plugins {
 kotlin {
     androidTarget()
 
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
-    listOf(
-        iosX64(), iosArm64(), iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
+
+    cocoapods {
+        ios.deploymentTarget = "14.1"
+        version = "1.0.0"
+        summary = "Shared module of FindTravelNow"
+        homepage = "https://github.com/mirzemehdi/FindTravelNow-KMM/"
+        framework {
             baseName = "shared"
             isStatic = true
             export(libs.kmpNotifier)
         }
+        pod("GoogleSignIn")
     }
 
 
@@ -129,9 +137,9 @@ fun readPropertiesFromFile(fileName: String): Map<String, String> {
     } else {
         fileName
     }
-    val isLocalFileExists= File(localPropertyFileName).exists()
+    val isLocalFileExists= File(project.rootDir,localPropertyFileName).exists()
     val fileContent = try {
-        File(if (isLocalFileExists) localPropertyFileName else fileName).readText()
+        File(project.rootDir,if (isLocalFileExists) localPropertyFileName else fileName).readText()
     } catch (e: Exception) {
         e.printStackTrace()
         return emptyMap()

@@ -1,16 +1,15 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'shared'
     spec.version                  = '1.0.0'
-    spec.homepage                 = 'Link to a Kotlin/Native module homepage'
+    spec.homepage                 = 'https://github.com/mirzemehdi/FindTravelNow-KMM/'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Some description for a Kotlin/Native module'
+    spec.summary                  = 'Shared module of FindTravelNow'
     spec.vendored_frameworks      = 'build/cocoapods/framework/shared.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
     spec.dependency 'GoogleSignIn'
-    spec.dependency 'GoogleSignInSwiftSupport'
                 
     if !Dir.exist?('build/cocoapods/framework/shared.framework') || Dir.empty?('build/cocoapods/framework/shared.framework')
         raise "
