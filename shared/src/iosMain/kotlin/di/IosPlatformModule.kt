@@ -15,7 +15,6 @@ import util.auth.google.GoogleAuthUiProviderImpl
 
 
 private val googleAuthModule = module {
-    factoryOf(::GoogleAuthUiProviderImpl) bind GoogleAuthUiProvider::class
     factoryOf(::GoogleAuthProviderImpl) bind GoogleAuthProvider::class
 }
 

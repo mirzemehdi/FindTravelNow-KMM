@@ -16,13 +16,12 @@ import util.auth.google.GoogleAuthUiProvider
 import util.auth.google.GoogleAuthUiProviderImpl
 
 private val googleAuthModule = module {
-    factoryOf(::GoogleAuthUiProviderImpl) bind GoogleAuthUiProvider::class
+    factory { CredentialManager.create(androidContext()) } bind CredentialManager::class
     factoryOf(::GoogleAuthProviderImpl) bind GoogleAuthProvider::class
 }
 
 internal actual val platformModule: Module = module {
     factoryOf(::AppOpenerUtilImpl) bind AppOpenerUtil::class
     factoryOf(::AndroidAppVersion) bind AppVersion::class
-    factory { CredentialManager.create(androidContext()) } bind CredentialManager::class
     includes(googleAuthModule)
 }
