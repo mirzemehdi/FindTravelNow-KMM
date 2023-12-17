@@ -91,6 +91,7 @@ kotlin {
                 //Credential Manager
                 implementation(libs.androidx.credentials)
                 implementation(libs.androidx.credentials.playServicesAuth)
+                implementation(libs.googleIdIdentity)
 
             }
         }

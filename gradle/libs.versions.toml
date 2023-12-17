@@ -20,6 +20,7 @@ firebaseBom="32.4.1"
 googleServices="4.4.0"
 firebaseCrashlytics = "2.9.9"
 kmpNotifier = "0.1.8"
+googleIdIdentity="1.1.0"
 
 
 
@@ -29,8 +30,13 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppCompat" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycleRuntimeCpmpose" }
+
+
+#Google Sign In
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "androidxCredential" }
 androidx-credentials-playServicesAuth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "androidxCredential" }
+googleIdIdentity = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleIdIdentity" }
+
 
 #Koin - Dependency Injection
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
