@@ -107,7 +107,7 @@ jobs:
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
       - name: Build iOSApp archive
         run: |
-          xcodebuild -project iosApp/iosApp.xcodeproj \
+          xcodebuild -workspace iosApp/iosApp.xcworkspace \
           -scheme iosApp \
           -sdk iphoneos \
           -archivePath $RUNNER_TEMP/iosApp.xcarchive \
