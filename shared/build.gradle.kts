@@ -88,6 +88,10 @@ kotlin {
                 api(libs.firebase.crashlytics)
                 api(libs.firebase.messaging)
 
+                //Credential Manager
+                implementation(libs.androidx.credentials)
+                implementation(libs.androidx.credentials.playServicesAuth)
+
             }
         }
         iosMain {
