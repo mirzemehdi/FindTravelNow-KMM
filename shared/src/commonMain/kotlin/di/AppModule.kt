@@ -14,8 +14,7 @@ internal expect val platformModule: Module
 private val utilModule = module {
     factory {
         GoogleAuthCredentials(
-            serverId = BuildConfig.GOOGLE_AUTH_SERVER_ID,
-            iosClientId = ""
+            serverId = "400988245981-u6ajdq65cv1utc6b0j7mtnhc5ap54kbd.apps.googleusercontent.com",
         )
     }
 }
