@@ -19,6 +19,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import presentation.screens.about.AboutScreen
+import presentation.screens.auth.signin.SignInScreen
 import presentation.screens.home.HomeScreen
 import presentation.screens.home.HomeUiStateHolder
 import presentation.screens.main.MainScreen
@@ -40,7 +41,9 @@ interface TopLevelScreenDestination : MainScreenDestination {
 
 interface MainScreenDestination {
 
-
+    fun getTitle(): String {
+        return ""
+    }
     object Home : Screen, TopLevelScreenDestination {
         @Composable
         override fun Content() {
@@ -79,6 +82,7 @@ interface MainScreenDestination {
             val navigator = LocalNavigator.currentOrThrow
             MoreScreen(
                 onNavigateAboutUs = { navigator.navigate(AboutUs) },
+                onNavigateProfile = { navigator.navigate(Profile) },
                 onNavigatePrivacyPolicy = {
                     navigator.navigate(
                         WebView(
@@ -130,9 +134,15 @@ interface MainScreenDestination {
         override fun getTitle(): String = Strings.about_us
     }
 
-    fun getTitle(): String {
-        return ""
+    object Profile : Screen, MainScreenDestination {
+        @Composable
+        override fun Content() {
+            SignInScreen()
+        }
+
+        override fun getTitle(): String = Strings.profile
     }
+
 
     data class WebView(val url: String, private val title: String = "") : Screen,
         MainScreenDestination {

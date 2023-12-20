@@ -20,6 +20,7 @@ object Strings {
     const val onboarding_desc_2 = "Search 100s of travel sites to compare prices"
     const val onboarding_desc_3 = "See deals from 3M+ hotels and accommodations in one place"
 
+    const val profile = "Profile"
     const val feedback = "Feedback"
     const val share_app = "Share App"
     const val rate_app = "Rate App"

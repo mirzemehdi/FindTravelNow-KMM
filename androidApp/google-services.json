@@ -30,7 +30,7 @@
           }
         },
         {
-          "client_id": "400988245981-834b2f8ej4v57o5scp45a308n3q3fn25.apps.googleusercontent.com",
+          "client_id": "400988245981-u6ajdq65cv1utc6b0j7mtnhc5ap54kbd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -45,6 +45,14 @@
             {
               "client_id": "400988245981-834b2f8ej4v57o5scp45a308n3q3fn25.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "400988245981-9tv75mdhd0he2unncn3t1g3dq0gur3oc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.measify.findtravelnow",
+                "app_store_id": "6471192930"
+              }
             }
           ]
         }
