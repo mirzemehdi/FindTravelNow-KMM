@@ -15,7 +15,7 @@ interface GoogleButtonUiContainerScope {
 @Composable
 fun GoogleButtonUiContainer(
     modifier: Modifier = Modifier,
-    onGoogleSignInResult: (String?) -> Unit,
+    onGoogleSignInResult: (GoogleUser?) -> Unit,
     content: @Composable GoogleButtonUiContainerScope.() -> Unit,
 ) {
     val googleAuthProvider = koinInject<GoogleAuthProvider>()
@@ -26,8 +26,8 @@ fun GoogleButtonUiContainer(
             override fun onClick() {
                 println("GoogleUiButtonContainer is clicked")
                 coroutineScope.launch {
-                    val googleIdToken = googleAuthUiProvider.signIn()
-                    onGoogleSignInResult(googleIdToken)
+                    val googleUser = googleAuthUiProvider.signIn()
+                    onGoogleSignInResult(googleUser)
                 }
             }
         }

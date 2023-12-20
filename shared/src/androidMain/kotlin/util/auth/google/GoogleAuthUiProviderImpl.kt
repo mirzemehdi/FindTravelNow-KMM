@@ -17,13 +17,13 @@ internal class GoogleAuthUiProviderImpl(
     private val credentials: GoogleAuthCredentials,
 ) :
     GoogleAuthUiProvider {
-    override suspend fun signIn(): String? {
+    override suspend fun signIn(): GoogleUser? {
         return try {
             val credential = credentialManager.getCredential(
                 context = activityContext,
                 request = getCredentialRequest()
             ).credential
-            getGoogleIdTokenFromCredential(credential)
+            getGoogleUserFromCredential(credential)
         } catch (e: GetCredentialException) {
             AppLogger.e("GoogleAuthUiProvider error: ${e.message}")
             null
@@ -32,13 +32,17 @@ internal class GoogleAuthUiProviderImpl(
         }
     }
 
-    private fun getGoogleIdTokenFromCredential(credential: Credential): String? {
+    private fun getGoogleUserFromCredential(credential: Credential): GoogleUser? {
         return when {
             credential is CustomCredential && credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL -> {
                 try {
                     val googleIdTokenCredential =
                         GoogleIdTokenCredential.createFrom(credential.data)
-                    googleIdTokenCredential.idToken
+                    GoogleUser(
+                        idToken = googleIdTokenCredential.idToken,
+                        displayName = googleIdTokenCredential.displayName ?: "",
+                        profilePicUrl = googleIdTokenCredential.profilePictureUri?.toString()
+                    )
                 } catch (e: GoogleIdTokenParsingException) {
                     AppLogger.e("GoogleAuthUiProvider Received an invalid google id token response: ${e.message}")
                     null
