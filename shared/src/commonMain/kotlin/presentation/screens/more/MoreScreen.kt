@@ -30,6 +30,7 @@ fun MoreScreen(
     onNavigateAboutUs: () -> Unit,
     onNavigatePrivacyPolicy: () -> Unit,
     onNavigateTermsConditions: () -> Unit,
+    onNavigateProfile: () -> Unit,
 ) {
     val moreScreenUiState by remember { mutableStateOf(MoreScreenUiState()) }
     val appOpenerUtil = koinInject<AppOpenerUtil>()
@@ -52,6 +53,7 @@ fun MoreScreen(
                         Strings.terms_conditions -> onNavigateTermsConditions()
                         Strings.share_app -> appOpenerUtil.shareApp()
                         Strings.feedback -> appOpenerUtil.openFeedbackMail()
+                        Strings.profile -> onNavigateProfile()
                         else -> Unit
 
                     }
