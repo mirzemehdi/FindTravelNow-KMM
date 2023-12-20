@@ -36,7 +36,10 @@ fun SignInScreen(modifier: Modifier = Modifier) {
         if (signedInUser == null) {
 
             GoogleButtonUiContainer(onGoogleSignInResult = { googleUser ->
-                signedInUser = googleUser
+                coroutineScope.launch {
+                    signedInUser=googleUser
+                }
+
             }) {
                 Button(
                     onClick = { this.onClick() }

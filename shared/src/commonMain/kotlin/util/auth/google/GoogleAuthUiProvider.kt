@@ -4,7 +4,7 @@ interface GoogleAuthUiProvider {
 
     /**
      * Opens Sign In with Google UI,
-     * @return returns googleIdToken
+     * @return returns GoogleUser
      */
     suspend fun signIn(): GoogleUser?
 }
