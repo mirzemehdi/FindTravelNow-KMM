@@ -72,6 +72,10 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.napier)
                 api(libs.kmpNotifier)
+                implementation(libs.kmpAuth.firebase)
+                implementation(libs.kmpAuth.uihelper)
+                implementation(libs.kmpAuth.google)
+
             }
         }
         androidMain  {

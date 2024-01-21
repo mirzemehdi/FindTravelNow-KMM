@@ -19,6 +19,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import presentation.screens.about.AboutScreen
+import presentation.screens.auth.signin.SignInScreen
 import presentation.screens.home.HomeScreen
 import presentation.screens.home.HomeUiStateHolder
 import presentation.screens.main.MainScreen
@@ -124,7 +125,9 @@ interface MainScreenDestination {
     object AboutUs : Screen, MainScreenDestination {
         @Composable
         override fun Content() {
-            AboutScreen()
+            //TODO Fix This
+            SignInScreen()
+//            AboutScreen()
         }
 
         override fun getTitle(): String = Strings.about_us
