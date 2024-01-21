@@ -94,6 +94,8 @@ kotlin {
             }
         }
         iosMain {
+            resources.srcDirs("src/commonMain/resources","src/iosMain/resources")
+
             dependencies {
                 implementation(libs.ktor.client.darwin)
             }
