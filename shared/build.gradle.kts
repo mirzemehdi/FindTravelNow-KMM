@@ -24,7 +24,6 @@ kotlin {
             isStatic = true
             export(libs.kmpNotifier)
         }
-        pod("GoogleSignIn")
     }
 
 
