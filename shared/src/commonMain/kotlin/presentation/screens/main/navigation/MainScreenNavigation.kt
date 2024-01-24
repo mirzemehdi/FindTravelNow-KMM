@@ -122,12 +122,22 @@ interface MainScreenDestination {
         override fun getTitle(): String = Strings.title_screen_top5_flights
     }
 
+    object Profile : Screen, TopLevelScreenDestination {
+
+        @Composable
+        override fun Content() {
+            val navigator = LocalNavigator.currentOrThrow
+//            val uiStateHolder = getUiStateHolder<Top5FlightsUiStateHolder>()
+            SignInScreen()
+        }
+
+        override fun getTitle(): String = Strings.title_screen_profile
+    }
+
     object AboutUs : Screen, MainScreenDestination {
         @Composable
         override fun Content() {
-            //TODO Fix This
-            SignInScreen()
-//            AboutScreen()
+            AboutScreen()
         }
 
         override fun getTitle(): String = Strings.about_us

@@ -8,6 +8,7 @@ object Strings {
     const val app_name = "FindTravelNow"
     const val title_screen_more: String = "More"
     const val title_screen_top5_flights: String = "Top5 Flights"
+    const val title_screen_profile: String = "Account"
     const val price = "Price"
     const val date = "Date"
     const val sort_by = "Sort by"
