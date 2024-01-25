@@ -393,8 +393,3 @@ private fun HorizontalPagerIndicator(
         }
     }
 }
-
-
-private fun CoroutineScope.animateOffsetX() {
-
-}
