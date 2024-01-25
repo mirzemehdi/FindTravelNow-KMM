@@ -1,13 +1,9 @@
 package presentation.screens.main
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -15,7 +11,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import presentation.components.AppUpgradeRequiredDialog
@@ -41,16 +36,18 @@ fun MainScreen(
     content: @Composable () -> Unit,
 ) {
 
-    if (uiState.isAppVersionUpgradeRequired){
+    if (uiState.isAppVersionUpgradeRequired) {
         AppUpgradeRequiredDialog()
     }
 
 
     Column(modifier = modifier.fillMaxSize()) {
+        val isToolbarInvisible = (currentDestination == MainScreenDestination.Home)
+                || (currentDestination == MainScreenDestination.Account && uiState.currentUser == null)
 
-        AnimatedVisibility(currentDestination != MainScreenDestination.Home) {
+        AnimatedVisibility(isToolbarInvisible.not()) {
             MyAppToolbar(
-                title = currentDestination.getTitle(),
+                title = if (isToolbarInvisible) "" else currentDestination.getTitle(),
                 onNavigationIconClick = { onNavigateBack() }
             )
         }

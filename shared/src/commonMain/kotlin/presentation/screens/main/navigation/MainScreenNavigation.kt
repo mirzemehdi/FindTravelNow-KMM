@@ -39,7 +39,7 @@ import util.getUiStateHolder
 
 interface TopLevelScreenDestination : MainScreenDestination {
     companion object {
-        fun getStartScreen(): TopLevelScreenDestination = MainScreenDestination.Account
+        fun getStartScreen(): TopLevelScreenDestination = MainScreenDestination.Home
     }
 
 }
