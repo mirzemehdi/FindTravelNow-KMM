@@ -20,6 +20,7 @@ googleServices="4.4.0"
 firebaseCrashlytics = "2.9.9"
 kmpNotifier = "0.1.8"
 kmpAuth = "1.1.0"
+coil = "3.0.0-alpha03"
 
 
 
@@ -73,6 +74,10 @@ kmpNotifier = { group = "io.github.mirzemehdi", name = "kmpnotifier", version.re
 kmpAuth-firebase = { group = "io.github.mirzemehdi", name = "kmpauth-firebase", version.ref = "kmpAuth" }
 kmpAuth-google = { group = "io.github.mirzemehdi", name = "kmpauth-google", version.ref = "kmpAuth" }
 kmpAuth-uihelper = { group = "io.github.mirzemehdi", name = "kmpauth-uihelper", version.ref = "kmpAuth" }
+
+# Coil Image Loading
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor", version.ref = "coil" }
 
 
 [bundles]

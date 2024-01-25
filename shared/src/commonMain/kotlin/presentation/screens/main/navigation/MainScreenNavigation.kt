@@ -12,14 +12,19 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.stack.StackEvent
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import data.repository.UserRepository
+import org.koin.compose.koinInject
 import presentation.screens.about.AboutScreen
-import presentation.screens.auth.signin.SignInScreen
+import presentation.screens.account.profile.ProfileScreen
+import presentation.screens.account.profile.ProfileUiStateHolder
+import presentation.screens.account.signin.SignInScreen
 import presentation.screens.home.HomeScreen
 import presentation.screens.home.HomeUiStateHolder
 import presentation.screens.main.MainScreen
@@ -34,7 +39,7 @@ import util.getUiStateHolder
 
 interface TopLevelScreenDestination : MainScreenDestination {
     companion object {
-        fun getStartScreen(): TopLevelScreenDestination = MainScreenDestination.Profile
+        fun getStartScreen(): TopLevelScreenDestination = MainScreenDestination.Account
     }
 
 }
@@ -122,16 +127,41 @@ interface MainScreenDestination {
         override fun getTitle(): String = Strings.title_screen_top5_flights
     }
 
-    object Profile : Screen, TopLevelScreenDestination {
+    object Account : Screen, TopLevelScreenDestination {
 
         @Composable
         override fun Content() {
             val navigator = LocalNavigator.currentOrThrow
-//            val uiStateHolder = getUiStateHolder<Top5FlightsUiStateHolder>()
-            SignInScreen()
+
+            val userRepository = koinInject<UserRepository>()
+            val currentUser by userRepository.currentUser.collectAsState(null)
+            if (currentUser == null) {
+                SignInScreen(
+                    onNavigatePrivacyPolicy = {
+                        navigator.navigate(
+                            WebView(
+                                url = Strings.url_privacy_policy,
+                                title = Strings.privacy_policy
+                            )
+                        )
+                    },
+                    onNavigateTermsConditions = {
+                        navigator.navigate(
+                            WebView(
+                                url = Strings.url_terms_conditions,
+                                title = Strings.terms_conditions
+                            )
+                        )
+                    }
+                )
+            } else {
+                val uiStateHolder = getUiStateHolder<ProfileUiStateHolder>()
+                ProfileScreen(uiStateHolder = uiStateHolder)
+            }
+
         }
 
-        override fun getTitle(): String = Strings.title_screen_profile
+        override fun getTitle(): String = Strings.title_screen_account
     }
 
     object AboutUs : Screen, MainScreenDestination {

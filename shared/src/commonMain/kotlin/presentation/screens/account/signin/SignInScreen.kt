@@ -1,5 +1,6 @@
-package presentation.screens.auth.signin
+package presentation.screens.account.signin
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,6 +24,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -51,14 +53,23 @@ import org.jetbrains.compose.resources.painterResource
 import presentation.theme.Yellow_alpha_0
 import presentation.theme.Yellow_alpha_39
 import presentation.theme.strings.Strings
+import util.logging.AppLogger
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun SignInScreen(modifier: Modifier = Modifier) {
+fun SignInScreen(
+    modifier: Modifier = Modifier,
+    onNavigatePrivacyPolicy: () -> Unit,
+    onNavigateTermsConditions: () -> Unit,
+) {
+    val scrollState = rememberScrollState()
+    LaunchedEffect(true) {
+        scrollState.animateScrollTo(scrollState.maxValue, tween(1500))
+    }
     Column(
         modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .background(
                 Brush.verticalGradient(
                     0.8f to Yellow_alpha_0,
@@ -80,18 +91,27 @@ fun SignInScreen(modifier: Modifier = Modifier) {
 
         AuthUiHelperButtonsAndFirebaseAuth(
             modifier = Modifier.padding(top = 32.dp).fillMaxWidth(),
-            onFirebaseResult = {}
+            onFirebaseResult = { result ->
+                result.onSuccess {
+                    AppLogger.d("Successful sign in")
+                }.onFailure {
+                    AppLogger.e("Error occurred while signing in")
+                }
+            }
         )
 
         AgreePrivacyPolicyTermsConditionsText(
-            modifier = Modifier.padding(top = 32.dp).fillMaxWidth(), {}, {})
+            modifier = Modifier.padding(top = 32.dp).fillMaxWidth(),
+            onClickPrivacyPolicy = onNavigatePrivacyPolicy,
+            onClickTermsService = onNavigateTermsConditions
+        )
 
 
     }
 }
 
 @Composable
-fun AuthUiHelperButtonsAndFirebaseAuth(
+private fun AuthUiHelperButtonsAndFirebaseAuth(
     modifier: Modifier = Modifier,
     onFirebaseResult: (Result<FirebaseUser?>) -> Unit,
 ) {

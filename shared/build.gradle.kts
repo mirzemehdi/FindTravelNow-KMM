@@ -75,6 +75,10 @@ kotlin {
                 implementation(libs.kmpAuth.uihelper)
                 implementation(libs.kmpAuth.google)
 
+                implementation(libs.coil.compose)
+                implementation(libs.coil.ktor)
+
+
             }
         }
         androidMain  {
@@ -90,6 +94,8 @@ kotlin {
                 api(libs.firebase.analytics)
                 api(libs.firebase.crashlytics)
                 api(libs.firebase.messaging)
+
+//                implementation("io.ktor:ktor-client-okhttp:2.3.7")
 
             }
         }

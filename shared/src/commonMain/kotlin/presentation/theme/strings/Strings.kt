@@ -1,9 +1,15 @@
 package presentation.theme.strings
 
 object Strings {
-    const val btn_sign_in_with_github: String="Continue with Github"
-    const val btn_sign_in_with_google: String="Continue with Google"
-    const val btn_sign_in_with_apple: String="Continue with Apple"
+    const val display_name_default: String = "Traveller"
+    const val btn_delete_account: String = "Delete Account"
+    const val display_name_title: String = "Display Name"
+    const val basic_info: String = "Basic Info"
+    const val edit_profile: String = "Edit Profile"
+    const val btn_log_out: String = "LOG OUT"
+    const val btn_sign_in_with_github: String = "Continue with Github"
+    const val btn_sign_in_with_google: String = "Continue with Google"
+    const val btn_sign_in_with_apple: String = "Continue with Apple"
 
     const val title_app_upgrade_dialog: String = "Update Required"
     const val btn_update: String = "Update"
@@ -12,7 +18,7 @@ object Strings {
     const val app_name = "FindTravelNow"
     const val title_screen_more: String = "More"
     const val title_screen_top5_flights: String = "Top5 Flights"
-    const val title_screen_profile: String = "Account"
+    const val title_screen_account: String = "Account"
     const val price = "Price"
     const val date = "Date"
     const val sort_by = "Sort by"
@@ -32,7 +38,7 @@ object Strings {
     const val privacy_policy = "Privacy Policy"
     const val terms_conditions = "Terms & Conditions"
     const val your_travel_plans = "Your Travel Plans"
-    const val title_sign_in_account = "Sign in to your account to continue to "
+    const val title_sign_in_account = "Sign in to your account to continue "
 
     const val about_findtravelnow = "About FindTravelNow"
     const val about_findtravelnow_text =
