@@ -7,6 +7,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,8 +20,10 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,9 +38,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
+import dev.gitlive.firebase.auth.FirebaseUser
 import domain.model.User
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import presentation.components.AuthUiHelperButtonsAndFirebaseAuth
+import presentation.components.DeleteUserConfirmationDialog
 import presentation.components.ExpandableBoxItem
 import presentation.components.GradientButton
 import presentation.components.MyAppCircularProgressIndicator
@@ -51,10 +57,23 @@ import util.asState
 @Composable
 fun ProfileScreen(modifier: Modifier = Modifier, uiStateHolder: ProfileUiStateHolder) {
     val uiState by uiStateHolder.profileScreenUiState.asState()
+    if (uiState.reAuthenticateUserViewShown) {
+        SocialLoginsBottomSheet(
+            onDismiss = uiStateHolder::onDismissReAuthenticateView,
+            onResult = uiStateHolder::onUserReAuthenticatedResult
+        )
+    }
+
     if (uiState.isLoading) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             MyAppCircularProgressIndicator()
         }
+    }
+    if (uiState.deleteUserDialogShown) {
+        DeleteUserConfirmationDialog(
+            onConfirm = uiStateHolder::onConfirmDeleteAccount,
+            onDismiss = uiStateHolder::onDismissDeleteUserConfirmationDialog
+        )
     }
     uiState.currentUser?.let { currentUser ->
         ProfileScreen(
@@ -198,4 +217,22 @@ private fun BasicInfo(modifier: Modifier = Modifier, currentUser: User) {
 
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SocialLoginsBottomSheet(onDismiss: () -> Unit, onResult: (Result<FirebaseUser?>) -> Unit) {
+    ModalBottomSheet(
+
+        windowInsets = WindowInsets(0),
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        dragHandle = {},
+        onDismissRequest = { onDismiss() }
+    ) {
+        Box(modifier = Modifier.padding(40.dp)) {
+            AuthUiHelperButtonsAndFirebaseAuth(onFirebaseResult = onResult)
+        }
+    }
+
+
 }

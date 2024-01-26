@@ -1,6 +1,11 @@
 package presentation.theme.strings
 
 object Strings {
+    const val btn_cancel: String = "Cancel"
+    const val btn_delete: String = "Delete"
+    const val description_delete_user_dialog: String =
+        "This irreversible action will permanently delete the user and associated data. For security, you will need to log in or reauthenticate to proceed. Are you sure?"
+    const val title_delete_user_dialog = "Delete User?"
     const val display_name_default: String = "Traveller"
     const val btn_delete_account: String = "Delete Account"
     const val display_name_title: String = "Display Name"

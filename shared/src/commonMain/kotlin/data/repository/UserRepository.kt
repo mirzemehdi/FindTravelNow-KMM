@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import util.logging.AppLogger
 import kotlin.coroutines.CoroutineContext
 
 class UserRepository(private val backgroundScope: CoroutineContext = Dispatchers.IO) {
@@ -26,7 +27,12 @@ class UserRepository(private val backgroundScope: CoroutineContext = Dispatchers
     }
 
     suspend fun deleteAccount() = withContext(backgroundScope) {
-        Firebase.auth.currentUser?.delete()
+        val currentUser=Firebase.auth.currentUser
+       currentUser?.providerData?.forEach {
+            AppLogger.e("ProviderId: ${it.providerId}")
+
+        }
+        currentUser?.delete()
     }
 
 }

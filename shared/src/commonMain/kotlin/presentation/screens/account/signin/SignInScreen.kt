@@ -53,6 +53,7 @@ import com.mmk.kmpauth.uihelper.google.GoogleSignInButton
 import dev.gitlive.firebase.auth.FirebaseUser
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import presentation.components.AuthUiHelperButtonsAndFirebaseAuth
 import presentation.theme.Yellow_alpha_0
 import presentation.theme.Yellow_alpha_39
 import presentation.theme.strings.Strings
@@ -116,52 +117,6 @@ fun SignInScreen(
 }
 
 @Composable
-private fun AuthUiHelperButtonsAndFirebaseAuth(
-    modifier: Modifier = Modifier,
-    onFirebaseResult: (Result<FirebaseUser?>) -> Unit,
-) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(14.dp)
-    ) {
-        val shape = RoundedCornerShape(8.dp)
-        val height = 56.dp
-        val textFontSize = 24.sp
-        //Google Sign-In Button and authentication with Firebase
-        GoogleButtonUiContainerFirebase(onResult = onFirebaseResult) {
-            GoogleSignInButton(
-                modifier = Modifier.fillMaxWidth().height(height),
-                text = Strings.btn_sign_in_with_google,
-                mode = GoogleButtonMode.Light,
-                fontSize = textFontSize,
-                shape = shape
-            ) { this.onClick() }
-        }
-
-        //Apple Sign-In Button and authentication with Firebase
-        AppleButtonUiContainer(onResult = onFirebaseResult) {
-            AppleSignInButton(
-                modifier = Modifier.fillMaxWidth().height(height),
-                text = Strings.btn_sign_in_with_apple,
-                shape = shape
-            ) { this.onClick() }
-        }
-
-        //Github Sign-In Button and authentication with Firebase
-        GithubButtonUiContainer(onResult = onFirebaseResult) {
-            GithubSignInButton(
-                modifier = Modifier.fillMaxWidth().height(height),
-                text = Strings.btn_sign_in_with_github,
-                fontSize = textFontSize,
-                shape = shape
-            ) { this.onClick() }
-        }
-
-    }
-}
-
-
-@Composable
 private fun TitleText(modifier: Modifier) {
     val annotatedString = buildAnnotatedString {
         append(Strings.title_sign_in_account)
@@ -178,53 +133,6 @@ private fun TitleText(modifier: Modifier) {
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.displayMedium.copy(color = Color.Black)
     )
-
-}
-
-
-@OptIn(ExperimentalResourceApi::class, KMPAuthInternalApi::class)
-@Composable
-private fun GithubSignInButton(
-    modifier: Modifier = Modifier,
-    text: String = "Sign in with Github",
-    fontSize: TextUnit = 14.sp,
-    shape: Shape = ButtonDefaults.shape,
-    onClick: () -> Unit,
-) {
-
-    val horizontalPadding = if (isAndroidPlatform()) 12.dp else 16.dp
-    val iconTextPadding = if (isAndroidPlatform()) 10.dp else 12.dp
-    val containerColor = Color.White
-    val contentColor = Color(0xFF1F1F1F)
-    val buttonColor =
-        ButtonDefaults.buttonColors(containerColor = containerColor, contentColor = contentColor)
-    Button(
-        modifier = modifier,
-        contentPadding = PaddingValues(horizontal = horizontalPadding),
-        onClick = onClick,
-        shape = shape,
-        colors = buttonColor,
-        border = BorderStroke(
-            width = 1.dp,
-            color = Color(0xFF747775),
-        ),
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                modifier = Modifier.size(20.dp),
-                painter = painterResource("drawable/ic_github.xml"),
-                contentDescription = "githubicon"
-            )
-            Spacer(modifier = Modifier.width(iconTextPadding))
-            Text(
-                text = text,
-                maxLines = 1,
-                fontSize = fontSize,
-            )
-        }
-
-    }
-
 
 }
 
