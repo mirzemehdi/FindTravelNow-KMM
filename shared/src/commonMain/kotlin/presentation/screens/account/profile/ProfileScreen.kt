@@ -21,13 +21,18 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
 import dev.gitlive.firebase.auth.FirebaseUser
+import domain.model.AuthProvider
 import domain.model.User
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -59,29 +65,48 @@ fun ProfileScreen(modifier: Modifier = Modifier, uiStateHolder: ProfileUiStateHo
     val uiState by uiStateHolder.profileScreenUiState.asState()
     if (uiState.reAuthenticateUserViewShown) {
         SocialLoginsBottomSheet(
+            isLoading = uiState.isDeleteInProgress,
+            authProviders = uiState.currentUserAuthProviderList,
             onDismiss = uiStateHolder::onDismissReAuthenticateView,
             onResult = uiStateHolder::onUserReAuthenticatedResult
         )
     }
 
-    if (uiState.isLoading) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            MyAppCircularProgressIndicator()
-        }
-    }
     if (uiState.deleteUserDialogShown) {
         DeleteUserConfirmationDialog(
             onConfirm = uiStateHolder::onConfirmDeleteAccount,
             onDismiss = uiStateHolder::onDismissDeleteUserConfirmationDialog
         )
     }
-    uiState.currentUser?.let { currentUser ->
-        ProfileScreen(
-            modifier = modifier.fillMaxSize(),
-            currentUser = currentUser,
-            onClickLogOut = uiStateHolder::onClickLogOut,
-            onClickDeleteAccount = uiStateHolder::onClickDeleteAccount
-        )
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    Scaffold(modifier = modifier.fillMaxSize(),
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        }
+    ) {
+        LaunchedEffect(uiState.message){
+            uiState.message?.let { message->
+                snackbarHostState.showSnackbar(message)
+                uiStateHolder.onMessageIsShown()
+            }
+        }
+        uiState.currentUser?.let { currentUser ->
+            ProfileScreen(
+                modifier = Modifier.fillMaxSize(),
+                currentUser = currentUser,
+                onClickLogOut = uiStateHolder::onClickLogOut,
+                onClickDeleteAccount = uiStateHolder::onClickDeleteAccount
+            )
+        }
+
+    }
+
+
+    if (uiState.isLoading) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            MyAppCircularProgressIndicator()
+        }
     }
 }
 
@@ -150,20 +175,22 @@ private fun ProfileScreen(
                 )
             )
 
-            Text(
-                modifier = Modifier
-                    .clip(ButtonDefaults.textShape)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(color = MaterialTheme.colorScheme.primary),
-                        onClick = {}
-                    )
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-                text = Strings.edit_profile,
-                style = MaterialTheme.typography.bodySmall.copy(
-                    color = MaterialTheme.colorScheme.secondary
-                )
-            )
+            //TODO Implement Edit Profile
+
+//            Text(
+//                modifier = Modifier
+//                    .clip(ButtonDefaults.textShape)
+//                    .clickable(
+//                        interactionSource = remember { MutableInteractionSource() },
+//                        indication = rememberRipple(color = MaterialTheme.colorScheme.primary),
+//                        onClick = {}
+//                    )
+//                    .padding(horizontal = 16.dp, vertical = 4.dp),
+//                text = Strings.edit_profile,
+//                style = MaterialTheme.typography.bodySmall.copy(
+//                    color = MaterialTheme.colorScheme.secondary
+//                )
+//            )
 
             BasicInfo(
                 modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
@@ -221,7 +248,12 @@ private fun BasicInfo(modifier: Modifier = Modifier, currentUser: User) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SocialLoginsBottomSheet(onDismiss: () -> Unit, onResult: (Result<FirebaseUser?>) -> Unit) {
+fun SocialLoginsBottomSheet(
+    isLoading: Boolean = false,
+    authProviders: List<AuthProvider>,
+    onDismiss: () -> Unit,
+    onResult: (Result<FirebaseUser?>) -> Unit,
+) {
     ModalBottomSheet(
 
         windowInsets = WindowInsets(0),
@@ -230,7 +262,11 @@ fun SocialLoginsBottomSheet(onDismiss: () -> Unit, onResult: (Result<FirebaseUse
         onDismissRequest = { onDismiss() }
     ) {
         Box(modifier = Modifier.padding(40.dp)) {
-            AuthUiHelperButtonsAndFirebaseAuth(onFirebaseResult = onResult)
+            AuthUiHelperButtonsAndFirebaseAuth(
+                onFirebaseResult = onResult,
+                authProviders = authProviders
+            )
+            if (isLoading) MyAppCircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
 

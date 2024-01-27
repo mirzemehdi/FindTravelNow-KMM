@@ -2,6 +2,7 @@ package data.repository
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
+import domain.model.AuthProvider
 import domain.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -27,12 +28,26 @@ class UserRepository(private val backgroundScope: CoroutineContext = Dispatchers
     }
 
     suspend fun deleteAccount() = withContext(backgroundScope) {
-        val currentUser=Firebase.auth.currentUser
-       currentUser?.providerData?.forEach {
+        val currentUser = Firebase.auth.currentUser
+        currentUser?.providerData?.forEach {
             AppLogger.e("ProviderId: ${it.providerId}")
 
         }
         currentUser?.delete()
+    }
+
+    fun getCurrentUserProviders(): List<AuthProvider> {
+        val currentUser = Firebase.auth.currentUser
+        return currentUser?.providerData?.mapNotNull {
+            val providerId = it.providerId
+            AppLogger.d("ProviderId: $providerId")
+            when (providerId) {
+                "google.com" -> AuthProvider.GOOGLE
+                "apple.com" -> AuthProvider.APPLE
+                "github.com" -> AuthProvider.GITHUB
+                else -> null
+            }
+        } ?: emptyList()
     }
 
 }

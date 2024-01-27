@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import presentation.theme.strings.Strings
 import util.UiStateHolder
-import util.logging.AppLogger
 import util.uiStateHolderScope
 
 class ProfileUiStateHolder(private val userRepository: UserRepository) : UiStateHolder() {
@@ -41,22 +40,47 @@ class ProfileUiStateHolder(private val userRepository: UserRepository) : UiState
     }
 
     fun onConfirmDeleteAccount() = uiStateHolderScope.launch {
-        _profileScreenUiState.update { it.copy(reAuthenticateUserViewShown = true, deleteUserDialogShown = false) }
+        _profileScreenUiState.update {
+            it.copy(
+                reAuthenticateUserViewShown = true,
+                deleteUserDialogShown = false,
+                currentUserAuthProviderList = userRepository.getCurrentUserProviders()
+            )
+        }
     }
 
     fun onDismissReAuthenticateView() = uiStateHolderScope.launch {
         _profileScreenUiState.update { it.copy(reAuthenticateUserViewShown = false) }
     }
 
+    fun onMessageIsShown() = uiStateHolderScope.launch {
+        _profileScreenUiState.update { it.copy(message = null) }
+    }
+
     fun onUserReAuthenticatedResult(result: Result<FirebaseUser?>) = uiStateHolderScope.launch {
-        _profileScreenUiState.update { it.copy(reAuthenticateUserViewShown = false) }
-        result.onSuccess {user->
-            if (user!=null) userRepository.deleteAccount()
-            else{
-                AppLogger.e("User is null")
+        _profileScreenUiState.update { it.copy(isDeleteInProgress = true) }
+        result.onSuccess { user ->
+            val userMessage = if (user != null) {
+                userRepository.deleteAccount()
+                Strings.msg_success_delete_user
+            } else
+                Strings.error_msg_no_signed_in_user
+            _profileScreenUiState.update {
+                it.copy(
+                    isDeleteInProgress = false,
+                    reAuthenticateUserViewShown = false,
+                    message = userMessage
+                )
             }
-        }.onFailure {
-            AppLogger.e(it.message)
+
+        }.onFailure { error ->
+            _profileScreenUiState.update {
+                it.copy(
+                    isDeleteInProgress = false,
+                    reAuthenticateUserViewShown = false,
+                    message = error.message
+                )
+            }
         }
 
     }

@@ -16,6 +16,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,6 +47,7 @@ fun AuthUiHelperButtonsAndFirebaseAuth(
     authProviders: List<AuthProvider> = AuthProvider.values().asList(),
     onFirebaseResult: (Result<FirebaseUser?>) -> Unit,
 ) {
+    val isExistOnlyOneAuthProvider by remember { mutableStateOf(authProviders.size == 1) }
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(14.dp)
@@ -54,6 +59,7 @@ fun AuthUiHelperButtonsAndFirebaseAuth(
         if (authProviders.contains(AuthProvider.GOOGLE)) {
             //Google Sign-In Button and authentication with Firebase
             GoogleButtonUiContainerFirebase(onResult = onFirebaseResult) {
+                LaunchedEffect(Unit) { if (isExistOnlyOneAuthProvider) this@GoogleButtonUiContainerFirebase.onClick() }
                 GoogleSignInButton(
                     modifier = Modifier.fillMaxWidth().height(height),
                     text = Strings.btn_sign_in_with_google,
@@ -67,6 +73,7 @@ fun AuthUiHelperButtonsAndFirebaseAuth(
         if (authProviders.contains(AuthProvider.APPLE)) {
             //Apple Sign-In Button and authentication with Firebase
             AppleButtonUiContainer(onResult = onFirebaseResult) {
+                LaunchedEffect(Unit) { if (isExistOnlyOneAuthProvider) this@AppleButtonUiContainer.onClick() }
                 AppleSignInButton(
                     modifier = Modifier.fillMaxWidth().height(height),
                     text = Strings.btn_sign_in_with_apple,
@@ -78,6 +85,7 @@ fun AuthUiHelperButtonsAndFirebaseAuth(
         if (authProviders.contains(AuthProvider.GITHUB)) {
             //Github Sign-In Button and authentication with Firebase
             GithubButtonUiContainer(onResult = onFirebaseResult) {
+                LaunchedEffect(Unit) { if (isExistOnlyOneAuthProvider) this@GithubButtonUiContainer.onClick() }
                 GithubSignInButton(
                     modifier = Modifier.fillMaxWidth().height(height),
                     text = Strings.btn_sign_in_with_github,
