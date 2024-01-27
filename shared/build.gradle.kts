@@ -24,7 +24,6 @@ kotlin {
             isStatic = true
             export(libs.kmpNotifier)
         }
-        pod("GoogleSignIn")
     }
 
 
@@ -72,6 +71,14 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.napier)
                 api(libs.kmpNotifier)
+                implementation(libs.kmpAuth.firebase)
+                implementation(libs.kmpAuth.uihelper)
+                implementation(libs.kmpAuth.google)
+
+                implementation(libs.coil.compose)
+                implementation(libs.coil.ktor)
+
+
             }
         }
         androidMain  {
@@ -88,9 +95,13 @@ kotlin {
                 api(libs.firebase.crashlytics)
                 api(libs.firebase.messaging)
 
+//                implementation("io.ktor:ktor-client-okhttp:2.3.7")
+
             }
         }
         iosMain {
+            resources.srcDirs("src/commonMain/resources","src/iosMain/resources")
+
             dependencies {
                 implementation(libs.ktor.client.darwin)
             }

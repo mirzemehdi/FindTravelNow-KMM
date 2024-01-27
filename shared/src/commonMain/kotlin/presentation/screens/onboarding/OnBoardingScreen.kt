@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -66,6 +65,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import presentation.components.GradientButton
 import presentation.theme.Black_28
 import presentation.theme.Black_34
 import presentation.theme.Orange
@@ -108,7 +108,7 @@ fun OnBoardingScreen(
     onCheckPrivacyPolicy: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
-    LaunchedEffect(true){
+    LaunchedEffect(true) {
         scrollState.animateScrollTo(scrollState.maxValue, tween(1500))
     }
     val windowInsetsPadding = WindowInsets.systemBars.asPaddingValues()
@@ -174,11 +174,15 @@ fun OnBoardingScreen(
                     enter = fadeIn(),
                     exit = fadeOut()
                 ) {
-                    GetStartedButton(modifier = Modifier.fillMaxWidth(), onClick = {
-                        if (uiState.isPrivacyPolicyChecked) onClickNavigateNext()
-                        else coroutineScope.shakePrivacyPolicyText(offsetX)
 
-                    })
+                    GradientButton(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = Strings.btn_get_started,
+                        onClick = {
+                            if (uiState.isPrivacyPolicyChecked) onClickNavigateNext()
+                            else coroutineScope.shakePrivacyPolicyText(offsetX)
+
+                        })
                 }
                 this@Column.AnimatedVisibility(
                     visible = isLastPage.not(),
@@ -392,9 +396,4 @@ private fun HorizontalPagerIndicator(
             )
         }
     }
-}
-
-
-private fun CoroutineScope.animateOffsetX() {
-
 }

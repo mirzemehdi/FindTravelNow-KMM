@@ -1,6 +1,21 @@
 package presentation.theme.strings
 
 object Strings {
+    const val btn_cancel: String = "Cancel"
+    const val btn_delete: String = "Delete"
+    const val description_delete_user_dialog: String =
+        "This irreversible action will permanently delete the user and associated data. For security, you will need to log in or reauthenticate to proceed. Are you sure?"
+    const val title_delete_user_dialog = "Delete User?"
+    const val display_name_default: String = "Traveller"
+    const val btn_delete_account: String = "Delete Account"
+    const val display_name_title: String = "Display Name"
+    const val basic_info: String = "Basic Info"
+    const val edit_profile: String = "Edit Profile"
+    const val btn_log_out: String = "LOG OUT"
+    const val btn_sign_in_with_github: String = "Continue with Github"
+    const val btn_sign_in_with_google: String = "Continue with Google"
+    const val btn_sign_in_with_apple: String = "Continue with Apple"
+
     const val title_app_upgrade_dialog: String = "Update Required"
     const val btn_update: String = "Update"
     const val description_app_upgrade_dialog: String =
@@ -8,6 +23,7 @@ object Strings {
     const val app_name = "FindTravelNow"
     const val title_screen_more: String = "More"
     const val title_screen_top5_flights: String = "Top5 Flights"
+    const val title_screen_account: String = "Account"
     const val price = "Price"
     const val date = "Date"
     const val sort_by = "Sort by"
@@ -26,6 +42,8 @@ object Strings {
     const val about_us = "About Us"
     const val privacy_policy = "Privacy Policy"
     const val terms_conditions = "Terms & Conditions"
+    const val your_travel_plans = "Your Travel Plans"
+    const val title_sign_in_account = "Sign in to your account to continue "
 
     const val about_findtravelnow = "About FindTravelNow"
     const val about_findtravelnow_text =
@@ -65,9 +83,12 @@ object Strings {
     const val one_day_later = "Day later"
     const val web_url_search_flight = "https://search.findtravelnow.com/flights/"
     const val txt_accept_privacy_policy_and_terms = "I have read and agree to the "
+    const val txt_agree_privacy_policy_and_terms = "By continuing, I agree to the "
     const val and = "and"
     const val btn_get_started = "GET STARTED"
     const val btn_skip = "SKIP"
+    const val error_msg_no_signed_in_user = "Error: There is not any signed-in user"
+    const val msg_success_delete_user = "Your account data is deleted successfully"
 
 
 }

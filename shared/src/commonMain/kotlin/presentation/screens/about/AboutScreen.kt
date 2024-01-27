@@ -32,6 +32,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 import presentation.components.ExpandableBoxItem
+import presentation.components.TitleDescription
 import presentation.theme.Orange_55
 import presentation.theme.Red_48
 import presentation.theme.strings.Strings
@@ -127,21 +128,6 @@ private fun ImageTitleDescription(
             painter = painterResource(imageRes),
             contentDescription = null,
         )
-        Column(modifier = Modifier.padding(start = 14.dp)) {
-            Text(
-                modifier = Modifier,
-                text = title,
-                color = Color.Black,
-                style = MaterialTheme.typography.bodySmall,
-                textAlign = TextAlign.Start,
-            )
-
-            Text(
-                modifier = Modifier,
-                text = description,
-                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
-                textAlign = TextAlign.Start,
-            )
-        }
+        TitleDescription(modifier = Modifier.padding(start = 14.dp),title=title, description=description)
     }
 }

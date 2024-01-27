@@ -3,6 +3,7 @@ package data.di
 import com.russhwolf.settings.Settings
 import data.repository.FlightsRepository
 import data.repository.GlobalAppRepository
+import data.repository.UserRepository
 import data.source.preferences.UserPreferences
 import data.source.preferences.UserPreferencesImpl
 import data.source.remote.apiservice.FlightsApiService
@@ -63,6 +64,7 @@ private val repositoryModule = module {
     factory { Dispatchers.IO } bind CoroutineContext::class
     factoryOf(::FlightsRepository)
     factoryOf(::GlobalAppRepository)
+    singleOf(::UserRepository)
 }
 
 val dataModule = module {

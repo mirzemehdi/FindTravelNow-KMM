@@ -17,9 +17,30 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.6</string>
+	<string>2.1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.400988245981-9tv75mdhd0he2unncn3t1g3dq0gur3oc</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-400988245981-ios-38fa281563565b287b3034</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>20</string>
+	<string>21</string>
+	<key>GIDClientID</key>
+	<string>400988245981-9tv75mdhd0he2unncn3t1g3dq0gur3oc.apps.googleusercontent.com</string>
+	<key>GIDServerClientID</key>
+	<string>400988245981-u6ajdq65cv1utc6b0j7mtnhc5ap54kbd.apps.googleusercontent.com</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
