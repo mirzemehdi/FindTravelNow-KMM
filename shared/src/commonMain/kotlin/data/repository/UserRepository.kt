@@ -6,6 +6,7 @@ import domain.model.AuthProvider
 import domain.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import util.logging.AppLogger
@@ -21,7 +22,7 @@ class UserRepository(private val backgroundScope: CoroutineContext = Dispatchers
             profilePicSrc = it.photoURL,
             email = it.email
         )
-    }
+    }.flowOn(backgroundScope)
 
     suspend fun logOut() = withContext(backgroundScope) {
         Firebase.auth.signOut()
@@ -29,11 +30,8 @@ class UserRepository(private val backgroundScope: CoroutineContext = Dispatchers
 
     suspend fun deleteAccount() = withContext(backgroundScope) {
         val currentUser = Firebase.auth.currentUser
-        currentUser?.providerData?.forEach {
-            AppLogger.e("ProviderId: ${it.providerId}")
-
-        }
         currentUser?.delete()
+        kotlin.runCatching { Firebase.auth.signOut() }
     }
 
     fun getCurrentUserProviders(): List<AuthProvider> {

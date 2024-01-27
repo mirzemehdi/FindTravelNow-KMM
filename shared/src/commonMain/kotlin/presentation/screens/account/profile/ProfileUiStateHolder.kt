@@ -62,7 +62,7 @@ class ProfileUiStateHolder(private val userRepository: UserRepository) : UiState
         result.onSuccess { user ->
             val userMessage = if (user != null) {
                 userRepository.deleteAccount()
-                Strings.msg_success_delete_user
+                null
             } else
                 Strings.error_msg_no_signed_in_user
             _profileScreenUiState.update {
