@@ -5,7 +5,7 @@
 ![badge-android](http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat)
 ![badge-ios](http://img.shields.io/badge/platform-ios-CDCDCD.svg?style=flat)
 
-[FindTravelNow](https://www.findtravelnow.com/) is metasearch travel application that is available both in [AppStore](https://apps.apple.com/gr/app/findtravelnow/id6471192930) and [Google Play Store](https://play.google.com/store/apps/details?id=com.travelapp.findtravelnow) developed with Kotlin Multiplatform + Compose Multiplatform.
+[FindTravelNow](https://app.findtravelnow.com/) is metasearch travel application that is available both in [AppStore](https://apps.apple.com/gr/app/findtravelnow/id6471192930) and [Google Play Store](https://play.google.com/store/apps/details?id=com.travelapp.findtravelnow) developed with Kotlin Multiplatform + Compose Multiplatform.
 
 | Android | iOS |
 |:-:|:-:|
@@ -39,6 +39,7 @@
 - [Koin](https://insert-koin.io/) - DI framework
 - [Voyager](https://github.com/adrielcafe/voyager) - Multiplatform Navigation library
 - [KMPNotifier](https://github.com/mirzemehdi/KMPNotifier/) - Multiplatform Push Notification library
+- [KMPAuth](https://github.com/mirzemehdi/KMPAuth/) - Multiplatform Authentication library  
 - [Napier](https://github.com/AAkira/Napier) - Multiplatform Logging library
 - [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) - Multiplatform library for saving simple key-value data
 
