@@ -2,6 +2,7 @@ package presentation.screens.account.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -48,7 +50,9 @@ import presentation.components.DeleteUserConfirmationDialog
 import presentation.components.ExpandableBoxItem
 import presentation.components.GradientButton
 import presentation.components.MyAppCircularProgressIndicator
+import presentation.components.MyAppLabelledTextInput
 import presentation.components.TitleDescription
+import presentation.theme.Alabaster
 import presentation.theme.Black_22
 import presentation.theme.strings.Strings
 import util.asState
@@ -239,6 +243,43 @@ private fun BasicInfo(modifier: Modifier = Modifier, currentUser: User) {
 
         }
     }
+}
+
+@Composable
+private fun EditInfoContainer(modifier: Modifier = Modifier, currentUser: User) {
+
+    val shape = RoundedCornerShape(10.dp)
+    Box(
+        modifier = modifier
+            .border(
+                width = 1.dp,
+                color = Alabaster,
+                shape = shape
+            )
+            .background(color = Color.White, shape = shape)
+            .clip(shape)
+            .padding(start = 19.dp, top = 20.dp, bottom = 24.dp, end = 19.dp),
+        contentAlignment = Alignment.CenterStart
+
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+
+            MyAppLabelledTextInput(
+                title = Strings.display_name_title,
+                inputText = currentUser.displayName,
+                onValueChange = {}
+            )
+            currentUser.email?.let { email ->
+                MyAppLabelledTextInput(
+                    title = Strings.email_address_title,
+                    inputText = email,
+                    onValueChange = {}
+                )
+            }
+
+        }
+    }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
