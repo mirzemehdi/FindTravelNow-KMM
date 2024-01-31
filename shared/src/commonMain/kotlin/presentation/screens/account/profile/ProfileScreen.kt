@@ -3,6 +3,8 @@ package presentation.screens.account.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +18,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -94,8 +98,13 @@ fun ProfileScreen(modifier: Modifier = Modifier, uiStateHolder: ProfileUiStateHo
             ProfileScreen(
                 modifier = Modifier.fillMaxSize(),
                 currentUser = currentUser,
+                isEditMode = uiState.isEditMode,
+                isEditInProgress = uiState.isEditInProgress,
                 onClickLogOut = uiStateHolder::onClickLogOut,
-                onClickDeleteAccount = uiStateHolder::onClickDeleteAccount
+                onClickDeleteAccount = uiStateHolder::onClickDeleteAccount,
+                onClickEnableEditMode = uiStateHolder::onCLickEnableEditMode,
+                onClickUpdateProfile = uiStateHolder::onClickUpdateProfile,
+                onChangeDisplayName = uiStateHolder::onChangeDisplayName
             )
         }
 
@@ -114,8 +123,13 @@ fun ProfileScreen(modifier: Modifier = Modifier, uiStateHolder: ProfileUiStateHo
 private fun ProfileScreen(
     modifier: Modifier = Modifier,
     currentUser: User,
+    isEditMode: Boolean,
+    isEditInProgress: Boolean,
     onClickLogOut: () -> Unit,
     onClickDeleteAccount: () -> Unit,
+    onClickEnableEditMode: () -> Unit,
+    onClickUpdateProfile: () -> Unit,
+    onChangeDisplayName: (String) -> Unit,
 ) {
 
     Box(modifier = modifier) {
@@ -174,42 +188,55 @@ private fun ProfileScreen(
                 )
             )
 
-            //TODO Implement Edit Profile
-
-//            Text(
-//                modifier = Modifier
-//                    .clip(ButtonDefaults.textShape)
-//                    .clickable(
-//                        interactionSource = remember { MutableInteractionSource() },
-//                        indication = rememberRipple(color = MaterialTheme.colorScheme.primary),
-//                        onClick = {}
-//                    )
-//                    .padding(horizontal = 16.dp, vertical = 4.dp),
-//                text = Strings.edit_profile,
-//                style = MaterialTheme.typography.bodySmall.copy(
-//                    color = MaterialTheme.colorScheme.secondary
-//                )
-//            )
-
-            BasicInfo(
-                modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
-                currentUser = currentUser
-            )
-            GradientButton(
-                modifier = Modifier.padding(top = 32.dp).fillMaxWidth(),
-                text = Strings.btn_log_out,
-                onClick = { onClickLogOut() }
-            )
-
-            TextButton(
-                onClick = { onClickDeleteAccount() },
-                modifier = Modifier.padding(top = 24.dp)
-            ) {
+            if (isEditMode.not()) {
                 Text(
-                    text = Strings.btn_delete_account,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.secondary,
-                    textAlign = TextAlign.Start,
+                    modifier = Modifier
+                        .clip(ButtonDefaults.textShape)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(color = MaterialTheme.colorScheme.primary),
+                            onClick = { onClickEnableEditMode() }
+                        )
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                    text = Strings.edit_profile,
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                )
+
+                BasicInfo(
+                    modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+                    currentUser = currentUser
+                )
+                GradientButton(
+                    modifier = Modifier.padding(top = 32.dp).fillMaxWidth(),
+                    text = Strings.btn_log_out,
+                    onClick = { onClickLogOut() }
+                )
+
+                TextButton(
+                    onClick = { onClickDeleteAccount() },
+                    modifier = Modifier.padding(top = 24.dp)
+                ) {
+                    Text(
+                        text = Strings.btn_delete_account,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                        textAlign = TextAlign.Start,
+                    )
+                }
+            } else {
+                EditInfoContainer(
+                    modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+                    currentUser = currentUser,
+                    onChangeDisplayName = onChangeDisplayName
+                )
+
+                GradientButton(
+                    modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
+                    text = Strings.btn_update_profile,
+                    isLoading = isEditInProgress,
+                    onClick = { onClickUpdateProfile() }
                 )
             }
 
@@ -246,7 +273,11 @@ private fun BasicInfo(modifier: Modifier = Modifier, currentUser: User) {
 }
 
 @Composable
-private fun EditInfoContainer(modifier: Modifier = Modifier, currentUser: User) {
+private fun EditInfoContainer(
+    modifier: Modifier = Modifier,
+    currentUser: User,
+    onChangeDisplayName: (String) -> Unit,
+) {
 
     val shape = RoundedCornerShape(10.dp)
     Box(
@@ -263,15 +294,16 @@ private fun EditInfoContainer(modifier: Modifier = Modifier, currentUser: User) 
 
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-
             MyAppLabelledTextInput(
                 title = Strings.display_name_title,
                 inputText = currentUser.displayName,
-                onValueChange = {}
+                onValueChange = onChangeDisplayName
+
             )
             currentUser.email?.let { email ->
                 MyAppLabelledTextInput(
                     title = Strings.email_address_title,
+                    enabled = false,
                     inputText = email,
                     onValueChange = {}
                 )

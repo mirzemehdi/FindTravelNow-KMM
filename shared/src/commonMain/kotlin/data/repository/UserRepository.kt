@@ -34,6 +34,11 @@ class UserRepository(private val backgroundScope: CoroutineContext = Dispatchers
         kotlin.runCatching { Firebase.auth.signOut() }
     }
 
+    suspend fun updateProfile(user: User) = withContext(backgroundScope) {
+        val currentUser = Firebase.auth.currentUser
+        currentUser?.updateProfile(displayName = user.displayName,photoUrl = user.profilePicSrc)
+    }
+
     fun getCurrentUserProviders(): List<AuthProvider> {
         val currentUser = Firebase.auth.currentUser
         return currentUser?.providerData?.mapNotNull {

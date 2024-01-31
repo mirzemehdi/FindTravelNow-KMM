@@ -5,6 +5,7 @@ import dev.gitlive.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -16,10 +17,12 @@ class ProfileUiStateHolder(private val userRepository: UserRepository) : UiState
 
     private val _profileScreenUiState = MutableStateFlow(ProfileScreenUiState(isLoading = true))
     val profileScreenUiState =
-        combine(_profileScreenUiState, userRepository.currentUser) { uiState, user ->
+        combine(_profileScreenUiState, userRepository.currentUser.onEach { user ->
             val newUser =
                 user?.copy(displayName = user.displayName.ifEmpty { Strings.display_name_default })
-            uiState.copy(currentUser = newUser, isLoading = false)
+            _profileScreenUiState.update { it.copy(currentUser = newUser, isLoading = false) }
+        }) { uiState, _ ->
+            uiState
         }
             .stateIn(
                 uiStateHolderScope,
@@ -35,8 +38,26 @@ class ProfileUiStateHolder(private val userRepository: UserRepository) : UiState
         _profileScreenUiState.update { it.copy(deleteUserDialogShown = true) }
     }
 
+    fun onCLickEnableEditMode() = uiStateHolderScope.launch {
+        _profileScreenUiState.update { it.copy(isEditMode = true) }
+    }
+
+    fun onClickUpdateProfile() = uiStateHolderScope.launch {
+        _profileScreenUiState.value.currentUser?.let { currentUser ->
+            _profileScreenUiState.update { it.copy(isEditInProgress = true) }
+            userRepository.updateProfile(user = currentUser)
+            _profileScreenUiState.update { it.copy(isEditInProgress = false, isEditMode = false) }
+
+        }
+
+    }
+
     fun onDismissDeleteUserConfirmationDialog() = uiStateHolderScope.launch {
         _profileScreenUiState.update { it.copy(deleteUserDialogShown = false) }
+    }
+
+    fun onChangeDisplayName(displayName: String) = uiStateHolderScope.launch {
+        _profileScreenUiState.update { it.copy(currentUser = it.currentUser?.copy(displayName = displayName)) }
     }
 
     fun onConfirmDeleteAccount() = uiStateHolderScope.launch {

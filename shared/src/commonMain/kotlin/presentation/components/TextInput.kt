@@ -1,5 +1,10 @@
 package presentation.components
 
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -23,13 +28,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MyAppTextInput(modifier: Modifier = Modifier, text: String, onValueChange: (String) -> Unit) {
+fun MyAppTextInput(
+    modifier: Modifier = Modifier,
+    text: String,
+    enabled: Boolean = true,
+    onValueChange: (String) -> Unit,
+) {
 
 
     val textColor = Color.Black
-    val cursorColor=Color.Black
+    val cursorColor = Color.Black
     val textStyle = MaterialTheme.typography.bodySmall
     val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
+    val backgroundColor=if (enabled) Color.White else Color.LightGray.copy(alpha = 0.4f)
     val shape = RoundedCornerShape(8.dp)
     val customTextSelectionColors = TextSelectionColors(
         handleColor = cursorColor,
@@ -45,10 +56,11 @@ fun MyAppTextInput(modifier: Modifier = Modifier, text: String, onValueChange: (
                     shape = shape
                 )
                 .background(
-                    color = Color.White, shape = shape
+                    color = backgroundColor, shape = shape
                 ).padding(16.dp),
+            enabled = enabled,
             value = text,
-            onValueChange = onValueChange,
+            onValueChange = { onValueChange(it) },
             textStyle = mergedTextStyle,
             cursorBrush = SolidColor(cursorColor)
         )
@@ -63,6 +75,7 @@ fun MyAppLabelledTextInput(
     modifier: Modifier = Modifier,
     title: String,
     inputText: String,
+    enabled: Boolean = true,
     onValueChange: (String) -> Unit,
 ) {
     Column(modifier = modifier) {
@@ -74,8 +87,10 @@ fun MyAppLabelledTextInput(
             textAlign = TextAlign.Start,
         )
         Spacer(modifier = Modifier.height(9.dp))
+
         MyAppTextInput(
             modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
             text = inputText,
             onValueChange = onValueChange
         )
