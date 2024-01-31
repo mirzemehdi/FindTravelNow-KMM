@@ -57,11 +57,12 @@ fun ExpandableBoxItem(
             color = borderColor,
             shape = shape
         )
+
+        .animateContentSize()
+        .clip(shape)
         .drawBehind {
             drawRect(backgroundColor)
         }
-        .animateContentSize()
-        .clip(shape)
         .clickable { }
     ) {
         if (isExpanded) {
