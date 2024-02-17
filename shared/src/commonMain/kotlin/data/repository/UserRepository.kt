@@ -1,28 +1,33 @@
 package data.repository
 
+import data.source.remote.apiservice.UserApiService
+import data.source.remote.request.UserUpdateRequest
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
 import domain.model.AuthProvider
 import domain.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.withContext
 import util.logging.AppLogger
 import kotlin.coroutines.CoroutineContext
 
-class UserRepository(private val backgroundScope: CoroutineContext = Dispatchers.IO) {
+class UserRepository(
+    private val userApiService: UserApiService,
+    private val backgroundScope: CoroutineContext = Dispatchers.IO
+) {
 
 
     val currentUser = Firebase.auth.authStateChanged.map {
-        if (it == null) null else User(
-            id = it.uid,
-            displayName = it.displayName ?: "",
-            profilePicSrc = it.photoURL,
-            email = it.email
-        )
-    }.flowOn(backgroundScope)
+        if (it == null) null
+        else userApiService.createOrGetUser().data?.mapToDomainModel()
+    }.flowOn(backgroundScope).stateIn(MainScope(), SharingStarted.Eagerly,null)
 
     suspend fun logOut() = withContext(backgroundScope) {
         Firebase.auth.signOut()
@@ -35,8 +40,9 @@ class UserRepository(private val backgroundScope: CoroutineContext = Dispatchers
     }
 
     suspend fun updateProfile(user: User) = withContext(backgroundScope) {
-        val currentUser = Firebase.auth.currentUser
-        currentUser?.updateProfile(displayName = user.displayName,photoUrl = user.profilePicSrc)
+        userApiService.updateUser(userUpdateRequest = UserUpdateRequest(displayName = user.displayName,profilePicUrl = user.profilePicSrc))
+//        val currentUser = Firebase.auth.currentUser
+//        currentUser?.updateProfile(displayName = user.displayName, photoUrl = user.profilePicSrc)
     }
 
     fun getCurrentUserProviders(): List<AuthProvider> {

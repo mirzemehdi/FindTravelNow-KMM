@@ -18,7 +18,7 @@ napier = "2.6.1"
 firebaseBom="32.4.1"
 googleServices="4.4.0"
 firebaseCrashlytics = "2.9.9"
-kmpNotifier = "0.1.8"
+kmpNotifier = "0.3.0"
 kmpAuth = "1.1.0"
 coil = "3.0.0-alpha03"
 
