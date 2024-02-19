@@ -9,6 +9,8 @@ data class ProfileScreenUiState(
     val isDeleteInProgress: Boolean = false,
     val deleteUserDialogShown: Boolean = false,
     val reAuthenticateUserViewShown: Boolean = false,
+    val isEditMode: Boolean = false,
+    val isEditInProgress: Boolean = false,
     val currentUserAuthProviderList: List<AuthProvider> = emptyList(),
     val message: String? = null,
 )

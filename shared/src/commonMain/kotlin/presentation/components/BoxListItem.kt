@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -26,14 +27,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import presentation.theme.Alabaster
 import presentation.theme.Black_22
-import presentation.theme.Black_alpha_8
 import presentation.theme.Gray
 import presentation.theme.Orange_alpha_5
 import presentation.theme.Orange_alpha_50
@@ -43,25 +43,28 @@ fun ExpandableBoxItem(
     modifier: Modifier = Modifier,
     text: String,
     isExpanded: Boolean,
+    boxListItemColors: BoxListItemColors = BoxListItemColors(),
     onToggle: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     val shape = RoundedCornerShape(10.dp)
-    val backgroundColor by animateColorAsState(if (isExpanded) Orange_alpha_5.compositeOver(Color.White) else Color.White)
-    val borderColor = if (isExpanded) Orange_alpha_50 else Color(0xFFF1E9E9)
+    val backgroundColor by animateColorAsState(if (isExpanded) boxListItemColors.expandedBackgroundColor else boxListItemColors.backgroundColor)
+    val borderColor = if (isExpanded) boxListItemColors.expandedBorderColor else boxListItemColors.borderColor
     val iconRotation by animateFloatAsState(if (isExpanded) 90f else 0f)
 
+    ButtonDefaults.buttonColors()
     Column(modifier = modifier
         .border(
             width = 1.dp,
             color = borderColor,
             shape = shape
         )
+
+        .animateContentSize()
+        .clip(shape)
         .drawBehind {
             drawRect(backgroundColor)
         }
-        .animateContentSize()
-        .clip(shape)
         .clickable { }
     ) {
         if (isExpanded) {
@@ -102,7 +105,7 @@ fun BoxListItem(
         modifier = modifier
             .border(
                 width = 1.dp,
-                color = Color(0xFFF1E9E9),
+                color = Alabaster,
                 shape = shape
             )
             .background(color = Color.White, shape = shape)
@@ -115,6 +118,7 @@ fun BoxListItem(
         TextIconRow(text = text)
     }
 }
+
 
 @Composable
 private fun TextIconRow(
@@ -139,4 +143,11 @@ private fun TextIconRow(
         )
     }
 }
+
+data class BoxListItemColors(
+    val expandedBackgroundColor: Color = Orange_alpha_5.compositeOver(Color.White),
+    val expandedBorderColor: Color = Orange_alpha_50,
+    val backgroundColor: Color = Color.White,
+    val borderColor: Color = Alabaster,
+)
 

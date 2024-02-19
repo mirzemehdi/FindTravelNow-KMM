@@ -1,6 +1,7 @@
 package presentation.theme.strings
 
 object Strings {
+    const val btn_update_profile: String = "UPDATE PROFILE"
     const val btn_cancel: String = "Cancel"
     const val btn_delete: String = "Delete"
     const val description_delete_user_dialog: String =
