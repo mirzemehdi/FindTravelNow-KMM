@@ -1,16 +1,28 @@
 PODS:
-  - shared (1.0.0)
+  - RevenueCat (4.36.3)
+  - RevenueCatUI (4.36.3):
+    - RevenueCat (= 4.36.3)
+  - shared (1.0.0):
+    - RevenueCat
+    - RevenueCatUI
 
 DEPENDENCIES:
   - shared (from `../shared`)
+
+SPEC REPOS:
+  trunk:
+    - RevenueCat
+    - RevenueCatUI
 
 EXTERNAL SOURCES:
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
-  shared: 45f487984c6fbabf19d6b4eb91ffb5129a2bfc20
+  RevenueCat: 7be0d7bde9efb2fc1ebd1888522c55bb4f9feb18
+  RevenueCatUI: 42dc70fb9527d63b753d73298d7b53e816070b1a
+  shared: 70eafa9459fbf6e44d035b47c2deeed2286efe57
 
-PODFILE CHECKSUM: eae97542391f0ffa4310330e32cfe71726dbe5ec
+PODFILE CHECKSUM: 0a20442581fb5fc64112ac1d7a63be54e50e4662
 
 COCOAPODS: 1.14.3

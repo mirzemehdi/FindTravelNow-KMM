@@ -1,0 +1,6 @@
+module RevenueCat {
+  umbrella header "RevenueCat-umbrella.h"
+
+  export *
+  module * { export * }
+}

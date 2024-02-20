@@ -1,0 +1,6 @@
+module RevenueCatUI {
+  umbrella header "RevenueCatUI-umbrella.h"
+
+  export *
+  module * { export * }
+}

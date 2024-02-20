@@ -24,6 +24,12 @@ kotlin {
             isStatic = true
             export(libs.kmpNotifier)
         }
+        pod("RevenueCat"){
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
+        pod("RevenueCatUI"){
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
     }
 
 
@@ -95,7 +101,7 @@ kotlin {
                 api(libs.firebase.crashlytics)
                 api(libs.firebase.messaging)
 
-//                implementation("io.ktor:ktor-client-okhttp:2.3.7")
+                implementation(libs.revenuecat.android)
 
             }
         }

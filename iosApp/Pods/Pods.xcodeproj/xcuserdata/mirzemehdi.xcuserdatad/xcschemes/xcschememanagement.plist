@@ -9,6 +9,21 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RevenueCat.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RevenueCatUI-RevenueCat_RevenueCatUI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RevenueCatUI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>shared.xcscheme</key>
 		<dict>
 			<key>isShown</key>

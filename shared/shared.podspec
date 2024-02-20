@@ -9,7 +9,8 @@ Pod::Spec.new do |spec|
     spec.vendored_frameworks      = 'build/cocoapods/framework/shared.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
-                
+    spec.dependency 'RevenueCat'
+    spec.dependency 'RevenueCatUI'
                 
     if !Dir.exist?('build/cocoapods/framework/shared.framework') || Dir.empty?('build/cocoapods/framework/shared.framework')
         raise "
