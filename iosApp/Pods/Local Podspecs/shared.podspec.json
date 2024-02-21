@@ -13,14 +13,6 @@
   "platforms": {
     "ios": "14.1"
   },
-  "dependencies": {
-    "RevenueCat": [
-
-    ],
-    "RevenueCatUI": [
-
-    ]
-  },
   "pod_target_xcconfig": {
     "KOTLIN_PROJECT_PATH": ":shared",
     "PRODUCT_MODULE_NAME": "shared"
