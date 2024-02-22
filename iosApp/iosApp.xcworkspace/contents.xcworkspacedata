@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:FindTravelNow StoreKit.storekit">
+   </FileRef>
+   <FileRef
+      location = "group:StoreKitTestCertificate.cer">
+   </FileRef>
+   <FileRef
       location = "group:iosApp.xcodeproj">
    </FileRef>
    <FileRef

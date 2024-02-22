@@ -16,6 +16,8 @@ jobs:
     runs-on: macos-latest
     env:
       API_KEY: ${{ secrets.API_KEY }}
+      REVENUECAT_API_KEY_ANDROID: ${{ secrets.REVENUECAT_API_KEY_ANDROID }}
+      REVENUECAT_API_KEY_IOS: ${{ secrets.REVENUECAT_API_KEY_IOS }}
 
     steps:
       - uses: actions/checkout@v3

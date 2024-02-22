@@ -3,11 +3,15 @@ package root
 import com.mmk.kmpauth.google.GoogleAuthCredentials
 import com.mmk.kmpauth.google.GoogleAuthProvider
 import com.mmk.kmpnotifier.notification.NotifierManager
+import com.mmk.kmprevenuecat.purchases.LogLevel
+import com.mmk.kmprevenuecat.purchases.Purchases
 import di.appModules
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
+import secrets.BuildConfig
+import util.isAndroid
 import util.logging.AppLogger
 
 object AppInitializer {
@@ -20,6 +24,9 @@ object AppInitializer {
         }
 
         if (isDebug) AppLogger.initialize()
+
+        Purchases.logLevel = LogLevel.DEBUG
+        Purchases.configure(if (isAndroid()) BuildConfig.REVENUECAT_API_KEY_ANDROID else BuildConfig.REVENUECAT_API_KEY_IOS)
     }
 
     private fun KoinApplication.onApplicationStart() {

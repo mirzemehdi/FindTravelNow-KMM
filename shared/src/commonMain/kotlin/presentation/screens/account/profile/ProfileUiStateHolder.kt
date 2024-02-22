@@ -60,6 +60,15 @@ class ProfileUiStateHolder(private val userRepository: UserRepository) : UiState
         _profileScreenUiState.update { it.copy(currentUser = it.currentUser?.copy(displayName = displayName)) }
     }
 
+    fun onClickUpgradePremium(){
+        _profileScreenUiState.update { it.copy(isSubscribePlansViewVisible = true) }
+    }
+
+    fun onDismissSubscriptionPlansView(){
+        _profileScreenUiState.update { it.copy(isSubscribePlansViewVisible = false) }
+        userRepository.refreshUserSubscription()
+    }
+
     fun onConfirmDeleteAccount() = uiStateHolderScope.launch {
         _profileScreenUiState.update {
             it.copy(
@@ -76,6 +85,14 @@ class ProfileUiStateHolder(private val userRepository: UserRepository) : UiState
 
     fun onMessageIsShown() = uiStateHolderScope.launch {
         _profileScreenUiState.update { it.copy(message = null) }
+    }
+
+    fun onSubscriptionPurchaseCompleted() = uiStateHolderScope.launch {
+        userRepository.refreshUserSubscription()
+    }
+
+    fun onSubscriptionPurchaseError(errorMessage:String?){
+        _profileScreenUiState.update { it.copy(message = errorMessage) }
     }
 
     fun onUserReAuthenticatedResult(result: Result<FirebaseUser?>) = uiStateHolderScope.launch {

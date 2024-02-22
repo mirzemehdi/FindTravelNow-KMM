@@ -21,3 +21,5 @@ interface AppVersion {
     fun name(): String
 }
 
+expect fun isAndroid():Boolean
+

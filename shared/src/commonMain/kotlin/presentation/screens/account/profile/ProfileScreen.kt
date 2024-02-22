@@ -26,6 +26,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -42,8 +43,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
+import com.mmk.kmprevenuecat.purchases.data.CustomerInfo
+import com.mmk.kmprevenuecat.purchases.ui.Paywall
+import com.mmk.kmprevenuecat.purchases.ui.PaywallListener
 import dev.gitlive.firebase.auth.FirebaseUser
 import domain.model.AuthProvider
 import domain.model.User
@@ -55,11 +61,13 @@ import presentation.components.ExpandableBoxItem
 import presentation.components.GradientButton
 import presentation.components.MyAppCircularProgressIndicator
 import presentation.components.MyAppLabelledTextInput
+import presentation.components.SubscriptionPaywall
 import presentation.components.TitleDescription
 import presentation.theme.Alabaster
 import presentation.theme.Black_22
 import presentation.theme.strings.Strings
 import util.asState
+import util.isAndroid
 
 
 @OptIn(ExperimentalResourceApi::class)
@@ -83,10 +91,11 @@ fun ProfileScreen(modifier: Modifier = Modifier, uiStateHolder: ProfileUiStateHo
     }
 
     val snackbarHostState = remember { SnackbarHostState() }
-    Scaffold(modifier = modifier.fillMaxSize(),
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
-        }
+        },
     ) {
         LaunchedEffect(uiState.message) {
             if (uiState.message.isNullOrEmpty().not()) {
@@ -104,7 +113,8 @@ fun ProfileScreen(modifier: Modifier = Modifier, uiStateHolder: ProfileUiStateHo
                 onClickDeleteAccount = uiStateHolder::onClickDeleteAccount,
                 onClickEnableEditMode = uiStateHolder::onCLickEnableEditMode,
                 onClickUpdateProfile = uiStateHolder::onClickUpdateProfile,
-                onChangeDisplayName = uiStateHolder::onChangeDisplayName
+                onChangeDisplayName = uiStateHolder::onChangeDisplayName,
+                onClickUpgradePremium = uiStateHolder::onClickUpgradePremium,
             )
         }
 
@@ -115,6 +125,33 @@ fun ProfileScreen(modifier: Modifier = Modifier, uiStateHolder: ProfileUiStateHo
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             MyAppCircularProgressIndicator()
         }
+    }
+    if (uiState.isSubscribePlansViewVisible) {
+        SubscriptionPaywall(
+            onDismiss = uiStateHolder::onDismissSubscriptionPlansView,
+            listener = object:PaywallListener{
+                override fun onPurchaseCompleted(customerInfo: CustomerInfo?) {
+                    super.onPurchaseCompleted(customerInfo)
+                    uiStateHolder.onSubscriptionPurchaseCompleted()
+                }
+
+                override fun onPurchaseError(error: String?) {
+                    super.onPurchaseError(error)
+                    uiStateHolder.onSubscriptionPurchaseError(error)
+                }
+
+
+                override fun onRestoreCompleted(customerInfo: CustomerInfo?) {
+                    super.onRestoreCompleted(customerInfo)
+                    uiStateHolder.onSubscriptionPurchaseCompleted()
+                }
+
+                override fun onRestoreError(error: String?) {
+                    super.onRestoreError(error)
+                    uiStateHolder.onSubscriptionPurchaseError(error)
+                }
+            }
+        )
     }
 }
 
@@ -130,6 +167,7 @@ private fun ProfileScreen(
     onClickEnableEditMode: () -> Unit,
     onClickUpdateProfile: () -> Unit,
     onChangeDisplayName: (String) -> Unit,
+    onClickUpgradePremium: () -> Unit,
 ) {
 
     Box(modifier = modifier) {
@@ -208,6 +246,12 @@ private fun ProfileScreen(
                     modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
                     currentUser = currentUser
                 )
+
+                SubscriptionInfo(
+                    modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
+                    currentUser = currentUser,
+                    onClickUpgradePremium = onClickUpgradePremium
+                )
                 GradientButton(
                     modifier = Modifier.padding(top = 32.dp).fillMaxWidth(),
                     text = Strings.btn_log_out,
@@ -266,6 +310,54 @@ private fun BasicInfo(modifier: Modifier = Modifier, currentUser: User) {
                     title = Strings.email_address_title,
                     description = email,
                 )
+            }
+
+        }
+    }
+}
+
+@Composable
+private fun SubscriptionInfo(
+    modifier: Modifier = Modifier,
+    currentUser: User,
+    onClickUpgradePremium: () -> Unit
+) {
+    var isExpanded by remember { mutableStateOf(false) }
+    ExpandableBoxItem(modifier = modifier,
+        text = Strings.subscription_info,
+        isExpanded = isExpanded,
+        onToggle = { isExpanded = !isExpanded }
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+
+
+            TitleDescription(
+                title = Strings.subscription_plan_title,
+                description = if (currentUser.hasPremiumSubscription()) Strings.subscription_plan_premium else Strings.subscription_plan_free,
+            )
+
+            if (
+                currentUser.hasPremiumSubscription() &&
+                (currentUser.subscription?.expirationDate ?: 0L) == 0L
+            )
+                TitleDescription(
+                    title = Strings.subscription_plan_expiration_date,
+                    description = Strings.subscription_lifetime,
+                )
+            if (currentUser.hasPremiumSubscription().not()) {
+                TextButton(
+                    onClick = { onClickUpgradePremium() },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
+                ) {
+                    Text(
+                        text = Strings.btn_get_premium_subscription_plan_free,
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Start,
+                    )
+                }
             }
 
         }

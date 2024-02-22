@@ -23,11 +23,13 @@
 		A6886A9B2AFBF140000FC219 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6886A9A2AFBF140000FC219 /* GoogleService-Info.plist */; };
 		A689DB122AF5F91200EC7353 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A689DB112AF5F91200EC7353 /* FirebaseAnalytics */; };
 		A68EBF9F2AF5ACA30038BFFD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A68EBF9E2AF5ACA30038BFFD /* FirebaseCrashlytics */; };
+		A6BD7BF22B86F6940052C214 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BD7BF12B86F6940052C214 /* StoreKit.framework */; };
 		A6D548BA2B0ECD9A0060761F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = A6D548B92B0ECD9A0060761F /* FirebaseMessaging */; };
+		A6DB22392B85B77B0086C4D3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = A6DB22382B85B77B0086C4D3 /* RevenueCat */; };
+		A6DB223B2B85B77B0086C4D3 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = A6DB223A2B85B77B0086C4D3 /* RevenueCatUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		034C794B9477822EA66F43DC /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1C775BE0B2EC6251EEB5DDB2 /* libPods-iosApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iosApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,11 +37,13 @@
 		7555FF7B242A565900829871 /* FindTravelNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindTravelNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0A10663FE7537E54A8D6A37 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A621B42A2AF4899C00D87165 /* iosAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosAppRelease.entitlements; sourceTree = "<group>"; };
 		A6886A9A2AFBF140000FC219 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../iosApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A6BD7BF12B86F6940052C214 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A6D548B82B0ECD840060761F /* iosApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosApp.entitlements; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		AEC633E835AD47E2894F710A /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
+		B27AACAA71233EC440B04D5C /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 			files = (
 				A648BF9C2B5D48CC00896CA6 /* FirebaseAnalyticsSwift in Frameworks */,
 				A648BF9E2B5D48CC00896CA6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				A6DB223B2B85B77B0086C4D3 /* RevenueCatUI in Frameworks */,
 				A648BF982B5D48CC00896CA6 /* FirebaseAnalytics in Frameworks */,
 				A648BF942B5D48AA00896CA6 /* GoogleSignIn in Frameworks */,
 				A6D548BA2B0ECD9A0060761F /* FirebaseMessaging in Frameworks */,
@@ -56,7 +61,9 @@
 				A648BF962B5D48AA00896CA6 /* GoogleSignInSwift in Frameworks */,
 				A648BFA22B5D49FD00896CA6 /* FirebaseAuth in Frameworks */,
 				A68EBF9F2AF5ACA30038BFFD /* FirebaseCrashlytics in Frameworks */,
+				A6DB22392B85B77B0086C4D3 /* RevenueCat in Frameworks */,
 				769F3BF91D39AE2AF514DB56 /* libPods-iosApp.a in Frameworks */,
+				A6BD7BF22B86F6940052C214 /* StoreKit.framework in Frameworks */,
 				A648BF9A2B5D48CC00896CA6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				A648BFA02B5D48CC00896CA6 /* FirebaseAppCheck in Frameworks */,
 			);
@@ -76,18 +83,10 @@
 		42799AB246E5F90AF97AA0EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6BD7BF12B86F6940052C214 /* StoreKit.framework */,
 				1C775BE0B2EC6251EEB5DDB2 /* libPods-iosApp.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5BDE45FF738E720B07260B4E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A0A10663FE7537E54A8D6A37 /* Pods-iosApp.debug.xcconfig */,
-				034C794B9477822EA66F43DC /* Pods-iosApp.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -97,7 +96,7 @@
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
 				42799AB246E5F90AF97AA0EF /* Frameworks */,
-				5BDE45FF738E720B07260B4E /* Pods */,
+				A75D105B3C54BB927D9736BE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +121,15 @@
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
+			sourceTree = "<group>";
+		};
+		A75D105B3C54BB927D9736BE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B27AACAA71233EC440B04D5C /* Pods-iosApp.debug.xcconfig */,
+				AEC633E835AD47E2894F710A /* Pods-iosApp.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		AB1DB47929225F7C00F7AF9C /* Configuration */ = {
@@ -164,6 +172,8 @@
 				A648BF9D2B5D48CC00896CA6 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				A648BF9F2B5D48CC00896CA6 /* FirebaseAppCheck */,
 				A648BFA12B5D49FD00896CA6 /* FirebaseAuth */,
+				A6DB22382B85B77B0086C4D3 /* RevenueCat */,
+				A6DB223A2B85B77B0086C4D3 /* RevenueCatUI */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* FindTravelNow.app */;
@@ -196,6 +206,7 @@
 			packageReferences = (
 				A68EBF792AF5AC5A0038BFFD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A648BF922B5D48AA00896CA6 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				A6DB22372B85B77B0086C4D3 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -434,10 +445,11 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0A10663FE7537E54A8D6A37 /* Pods-iosApp.debug.xcconfig */;
+			baseConfigurationReference = B27AACAA71233EC440B04D5C /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
 				APP_NAME = FindTravelNow;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME[sdk=*]" = AccentColor;
 				BUNDLE_ID = com.measify.findtravelnow;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -454,7 +466,7 @@
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FindTravelNow;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -477,10 +489,11 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 034C794B9477822EA66F43DC /* Pods-iosApp.release.xcconfig */;
+			baseConfigurationReference = AEC633E835AD47E2894F710A /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
 				APP_NAME = FindTravelNow;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME[sdk=*]" = AccentColor;
 				BUNDLE_ID = com.measify.findtravelnow;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -497,7 +510,7 @@
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FindTravelNow;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -558,6 +571,14 @@
 				minimumVersion = 10.17.0;
 			};
 		};
+		A6DB22372B85B77B0086C4D3 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.36.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -610,6 +631,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A68EBF792AF5AC5A0038BFFD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		A6DB22382B85B77B0086C4D3 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A6DB22372B85B77B0086C4D3 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+		A6DB223A2B85B77B0086C4D3 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A6DB22372B85B77B0086C4D3 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCatUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

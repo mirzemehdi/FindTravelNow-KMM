@@ -11,6 +11,7 @@ data class ProfileScreenUiState(
     val reAuthenticateUserViewShown: Boolean = false,
     val isEditMode: Boolean = false,
     val isEditInProgress: Boolean = false,
+    val isSubscribePlansViewVisible: Boolean = false,
     val currentUserAuthProviderList: List<AuthProvider> = emptyList(),
     val message: String? = null,
 )
