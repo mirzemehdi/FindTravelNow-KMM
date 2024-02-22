@@ -40,7 +40,8 @@ internal class IosAppVersion : AppVersion {
         }.getOrDefault("")
 
 
-
     private fun getInfoDictionary() = NSBundle.mainBundle.infoDictionary
 
 }
+
+actual fun isAndroid() = false

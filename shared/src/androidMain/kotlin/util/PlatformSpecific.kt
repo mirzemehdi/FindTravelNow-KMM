@@ -37,3 +37,5 @@ internal class AndroidAppVersion(private val context: Context) : AppVersion {
         context.packageManager.getPackageInfo(context.packageName, 0)
 
 }
+
+actual fun isAndroid() = true

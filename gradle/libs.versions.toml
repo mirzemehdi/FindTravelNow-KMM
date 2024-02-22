@@ -21,7 +21,7 @@ firebaseCrashlytics = "2.9.9"
 kmpNotifier = "0.3.0"
 kmpAuth = "1.1.0"
 coil = "3.0.0-alpha03"
-revenueCatAndroid="7.5.2"
+kmpRevenueCat="0.0.6"
 
 
 
@@ -80,8 +80,9 @@ kmpAuth-uihelper = { group = "io.github.mirzemehdi", name = "kmpauth-uihelper", 
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor", version.ref = "coil" }
 
-# Revenuecat - Subscription lib
-revenuecat-android = { group = "com.revenuecat.purchases", name = "purchases", version.ref = "revenueCatAndroid" }
+# KMPRevenuecat - Subscription lib
+kmprevenuecat-purchases = { group = "io.github.mirzemehdi", name = "kmprevenuecat-purchases", version.ref = "kmpRevenueCat" }
+kmprevenuecat-purchases-ui = { group = "io.github.mirzemehdi", name = "kmprevenuecat-purchases-ui", version.ref = "kmpRevenueCat" }
 
 
 

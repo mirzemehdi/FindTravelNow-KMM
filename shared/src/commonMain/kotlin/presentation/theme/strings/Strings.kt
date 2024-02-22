@@ -1,6 +1,7 @@
 package presentation.theme.strings
 
 object Strings {
+    const val subscription_lifetime: String = "Lifetime"
     const val btn_update_profile: String = "UPDATE PROFILE"
     const val btn_cancel: String = "Cancel"
     const val btn_delete: String = "Delete"
@@ -10,7 +11,13 @@ object Strings {
     const val display_name_default: String = "Traveller"
     const val btn_delete_account: String = "Delete Account"
     const val display_name_title: String = "Display Name"
+    const val subscription_plan_title: String = "Subscription Plan"
+    const val subscription_plan_expiration_date: String = "Expiration Date"
+    const val subscription_plan_free: String = "Free"
+    const val subscription_plan_premium: String = "Premium"
+    const val btn_get_premium_subscription_plan_free: String = "Get Premium access"
     const val basic_info: String = "Basic Info"
+    const val subscription_info: String = "Subscription Info"
     const val edit_profile: String = "Edit Profile"
     const val btn_log_out: String = "LOG OUT"
     const val btn_sign_in_with_github: String = "Continue with Github"

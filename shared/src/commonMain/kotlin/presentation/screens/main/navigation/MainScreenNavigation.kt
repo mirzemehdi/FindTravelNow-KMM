@@ -11,16 +11,25 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.stack.StackEvent
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.mmk.kmprevenuecat.purchases.ui.Paywall
 import data.repository.UserRepository
+import domain.model.User
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import org.koin.compose.koinInject
+import presentation.components.MyAppCircularProgressIndicator
 import presentation.screens.about.AboutScreen
 import presentation.screens.account.profile.ProfileScreen
 import presentation.screens.account.profile.ProfileUiStateHolder
@@ -134,31 +143,46 @@ interface MainScreenDestination {
             val navigator = LocalNavigator.currentOrThrow
 
             val userRepository = koinInject<UserRepository>()
-            val currentUser by userRepository.currentUser.collectAsState(null)
-            if (currentUser == null) {
-                SignInScreen(
-                    onNavigatePrivacyPolicy = {
-                        navigator.navigate(
-                            WebView(
-                                url = Strings.url_privacy_policy,
-                                title = Strings.privacy_policy
-                            )
-                        )
-                    },
-                    onNavigateTermsConditions = {
-                        navigator.navigate(
-                            WebView(
-                                url = Strings.url_terms_conditions,
-                                title = Strings.terms_conditions
-                            )
-                        )
-                    }
-                )
-            } else {
-                val uiStateHolder = getUiStateHolder<ProfileUiStateHolder>()
-                ProfileScreen(uiStateHolder = uiStateHolder)
+            val currentUserState by userRepository.currentUser
+                .map { Pair(false, it) }
+                .collectAsState(Pair(true, null))
+            val (isLoading, currentUser) = currentUserState
+            if (isLoading) Box(modifier = Modifier.fillMaxSize()) {
+                MyAppCircularProgressIndicator()
             }
+            when {
+                isLoading -> {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        MyAppCircularProgressIndicator()
+                    }
+                }
 
+                isLoading.not() && currentUser != null -> {
+                    val uiStateHolder = getUiStateHolder<ProfileUiStateHolder>()
+                    ProfileScreen(uiStateHolder = uiStateHolder)
+                }
+
+                else -> {
+                    SignInScreen(
+                        onNavigatePrivacyPolicy = {
+                            navigator.navigate(
+                                WebView(
+                                    url = Strings.url_privacy_policy,
+                                    title = Strings.privacy_policy
+                                )
+                            )
+                        },
+                        onNavigateTermsConditions = {
+                            navigator.navigate(
+                                WebView(
+                                    url = Strings.url_terms_conditions,
+                                    title = Strings.terms_conditions
+                                )
+                            )
+                        }
+                    )
+                }
+            }
         }
 
         override fun getTitle(): String = Strings.title_screen_account

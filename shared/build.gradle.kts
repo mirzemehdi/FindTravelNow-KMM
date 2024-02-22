@@ -24,12 +24,6 @@ kotlin {
             isStatic = true
             export(libs.kmpNotifier)
         }
-        pod("RevenueCat"){
-            extraOpts += listOf("-compiler-option", "-fmodules")
-        }
-        pod("RevenueCatUI"){
-            extraOpts += listOf("-compiler-option", "-fmodules")
-        }
     }
 
 
@@ -44,6 +38,8 @@ kotlin {
         |
         |object BuildConfig {
         |  const val API_KEY = "${secretProperties.getPropertyValue("API_KEY")}"
+        |  const val REVENUECAT_API_KEY_ANDROID = "${secretProperties.getPropertyValue("REVENUECAT_API_KEY_ANDROID")}"
+        |  const val REVENUECAT_API_KEY_IOS = "${secretProperties.getPropertyValue("REVENUECAT_API_KEY_IOS")}"
         |}
         |
       """.trimMargin()
@@ -84,6 +80,9 @@ kotlin {
                 implementation(libs.coil.compose)
                 implementation(libs.coil.ktor)
 
+                implementation(libs.kmprevenuecat.purchases)
+                implementation(libs.kmprevenuecat.purchases.ui)
+
 
             }
         }
@@ -100,8 +99,6 @@ kotlin {
                 api(libs.firebase.analytics)
                 api(libs.firebase.crashlytics)
                 api(libs.firebase.messaging)
-
-                implementation(libs.revenuecat.android)
 
             }
         }

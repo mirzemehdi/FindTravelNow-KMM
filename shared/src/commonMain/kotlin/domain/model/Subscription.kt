@@ -1,3 +1,7 @@
 package domain.model
 
-data class Subscription()
+data class Subscription(
+    val entitlementId:String,
+    val expirationDate:Long?,
+    val isActive:Boolean
+)
