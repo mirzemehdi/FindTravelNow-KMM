@@ -23,6 +23,7 @@
 		A6886A9B2AFBF140000FC219 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6886A9A2AFBF140000FC219 /* GoogleService-Info.plist */; };
 		A689DB122AF5F91200EC7353 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A689DB112AF5F91200EC7353 /* FirebaseAnalytics */; };
 		A68EBF9F2AF5ACA30038BFFD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A68EBF9E2AF5ACA30038BFFD /* FirebaseCrashlytics */; };
+		A6BD7BF22B86F6940052C214 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BD7BF12B86F6940052C214 /* StoreKit.framework */; };
 		A6D548BA2B0ECD9A0060761F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = A6D548B92B0ECD9A0060761F /* FirebaseMessaging */; };
 		A6DB22392B85B77B0086C4D3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = A6DB22382B85B77B0086C4D3 /* RevenueCat */; };
 		A6DB223B2B85B77B0086C4D3 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = A6DB223A2B85B77B0086C4D3 /* RevenueCatUI */; };
@@ -38,6 +39,7 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A621B42A2AF4899C00D87165 /* iosAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosAppRelease.entitlements; sourceTree = "<group>"; };
 		A6886A9A2AFBF140000FC219 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../iosApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A6BD7BF12B86F6940052C214 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A6D548B82B0ECD840060761F /* iosApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosApp.entitlements; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		AEC633E835AD47E2894F710A /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				A68EBF9F2AF5ACA30038BFFD /* FirebaseCrashlytics in Frameworks */,
 				A6DB22392B85B77B0086C4D3 /* RevenueCat in Frameworks */,
 				769F3BF91D39AE2AF514DB56 /* libPods-iosApp.a in Frameworks */,
+				A6BD7BF22B86F6940052C214 /* StoreKit.framework in Frameworks */,
 				A648BF9A2B5D48CC00896CA6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				A648BFA02B5D48CC00896CA6 /* FirebaseAppCheck in Frameworks */,
 			);
@@ -80,6 +83,7 @@
 		42799AB246E5F90AF97AA0EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6BD7BF12B86F6940052C214 /* StoreKit.framework */,
 				1C775BE0B2EC6251EEB5DDB2 /* libPods-iosApp.a */,
 			);
 			name = Frameworks;
