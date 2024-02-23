@@ -1,5 +1,6 @@
 package data.repository
 
+import com.mmk.kmprevenuecat.purchases.CacheFetchPolicy
 import com.mmk.kmprevenuecat.purchases.Purchases
 import com.mmk.kmprevenuecat.purchases.PurchasesException
 import com.mmk.kmprevenuecat.purchases.awaitCustomerInfo
@@ -70,9 +71,11 @@ class UserRepository(
         }
     }
     private suspend fun getUserSubscription(): Subscription? {
+        AppLogger.d("Get User Subscription is called")
         val customerInfo = try {
-            Purchases.awaitCustomerInfo()
+            Purchases.awaitCustomerInfo(CacheFetchPolicy.FETCH_CURRENT)
         } catch (e: PurchasesException) {
+            AppLogger.e("Get User Subscription error: $e")
             null
         } ?: return null
         return customerInfo.asSubscription()

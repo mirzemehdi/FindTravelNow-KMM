@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import presentation.theme.strings.Strings
 import util.UiStateHolder
+import util.logging.AppLogger
 import util.uiStateHolderScope
 
 class ProfileUiStateHolder(private val userRepository: UserRepository) : UiStateHolder() {
@@ -88,7 +89,9 @@ class ProfileUiStateHolder(private val userRepository: UserRepository) : UiState
     }
 
     fun onSubscriptionPurchaseCompleted() = uiStateHolderScope.launch {
+        AppLogger.d("OnPurchase completed")
         userRepository.refreshUserSubscription()
+        _profileScreenUiState.update { it.copy(message = Strings.msg_subscription_successful_purchase) }
     }
 
     fun onSubscriptionPurchaseError(errorMessage:String?){

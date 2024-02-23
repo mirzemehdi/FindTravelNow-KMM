@@ -93,7 +93,7 @@ fun SignInScreen(
                         AppLogger.d("Successful sign in")
                     }.onFailure {
                         coroutineScope.launch { snackbarHostState.showSnackbar(it.message?:"") }
-                        AppLogger.e("Error occurred while signing in")
+                        AppLogger.e("Error occurred while signing in, $it")
                     }
                 }
             )

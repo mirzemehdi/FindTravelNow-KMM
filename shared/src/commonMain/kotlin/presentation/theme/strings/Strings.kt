@@ -16,6 +16,7 @@ object Strings {
     const val subscription_plan_free: String = "Free"
     const val subscription_plan_premium: String = "Premium"
     const val btn_get_premium_subscription_plan_free: String = "Get Premium access"
+    const val msg_subscription_successful_purchase: String = "Congrats!!! You got the subscription successfully."
     const val basic_info: String = "Basic Info"
     const val subscription_info: String = "Subscription Info"
     const val edit_profile: String = "Edit Profile"
