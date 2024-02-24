@@ -1,5 +1,6 @@
 package data.repository
 
+import data.BackgroundExecutor
 import data.source.remote.apiservice.FlightsApiService
 import data.source.remote.apiservice.GlobalApiService
 import domain.model.FlightLocation
@@ -16,24 +17,20 @@ import kotlin.coroutines.CoroutineContext
 
 class GlobalAppRepository(
     private val globalApiService: GlobalApiService,
-    private val backgroundScope: CoroutineContext = Dispatchers.IO,
+    private val backgroundExecutor: BackgroundExecutor = BackgroundExecutor.IO,
 ) {
 
-    suspend fun getGlobalConfig(): Result<GlobalAppConfig> = withContext(backgroundScope) {
-        try {
-            val apiResponse = globalApiService.getGlobalConfigInfo()
-            if (apiResponse.hasSuccessfulData())
-                Result.success(apiResponse.getSuccessfulData().mapToDomainModel())
-            else
-                Result.error(
-                    ErrorEntity.apiError(
-                        errorMessage = apiResponse.errorMessage,
-                        responseCode = apiResponse.responseCode
-                    )
+    suspend fun getGlobalConfig(): Result<GlobalAppConfig> = backgroundExecutor.execute {
+        val apiResponse = globalApiService.getGlobalConfigInfo()
+        if (apiResponse.hasSuccessfulData())
+            Result.success(apiResponse.getSuccessfulData().mapToDomainModel())
+        else
+            Result.error(
+                ErrorEntity.apiError(
+                    errorMessage = apiResponse.errorMessage,
+                    responseCode = apiResponse.responseCode
                 )
-        } catch (e: Exception) {
-            Result.error(ErrorEntity.apiError(exception = e))
-        }
+            )
     }
 
 }

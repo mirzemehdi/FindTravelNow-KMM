@@ -97,6 +97,7 @@ object Strings {
     const val btn_get_started = "GET STARTED"
     const val btn_skip = "SKIP"
     const val error_msg_no_signed_in_user = "Error: There is not any signed-in user"
+    const val error_msg_unknown_error = "Unknown error occurred"
     const val msg_success_delete_user = "Your account data is deleted successfully"
 
 

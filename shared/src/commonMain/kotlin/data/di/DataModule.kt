@@ -1,6 +1,7 @@
 package data.di
 
 import com.russhwolf.settings.Settings
+import data.BackgroundExecutor
 import data.repository.FlightsRepository
 import data.repository.GlobalAppRepository
 import data.repository.UserRepository
@@ -79,6 +80,7 @@ private val remoteSourceModule = module {
 
 private val repositoryModule = module {
     factory { Dispatchers.IO } bind CoroutineContext::class
+    factory { BackgroundExecutor.IO } bind BackgroundExecutor::class
     factoryOf(::FlightsRepository)
     factoryOf(::GlobalAppRepository)
     singleOf(::UserRepository)
