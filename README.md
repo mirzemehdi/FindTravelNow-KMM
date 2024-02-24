@@ -39,7 +39,8 @@
 - [Koin](https://insert-koin.io/) - DI framework
 - [Voyager](https://github.com/adrielcafe/voyager) - Multiplatform Navigation library
 - [KMPNotifier](https://github.com/mirzemehdi/KMPNotifier/) - Multiplatform Push Notification library
-- [KMPAuth](https://github.com/mirzemehdi/KMPAuth/) - Multiplatform Authentication library  
+- [KMPAuth](https://github.com/mirzemehdi/KMPAuth/) - Multiplatform Authentication library
+- [KMPRevenueCat](https://github.com/mirzemehdi/KMPRevenueCat/) - Multiplatform RevenueCat wrapper library for subscription/in-app-purchase      
 - [Napier](https://github.com/AAkira/Napier) - Multiplatform Logging library
 - [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings) - Multiplatform library for saving simple key-value data
 
