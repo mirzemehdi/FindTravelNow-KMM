@@ -14,3 +14,4 @@ iosApp/iosApp.xcodeproj/*
 !iosApp/iosApp.xcodeproj/project.pbxproj
 distribution/android/*
 distribution/ios/*
+.kotlin
