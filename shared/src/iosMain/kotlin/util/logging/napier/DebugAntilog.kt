@@ -48,7 +48,7 @@ actual class DebugAntilog(
     )
 
     @OptIn(ExperimentalNativeApi::class)
-    override fun performLog(
+    actual override fun performLog(
         priority: LogLevel,
         tag: String?,
         throwable: Throwable?,

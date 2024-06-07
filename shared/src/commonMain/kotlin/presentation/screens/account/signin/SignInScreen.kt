@@ -33,6 +33,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import findtravelnow_kmm.shared.generated.resources.Res
+import findtravelnow_kmm.shared.generated.resources.ic_logo
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -79,7 +81,7 @@ fun SignInScreen(
 
 
             Image(
-                painter = painterResource("drawable/ic_logo.xml"),
+                painter = painterResource(Res.drawable.ic_logo),
                 contentDescription = null,
                 modifier = Modifier.padding(top = 4.dp).size(140.dp)
             )

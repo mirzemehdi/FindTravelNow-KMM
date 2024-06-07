@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mmk.kmpnotifier.notification.NotifierManager
 import data.source.preferences.UserPreferences
+import findtravelnow_kmm.shared.generated.resources.Res
+import findtravelnow_kmm.shared.generated.resources.ic_logo
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -72,7 +74,7 @@ private fun SplashScreen() {
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Image(
-            painter = painterResource("drawable/ic_logo.xml"),
+            painter = painterResource(Res.drawable.ic_logo),
             contentDescription = null,
             modifier = Modifier.size(180.dp)
         )

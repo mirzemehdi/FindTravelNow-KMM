@@ -87,7 +87,7 @@ private fun BottomNavigation(
                 icon = {
                     Icon(
                         painter = painterResource(item.iconRes),
-                        contentDescription = item.iconRes,
+                        contentDescription = null,
                         tint = iconTint
                     )
                 },

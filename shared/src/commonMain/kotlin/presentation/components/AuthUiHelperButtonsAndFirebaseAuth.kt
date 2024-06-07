@@ -37,6 +37,8 @@ import com.mmk.kmpauth.uihelper.google.GoogleButtonMode
 import com.mmk.kmpauth.uihelper.google.GoogleSignInButton
 import dev.gitlive.firebase.auth.FirebaseUser
 import domain.model.AuthProvider
+import findtravelnow_kmm.shared.generated.resources.Res
+import findtravelnow_kmm.shared.generated.resources.ic_github
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import presentation.theme.strings.Strings
@@ -44,7 +46,7 @@ import presentation.theme.strings.Strings
 @Composable
 fun AuthUiHelperButtonsAndFirebaseAuth(
     modifier: Modifier = Modifier,
-    authProviders: List<AuthProvider> = AuthProvider.values().asList(),
+    authProviders: List<AuthProvider> = AuthProvider.entries,
     onFirebaseResult: (Result<FirebaseUser?>) -> Unit,
 ) {
     val isExistOnlyOneAuthProvider by remember { mutableStateOf(authProviders.size == 1) }
@@ -128,7 +130,7 @@ private fun GithubSignInButton(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
                 modifier = Modifier.size(20.dp),
-                painter = painterResource("drawable/ic_github.xml"),
+                painter = painterResource(Res.drawable.ic_github),
                 contentDescription = "githubicon"
             )
             Spacer(modifier = Modifier.width(iconTextPadding))

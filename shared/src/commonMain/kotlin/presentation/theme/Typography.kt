@@ -7,30 +7,38 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import findtravelnow_kmm.shared.generated.resources.Res
+import findtravelnow_kmm.shared.generated.resources.poppins_bold
+import findtravelnow_kmm.shared.generated.resources.poppins_medium
+import findtravelnow_kmm.shared.generated.resources.poppins_regular
+import findtravelnow_kmm.shared.generated.resources.poppins_semibold
+
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.Font
 import presentation.theme.Fonts.popinsFontFamily
-import util.font
 
 
 object Fonts {
+    @OptIn(ExperimentalResourceApi::class)
     val popinsFontFamily
         @Composable get() = FontFamily(
-            font(
-                "poppins_regular",
+            Font(
+                Res.font.poppins_regular,
                 FontWeight.Normal,
                 FontStyle.Normal
             ),
-            font(
-                "poppins_medium",
+            Font(
+                Res.font.poppins_medium,
                 FontWeight.Medium,
                 FontStyle.Normal
             ),
-            font(
-                "poppins_semibold",
+            Font(
+                Res.font.poppins_semibold,
                 FontWeight.SemiBold,
                 FontStyle.Normal
             ),
-            font(
-                "poppins_bold",
+            Font(
+                Res.font.poppins_bold,
                 FontWeight.Bold,
                 FontStyle.Normal
             ),
