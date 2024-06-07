@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -23,7 +23,7 @@ fun MyAppToolbar(
     title: String,
     onNavigationIconClick: () -> Unit,
     modifier: Modifier = Modifier,
-    navigationIcon :ImageVector = Icons.Filled.KeyboardArrowLeft,
+    navigationIcon: ImageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     CenterAlignedTopAppBar(

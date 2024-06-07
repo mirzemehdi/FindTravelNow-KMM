@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -42,6 +41,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import domain.model.FlightInfo
+import findtravelnow_kmm.shared.generated.resources.Res
+import findtravelnow_kmm.shared.generated.resources.ic_ellipse
+import findtravelnow_kmm.shared.generated.resources.img_travel_person
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import presentation.components.FlightInfoItem
@@ -263,7 +265,7 @@ private fun CardViewBanner(modifier: Modifier = Modifier, onClickBookNow: () -> 
         Box(Modifier.align(Alignment.TopEnd).fillMaxWidth(0.5f)) {
 
             Image(
-                painter = painterResource("drawable/ic_ellipse.xml"),
+                painter = painterResource(Res.drawable.ic_ellipse),
                 contentDescription = null,
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
@@ -272,7 +274,7 @@ private fun CardViewBanner(modifier: Modifier = Modifier, onClickBookNow: () -> 
 
                 )
             Image(
-                painter = painterResource("drawable/img_travel_person.png"),
+                painter = painterResource(Res.drawable.img_travel_person),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()

@@ -26,7 +26,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -43,16 +42,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
 import com.mmk.kmprevenuecat.purchases.data.CustomerInfo
-import com.mmk.kmprevenuecat.purchases.ui.Paywall
 import com.mmk.kmprevenuecat.purchases.ui.PaywallListener
 import dev.gitlive.firebase.auth.FirebaseUser
 import domain.model.AuthProvider
 import domain.model.User
+import findtravelnow_kmm.shared.generated.resources.Res
+import findtravelnow_kmm.shared.generated.resources.ic_person_placeholder
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import presentation.components.AuthUiHelperButtonsAndFirebaseAuth
@@ -67,8 +65,6 @@ import presentation.theme.Alabaster
 import presentation.theme.Black_22
 import presentation.theme.strings.Strings
 import util.asState
-import util.isAndroid
-import util.logging.AppLogger
 
 
 @OptIn(ExperimentalResourceApi::class)
@@ -206,7 +202,7 @@ private fun ProfileScreen(
                 )
                 if (isImageLoadedSuccessfully.not())
                     Image(
-                        painter = painterResource("drawable/ic_person_placeholder.xml"),
+                        painter = painterResource(Res.drawable.ic_person_placeholder),
                         contentDescription = null,
                         modifier = Modifier
                             .size(imageSize.dp)

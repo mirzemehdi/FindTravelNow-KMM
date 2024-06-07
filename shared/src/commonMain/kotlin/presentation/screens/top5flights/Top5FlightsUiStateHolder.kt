@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import kotlinx.datetime.toInstant
@@ -46,10 +47,11 @@ class Top5FlightsUiStateHolder(private val flightsRepository: FlightsRepository)
                             isLoading = false,
                             flights = resultData.flights,
                             origin =resultData.origin,
-                            lastUpdateDate = resultData.lastUpdateDate
-                                .toInstant().toLocalDateString(),
+                            lastUpdateDate = Instant.parse(
+                                resultData.lastUpdateDate
+                            ).toLocalDateString(),
                             nextUpdateInDays = Clock.System.now()
-                                .daysUntil(resultData.nextUpdateDate.toInstant(), TimeZone.UTC)
+                                .daysUntil(Instant.parse(resultData.nextUpdateDate), TimeZone.UTC)
 
                         )
                     }

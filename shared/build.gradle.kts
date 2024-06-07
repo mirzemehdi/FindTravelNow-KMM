@@ -4,9 +4,11 @@ plugins {
     alias(libs.plugins.kotlinNativeCocoapods)
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose)
+    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
+    task("testClasses") //For some reason without that it gives error
     androidTarget()
 
     iosX64()
@@ -61,9 +63,7 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class) implementation(
-                    compose.components.resources
-                )
+                implementation(compose.components.resources)
 
                 implementation(libs.bundles.koin)
                 implementation(libs.bundles.voyager)
@@ -103,8 +103,6 @@ kotlin {
             }
         }
         iosMain {
-            resources.srcDirs("src/commonMain/resources","src/iosMain/resources")
-
             dependencies {
                 implementation(libs.ktor.client.darwin)
             }

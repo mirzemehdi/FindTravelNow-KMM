@@ -29,6 +29,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import domain.model.FlightInfo
+import findtravelnow_kmm.shared.generated.resources.Res
+import findtravelnow_kmm.shared.generated.resources.ic_horizontal_flight
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import presentation.theme.Alabaster
@@ -174,7 +176,7 @@ private fun DashedFlightView(modifier: Modifier) {
         }
 
         Image(
-            painter = painterResource("drawable/ic_horizontal_flight.xml"),
+            painter = painterResource(Res.drawable.ic_horizontal_flight),
             contentDescription = null
         )
 

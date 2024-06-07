@@ -42,7 +42,7 @@ jobs:
         run: ./gradlew assembleDebug
 
       - name: Build iOS Debug app
-        run: xcodebuild -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 8' build
+        run: xcodebuild -allowProvisioningUpdates -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 14' build
 
       - name: Upload APK
         uses: actions/upload-artifact@v3

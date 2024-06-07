@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalResourceApi::class)
+
 package presentation.screens.about
 
 import androidx.compose.foundation.Image
@@ -25,9 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import findtravelnow_kmm.shared.generated.resources.Res
+import findtravelnow_kmm.shared.generated.resources.ic_app_version
+import findtravelnow_kmm.shared.generated.resources.ic_developer
+import findtravelnow_kmm.shared.generated.resources.ic_email
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
@@ -80,7 +85,7 @@ private fun AboutFindTravelNowExpandedContent() {
 private fun ContactDetailsExpandedContent() {
     Column {
         ImageTitleDescription(
-            imageRes = "drawable/ic_email.xml",
+            imageRes = Res.drawable.ic_email,
             title = Strings.email_address_title,
             description = Strings.contact_email_address,
         )
@@ -91,13 +96,13 @@ private fun ContactDetailsExpandedContent() {
 private fun AppDetailsExpandedContent(appVersionName:String) {
     Column {
         ImageTitleDescription(
-            imageRes = "drawable/ic_developer.xml",
+            imageRes = Res.drawable.ic_developer,
             title = Strings.developer_title,
             description = Strings.developer_description,
         )
         Spacer(modifier = Modifier.height(16.dp))
         ImageTitleDescription(
-            imageRes = "drawable/ic_app_version.xml",
+            imageRes = Res.drawable.ic_app_version,
             title = Strings.app_version_title,
             description = appVersionName,
         )
@@ -108,7 +113,7 @@ private fun AppDetailsExpandedContent(appVersionName:String) {
 @Composable
 private fun ImageTitleDescription(
     modifier: Modifier = Modifier,
-    imageRes: String,
+    imageRes: DrawableResource,
     title: String,
     description: String,
 ) {

@@ -1,6 +1,7 @@
 package util.extensions
 
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDate
 import kotlinx.datetime.toLocalDateTime
@@ -9,7 +10,7 @@ import kotlinx.datetime.toLocalDateTime
 fun Instant.toLocalDateString() = toLocalDateTime(TimeZone.UTC).date.toString()
 
 fun String.toFormattedDate(format: String): String {
-    val localDateTime = this.toLocalDate()
+    val localDateTime = LocalDate.parse(this)
     val day = localDateTime.dayOfMonth
     val month = localDateTime.monthNumber
     val year = localDateTime.year

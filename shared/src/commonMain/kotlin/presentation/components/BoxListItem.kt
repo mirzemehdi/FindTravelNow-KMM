@@ -14,9 +14,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -75,7 +76,7 @@ fun ExpandableBoxItem(
                 text = text,
                 iconRotation = iconRotation
             )
-            Divider(color = Gray, modifier = Modifier.padding(start = 22.dp, end = 19.dp))
+            HorizontalDivider(color = Gray, modifier = Modifier.padding(start = 22.dp, end = 19.dp))
             Spacer(modifier = Modifier.height(16.dp))
             Box(modifier = Modifier.padding(start = 22.dp, end = 19.dp, bottom = 19.dp)) {
                 content()
@@ -124,7 +125,7 @@ fun BoxListItem(
 private fun TextIconRow(
     modifier: Modifier = Modifier,
     text: String,
-    imageVector: ImageVector = Icons.Default.KeyboardArrowRight,
+    imageVector: ImageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
     iconRotation: Float = 0f,
 ) {
     Row(modifier = modifier) {

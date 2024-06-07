@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.interop.UIKitView
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.ObjCSignatureOverride
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.Foundation.NSError
@@ -93,6 +94,7 @@ private class WKUiDelegate : WKUIDelegateProtocol, NSObject() {
 class WKNavigationDelegate(private val onLoadingStateChanged: (Boolean) -> Unit = {}) : NSObject(),
     WKNavigationDelegateProtocol {
 
+    @ObjCSignatureOverride
     //On start loading
     override fun webView(
         webView: WKWebView,
@@ -101,6 +103,7 @@ class WKNavigationDelegate(private val onLoadingStateChanged: (Boolean) -> Unit 
         onLoadingStateChanged(true)
     }
 
+    @ObjCSignatureOverride
     /**
      * onRequest loaded
      */
@@ -111,6 +114,7 @@ class WKNavigationDelegate(private val onLoadingStateChanged: (Boolean) -> Unit 
         onLoadingStateChanged(false)
     }
 
+    @ObjCSignatureOverride
     /**
      * onRequestError
      */
