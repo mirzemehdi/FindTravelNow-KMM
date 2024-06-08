@@ -1,7 +1,7 @@
 # FindTravelNow - Travel App for iOS and Android
 
 [![Build](https://github.com/mirzemehdi/FindTravelNow-KMM/actions/workflows/build_debug_app.yml/badge.svg)](https://github.com/mirzemehdi/FindTravelNow-KMM/actions/workflows/build_debug_app.yml) 
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.0-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
 ![badge-android](http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat)
 ![badge-ios](http://img.shields.io/badge/platform-ios-CDCDCD.svg?style=flat)
 
